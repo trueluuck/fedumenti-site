@@ -18,7 +18,7 @@ export default function Navbar() {
     <header className="fixed w-full bg-white z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link href="/" className="text-xl font-bold text-blue-700">
-          Fedumenti
+          FCGroup
         </Link>
 
         <nav className="hidden md:flex space-x-6">

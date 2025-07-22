@@ -24,6 +24,10 @@ export default function ServicesPage() {
     <>
       <Head>
         <title>Serviços | Fedumenti Group</title>
+        <meta
+          name="description"
+          content="Veja como a Fedumenti Group pode ajudar seu negócio com soluções inovadoras."
+        />
       </Head>
 
       <div className="flex flex-col min-h-screen">

@@ -1,59 +1,49 @@
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="py-20 px-6 md:px-16 bg-white">
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-6"
+    <section id="contact" className="py-20 px-4 bg-white text-gray-800">
+      <div className="max-w-3xl mx-auto">
+        <h2 className="text-3xl font-semibold mb-8 text-center text-blue-700">
+          Fale Conosco
+        </h2>
+        <motion.form
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
+          className="flex flex-col gap-6"
         >
-          Entre em Contato
-        </motion.h2>
-        <motion.p
-          className="text-gray-600 mb-10"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          Tem um projeto ou precisa de uma solução? Envie uma mensagem.
-        </motion.p>
-        <form className="space-y-6 text-left max-w-xl mx-auto">
           <input
             type="text"
             name="name"
-            placeholder="Seu nome"
+            placeholder="Nome completo"
+            className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-            className="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
             name="email"
             placeholder="Seu email"
+            className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-            className="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <textarea
             name="message"
-            rows={5}
-            placeholder="Sua mensagem"
+            rows={6}
+            placeholder="Mensagem"
+            className="w-full border border-gray-300 rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
-            className="w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          ></textarea>
+          />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors"
+            className="self-center px-8 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
           >
             Enviar
           </button>
-        </form>
+        </motion.form>
       </div>
     </section>
-  )
+  );
 }

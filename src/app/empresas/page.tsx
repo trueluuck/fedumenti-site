@@ -60,7 +60,13 @@ const companies = [
 ];
 
 export default function CompaniesPage() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<{
+  name: string;
+  description: string;
+  details: string;
+  link?: string;
+} | null>(null);
+
 
   return (
     <>

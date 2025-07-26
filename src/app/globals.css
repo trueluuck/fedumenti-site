@@ -4,12 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilização base global */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  @apply bg-white text-black antialiased;
-  font-family: theme('fontFamily.sans');
+  @apply bg-white text-black antialiased dark:bg-gray-900 dark:text-white;
 }
+
+

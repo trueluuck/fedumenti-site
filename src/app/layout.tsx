@@ -1,8 +1,8 @@
-// src/app/layout.tsx
 import './globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fedumentigroup.com.br'),
@@ -30,10 +30,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR">
-      <body className="bg-white text-gray-800 scroll-smooth">
-        <Navbar />
-        <main className="pt-20">{children}</main>
-        <Footer />
+      <body className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+        <ThemeProvider>
+          <Navbar />
+          <main className="pt-20">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

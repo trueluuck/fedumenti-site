@@ -1,11 +1,13 @@
-// src/components/sections/HeroSection.tsx
-'use client'
+'use client';
 
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
 
 export default function HeroSection() {
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden">
+    <section
+      id="hero"
+      className="relative h-screen w-full overflow-hidden bg-inherit"
+    >
       {/* Vídeo de fundo */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
@@ -15,12 +17,12 @@ export default function HeroSection() {
         muted
         playsInline
       />
-      
-      {/* Overlay escuro */}
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-0" />
+
+      {/* Overlay adaptável para modo claro/escuro */}
+      <div className="absolute top-0 left-0 w-full h-full bg-white/60 dark:bg-black/60 z-0" />
 
       {/* Conteúdo com animação */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-black dark:text-white px-4">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -39,5 +41,5 @@ export default function HeroSection() {
         </motion.p>
       </div>
     </section>
-  )
+  );
 }

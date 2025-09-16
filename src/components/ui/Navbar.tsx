@@ -1,6 +1,7 @@
+// src/components/ui/Navbar.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -10,38 +11,14 @@ const navLinks = [
   { name: 'Sobre', href: '/#about' },
   { name: 'Serviços', href: '/services' },
   { name: 'Empresas', href: '/empresas' },
+  { name: 'Depoimentos', href: '/depoimentos' },
   { name: 'Contato', href: '/contact' },
 ];
 
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-  useEffect(() => {
-  const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-  if (savedTheme) {
-    setTheme(savedTheme);
-    if (savedTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }
-}, []);
-
-
- const toggleTheme = () => {
-  const newTheme = theme === 'dark' ? 'light' : 'dark';
-  setTheme(newTheme);
-  localStorage.setItem('theme', newTheme);
-
-  if (newTheme === 'dark') {
-    document.documentElement.classList.add('dark');
-  } else {
-    document.documentElement.classList.remove('dark');
-  }
-};
-
+  const { theme, toggleTheme } = useTheme(); // Usando ThemeContext
 
   return (
     <header className="fixed top-0 left-0 w-full bg-white dark:bg-gray-900 shadow-md z-50 transition-colors">

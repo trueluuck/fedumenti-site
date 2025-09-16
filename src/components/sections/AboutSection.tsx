@@ -1,13 +1,10 @@
-'use client';
+'use client'
 
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 
 export default function AboutSection() {
   return (
-    <section
-      id="about"
-      className="py-20 px-6 md:px-16 bg-inherit text-gray-800 dark:text-gray-100 transition-colors duration-300"
-    >
+    <section id="about" className="py-20 px-6 md:px-16 transition-colors duration-300">
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           className="text-4xl md:text-5xl font-bold mb-6"
@@ -31,5 +28,5 @@ export default function AboutSection() {
         </motion.p>
       </div>
     </section>
-  );
+  )
 }

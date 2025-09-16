@@ -4,12 +4,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Estilização base global */
 html {
   scroll-behavior: smooth;
 }
 
+/* Corpo herdando o tema global */
 body {
-  @apply bg-white text-black antialiased dark:bg-gray-900 dark:text-white;
+  @apply antialiased transition-colors duration-300;
+  font-family: theme('fontFamily.sans');
+  background-color: theme('colors.white'); /* Modo claro padrão */
+  color: theme('colors.gray.900');
 }
 
+/* Suporte ao modo escuro */
+html.dark body {
+  background-color: theme('colors.gray.900'); /* Modo escuro padrão */
+  color: theme('colors.gray.100');
+}
 
+/* Garantir que todas as sections herdem as cores do tema */
+section {
+  @apply transition-colors duration-300;
+  background-color: inherit;
+  color: inherit;
+}
+
+/* Links */
+a {
+  @apply transition-colors duration-300;
+}
+
+a:hover {
+  @apply underline;
+}

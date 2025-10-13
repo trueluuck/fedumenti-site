@@ -13,10 +13,16 @@ export default function HomePage() {
   return (
     <main>
       <HeroSection />
+      <ClientsCarousel />
       <AboutSection />
       <ServicesSection />
       <ClientsCarousel />
       <ContactSection />
+<<<<<<< HEAD
+=======
+      
+      
+>>>>>>> 1938c9d (deploy: LP trafego pago + CTA)
     </main>
   );
 }

@@ -1,28 +1,22 @@
-import HeroSection from '@/components/sections/HeroSection';
-import AboutSection from '@/components/sections/AboutSection';
-import ServicesSection from '@/components/sections/ServicesSection';
-import ContactSection from '@/components/sections/ContactSection';
-import ClientsCarousel from '@/components/sections/ClientsCarousel';
+﻿import type { Metadata } from "next";
 
-export const metadata = {
-  title: 'Fedumenti Group | Início',
-  description: 'Soluções em tecnologia e inovação para transformar o seu negócio.',
+import HeroSection from "@/components/sections/HeroSection";
+import ServicesSection from "@/components/sections/ServicesSection";
+import ClientsCarousel from "@/components/sections/ClientsCarousel";
+import ContactSection from "@/components/sections/ContactSection";
+
+export const metadata: Metadata = {
+  title: "Fedumenti Group",
+  description: "Soluções em tecnologia e inovação para transformar o seu negócio.",
 };
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="max-w-6xl mx-auto px-6 py-12">
       <HeroSection />
-      <ClientsCarousel />
-      <AboutSection />
       <ServicesSection />
       <ClientsCarousel />
       <ContactSection />
-<<<<<<< HEAD
-=======
-      
-      
->>>>>>> 1938c9d (deploy: LP trafego pago + CTA)
     </main>
   );
 }

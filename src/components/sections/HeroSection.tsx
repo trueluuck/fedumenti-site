@@ -8,7 +8,7 @@ export default function HeroSection() {
       {/* Vídeo de fundo */}
       <video
         className="absolute top-0 left-0 w-full h-full object-cover z-[-1]"
-        src="/assets/hero-video.mp4"
+        src="public/assets/hero-video.mp4"
         autoPlay
         loop
         muted

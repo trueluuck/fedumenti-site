@@ -4,37 +4,113 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilização base global */
-html {
-  scroll-behavior: smooth;
+/* ========= Paleta via CSS Variables (rgb) ========= */
+/* Claro: clean, legível; Escuro: alto contraste “slate” */
+:root {
+  --bg: 247 248 252;         /* #F7F8FC */
+  --surface: 255 255 255;    /* #FFFFFF */
+  --card: 255 255 255;       /* #FFFFFF */
+  --border: 226 232 240;     /* #E2E8F0 */
+  --text: 15 23 42;          /* #0F172A */
+  --muted: 71 85 105;        /* #475569 */
+
+  --accent: 59 130 246;      /* #3B82F6 (azul) */
+  --accent-fg: 255 255 255;  /* texto em cima do accent */
+  --primary: 34 197 94;      /* #22C55E (verde suave) */
+  --primary-fg: 0 0 0;
+
+  --selection-bg: 190 242 100; /* #BEF264 */
+  --selection-fg: 12 16 24;
 }
 
-/* Corpo herdando o tema global */
+html.dark {
+  --bg: 14 18 28;            /* “ink” escuro */
+  --surface: 17 24 39;       /* slate-900 */
+  --card: 17 24 39;
+  --border: 31 41 55;        /* slate-800 */
+  --text: 229 231 235;       /* slate-200 */
+  --muted: 148 163 184;      /* slate-400/300 */
+
+  --accent: 99 102 241;      /* #6366F1 (indigo) */
+  --accent-fg: 255 255 255;
+  --primary: 16 185 129;     /* #10B981 */
+  --primary-fg: 12 16 24;
+
+  --selection-bg: 163 230 53;
+  --selection-fg: 12 16 24;
+}
+
+/* ========= Base ========= */
+html { scroll-behavior: smooth; }
+
 body {
   @apply antialiased transition-colors duration-300;
-  font-family: theme('fontFamily.sans');
-  background-color: theme('colors.white'); /* Modo claro padrão */
-  color: theme('colors.gray.900');
+  background-color: rgb(var(--bg));
+  color: rgb(var(--text));
 }
 
-/* Suporte ao modo escuro */
-html.dark body {
-  background-color: theme('colors.gray.900'); /* Modo escuro padrão */
-  color: theme('colors.gray.100');
-}
-
-/* Garantir que todas as sections herdem as cores do tema */
+/* Seções herdam o tema */
 section {
   @apply transition-colors duration-300;
-  background-color: inherit;
+  background-color: transparent;
   color: inherit;
 }
 
+/* Seleção */
+::selection { background: rgb(var(--selection-bg)); color: rgb(var(--selection-fg)); }
+
 /* Links */
-a {
-  @apply transition-colors duration-300;
+a { @apply transition-colors duration-300; }
+
+/* ========= Helpers reutilizáveis ========= */
+@layer components {
+  /* Cartões/blocos */
+  .surface {
+    background-color: rgb(var(--card));
+    border: 1px solid rgb(var(--border));
+    border-radius: 1rem;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .muted { color: rgb(var(--muted)); }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 font-semibold;
+    background-color: rgb(var(--primary));
+    color: rgb(var(--primary-fg));
+  }
+  .btn-primary:hover { filter: brightness(1.05); }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center rounded-full px-5 py-2.5 font-semibold border;
+    border-color: rgb(var(--border));
+    color: rgb(var(--text));
+    background: transparent;
+  }
+  .btn-outline:hover { background-color: color-mix(in srgb, rgb(var(--surface)) 60%, transparent); }
+
+  /* Navbar vítrea (aplique na raiz do Navbar) */
+  .glass-nav {
+    @apply sticky top-0 z-50 backdrop-blur-md;
+    background-color: color-mix(in srgb, rgb(var(--surface)) 80%, transparent);
+    border-bottom: 1px solid rgb(var(--border));
+  }
+
+  .border-default { border-color: rgb(var(--border)); }
 }
 
-a:hover {
-  @apply underline;
+/* Util para esconder scrollbars quando necessário */
+@layer utilities {
+  .hide-scrollbar { scrollbar-width: none; }
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
 }
+
+/* Tipografia em .prose coerente nos dois temas */
+.prose { color: rgb(var(--text)); max-width: 75ch; }
+.prose :where(h1,h2,h3,h4,h5,h6) { color: rgb(var(--text)); }
+.prose :where(p,li) { color: rgb(var(--text)); }
+.prose a { color: rgb(var(--accent)); text-decoration: underline; }
+.prose a:hover { filter: brightness(1.1); }
+.prose hr { border-color: rgb(var(--border)); }
+.dark .prose,
+.prose-invert :where(h1,h2,h3,h4,h5,h6,p,li,a) { color: rgb(var(--text)); }

@@ -1,18 +1,18 @@
+// src/components/sections/FormsSwitcher.tsx
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useId, useMemo, useState, KeyboardEvent } from 'react';
 
 type FormDef = {
   id: string;
   label: string;
-  src: string;
+  src: string;         // use o link de embed (com ?embedded=true)
   description?: string;
 };
 
 /**
- * Formulários com link de embed do Google Forms.
- * Cada formulário é exibido com a estética do site.
+ * Mantive seus formulários atuais. Você pode adicionar/remover aqui sem mexer no resto.
+ * Dica: sempre usar o parâmetro "?embedded=true" no src para embed do Google Forms.
  */
 const DEFAULT_FORMS: FormDef[] = [
   {
@@ -35,110 +35,152 @@ const DEFAULT_FORMS: FormDef[] = [
   },
   {
     id: 'parceria',
-    label: 'BRIEFING',
-    src: 'https://docs.google.com/forms/d/e/1FAIpQLSd7VT9MZXYmU6hbN3bT_6KM4FT8cXzk3A8gFkqEMH0c1nqkPQ/viewform?embedded=true',
+    label: 'CADASTRO',
+    src: 'https://docs.google.com/forms/d/e/1FAIpQLSftgziSKBdyJCeQvM_fkeBEpXGrwbLHEY0ll3NZ6AdWFKtf8w/viewform?usp=dialog',
+    description: 'Formulário para empresas e parceiros interessados em colaborar com a Fedumenti Group.',
+  },
+  {
+    id: 'estagiarios',
+    label: 'PUBLICIDADE',
+    src: 'https://docs.google.com/forms/d/e/1FAIpQLSd68rXwQzKui9hq2FzvQVBRtG2SNogYCn3ofSIKxKS9ZVNuuw/viewform?usp=dialog',
     description: 'Formulário para empresas e parceiros interessados em colaborar com a Fedumenti Group.',
   },
 ];
 
 export default function FormsSwitcher({ forms = DEFAULT_FORMS }: { forms?: FormDef[] }) {
-  const [selected, setSelected] = useState<FormDef>(forms[0]);
-  const iframeRef = useRef<HTMLIFrameElement>(null);
-  const [iframeHeight, setIframeHeight] = useState(1200);
+  const [activeId, setActiveId] = useState(forms[0]?.id ?? '');
+  const tabsId = useId();
 
-  // Auto ajuste de altura (fallback + suavização)
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
+  const active = useMemo(
+    () => forms.find((f) => f.id === activeId) ?? forms[0],
+    [forms, activeId]
+  );
 
-    const resize = () => {
-      try {
-        const body = iframe.contentDocument?.body;
-        const html = iframe.contentDocument?.documentElement;
-        if (body && html) {
-          const newHeight = Math.max(body.scrollHeight, html.scrollHeight);
-          if (newHeight && newHeight !== iframeHeight) {
-            setIframeHeight(newHeight);
-          }
-        }
-      } catch {
-        // Google Forms bloqueia acesso cross-domain — usamos fallback seguro
-        setIframeHeight(1600);
-      }
-    };
+  // URL para abrir no Google Forms (sem ?embedded=true)
+  const openHref = useMemo(() => {
+    try {
+      const url = new URL(active.src);
+      url.searchParams.delete('embedded');
+      return url.toString();
+    } catch {
+      return active.src.replace('?embedded=true', '').replace('&embedded=true', '');
+    }
+  }, [active]);
 
-    const interval = setInterval(resize, 2000);
-    return () => clearInterval(interval);
-  }, [selected, iframeHeight]);
+  // Acessibilidade: teclas de seta para navegar entre abas no desktop
+  function onTabsKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    const idx = forms.findIndex((f) => f.id === active.id);
+    if (idx < 0) return;
+
+    if (e.key === 'ArrowRight') {
+      const next = (idx + 1) % forms.length;
+      setActiveId(forms[next].id);
+      e.preventDefault();
+    } else if (e.key === 'ArrowLeft') {
+      const prev = (idx - 1 + forms.length) % forms.length;
+      setActiveId(forms[prev].id);
+      e.preventDefault();
+    }
+  }
 
   return (
-    <section className="space-y-10">
-      {/* Botões de seleção */}
-      <div className="flex flex-wrap justify-center gap-3">
-        {forms.map((f) => (
-          <motion.button
-            key={f.id}
-            onClick={() => setSelected(f)}
-            whileTap={{ scale: 0.96 }}
-            className={[
-              'px-6 py-2.5 rounded-full border text-sm font-medium tracking-wide shadow-sm transition-all duration-300',
-              selected.id === f.id
-                ? 'bg-blue-600 text-white border-blue-700 shadow-md'
-                : 'bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-800 dark:text-gray-200 hover:bg-blue-500 hover:text-white',
-            ].join(' ')}
+    <section className="space-y-6">
+      {/* Header: tabs (desktop) + select (mobile) + ação abrir no Forms */}
+      <div className="flex items-center gap-3 flex-wrap justify-between">
+        {/* Abas (desktop) */}
+        <div
+          role="tablist"
+          aria-label="Selecione um formulário"
+          onKeyDown={onTabsKeyDown}
+          className="hidden md:flex gap-2 p-1 rounded-full border border-border bg-surface"
+        >
+          {forms.map((f) => {
+            const selected = f.id === active.id;
+            return (
+              <button
+                key={f.id}
+                role="tab"
+                aria-selected={selected}
+                aria-controls={`${tabsId}-${f.id}-panel`}
+                id={`${tabsId}-${f.id}-tab`}
+                onClick={() => setActiveId(f.id)}
+                className={[
+                  'px-4 py-2 rounded-full text-sm font-medium transition',
+                  selected ? 'bg-accent text-white' : 'text-default hover:bg-surface/70',
+                ].join(' ')}
+              >
+                {f.label}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Select (mobile) */}
+        <div className="md:hidden flex-1 min-w-[60%]">
+          <label htmlFor={`${tabsId}-select`} className="sr-only">
+            Selecionar formulário
+          </label>
+          <select
+            id={`${tabsId}-select`}
+            value={active.id}
+            onChange={(e) => setActiveId(e.target.value)}
+            className="w-full rounded-full border border-border bg-surface px-4 py-2 text-sm"
           >
-            {f.label}
-          </motion.button>
-        ))}
+            {forms.map((f) => (
+              <option key={f.id} value={f.id}>
+                {f.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Ação rápida: abrir externamente */}
+        <a
+          href={openHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-outline whitespace-nowrap"
+        >
+          Abrir no Google Forms
+        </a>
       </div>
 
-      {/* Exibição do formulário ativo */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={selected.id}
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -25 }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-          className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 shadow-xl overflow-hidden"
-        >
-          {/* Cabeçalho do formulário */}
-          <div className="p-8 border-b border-gray-100 dark:border-gray-800 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900">
-            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-2">
-              {selected.label}
-            </h2>
-            {selected.description && (
-              <p className="text-gray-600 dark:text-gray-400">{selected.description}</p>
-            )}
-          </div>
+      {/* Descrição do formulário ativo */}
+      {active.description && (
+        <p className="muted text-sm">{active.description}</p>
+      )}
 
-          {/* Formulário incorporado */}
-          <div className="relative bg-white dark:bg-gray-900">
-            <iframe
-              ref={iframeRef}
-              src={selected.src}
-              className="w-full transition-all duration-500 ease-in-out"
-              style={{
-                height: iframeHeight,
-                filter: 'brightness(1.03)',
-                borderRadius: '1.5rem',
-              }}
-              frameBorder={0}
-              marginHeight={0}
-              marginWidth={0}
-              title={`Formulário ${selected.label}`}
-            >
-              Carregando…
-            </iframe>
+      {/* Card do embed */}
+      <article
+        id={`${tabsId}-${active.id}-panel`}
+        role="tabpanel"
+        aria-labelledby={`${tabsId}-${active.id}-tab`}
+        className="surface overflow-hidden"
+      >
+        {/* Cabeçalho do card */}
+        <div className="p-4 md:p-6 border-b border-border">
+          <h2 className="text-lg md:text-xl font-semibold">{active.label}</h2>
+          <p className="mt-1 text-sm muted">
+            Se o formulário não carregar abaixo, use “Abrir no Google Forms”.
+          </p>
+        </div>
 
-            {/* Overlay sutil para harmonia visual */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-gray-50/40 dark:from-gray-900/30 to-transparent"></div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+        {/* Iframe do Google Forms — altura estável (sem resize cross-domain) */}
+        <div className="bg-white dark:bg-gray-900">
+          <iframe
+            title={active.label}
+            src={active.src}
+            loading="lazy"
+            className="w-full h-[820px] md:h-[920px]"
+            style={{ border: 0 }}
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+        </div>
+      </article>
 
       {/* Rodapé informativo */}
-      <p className="text-sm text-gray-500 dark:text-gray-400 text-center">
+      <p className="text-xs muted text-center">
         As respostas são enviadas diretamente ao Google Forms. Nenhum dado é armazenado neste site.
       </p>
     </section>

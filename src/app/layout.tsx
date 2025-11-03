@@ -1,8 +1,12 @@
+// src/app/layout.tsx
 import './globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import CookieBanner from '@/components/common/CookieBanner';
+import AnalyticsGate from '@/components/analytics/AnalyticsGate';
+import { inter, poppins } from './fonts';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fedumentigroup.com.br'),
@@ -26,28 +30,33 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html
+      lang="pt-BR"
+      suppressHydrationWarning
+      className={`${inter.variable} ${poppins.variable}`} // << injeta --font-sans / --font-heading sem CLS
+    >
       <head>
-        {/* LCP: poster do vídeo */}
-        <link rel="preload" as="image" href="/assets/hero-poster.jpg" />
+        {/* Preloads de posters (LCP do carrossel) */}
+        <link rel="preload" as="image" href="/assets/posters/reflorestamento.jpg" />
+        <link rel="preload" as="image" href="/assets/posters/financie-startup.jpg" />
+        <link rel="preload" as="image" href="/assets/posters/google360.jpg" />
+        <link rel="preload" as="image" href="/assets/posters/indicacoes.jpg" />
 
-        {/* Otimizações de conexão para embeds do YouTube (nocookie) */}
+        {/* Otimizações p/ YouTube (nocookie) */}
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
         <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
         <link rel="preconnect" href="https://i.ytimg.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
-
-        {/*
-          Se usar Google Fonts (não vi no projeto, mas caso ative no futuro):
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-          <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
-        */}
       </head>
-      <body className="bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+      {/* As cores vêm dos tokens (bg-bg / text-fg) */}
+      <body className="bg-bg text-fg font-sans transition-colors duration-300">
         <ThemeProvider>
           <Navbar />
           <main className="pt-20 min-h-screen">{children}</main>
           <Footer />
+          <CookieBanner />
+          <AnalyticsGate />
         </ThemeProvider>
       </body>
     </html>

@@ -1,29 +1,75 @@
 // src/app/depoimentos/page.tsx
 import type { Metadata } from 'next';
+import CurvedMediaCarousel, { MediaItem } from '@/components/common/CurvedMediaCarousel';
 
 export const metadata: Metadata = {
-  title: 'Depoimentos | Fedumenti Group',
-  description: 'Veja depoimentos e experiências de clientes que já confiaram na Fedumenti Group.',
+  title: 'Depoimentos',
+  description: 'Resultados reais de clientes da Fedumenti Group.',
 };
 
-export default function DepoimentosPage() {
-  return (
-    <main className="max-w-6xl mx-auto px-6 py-20">
-      <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-100">
-        Depoimentos
-      </h1>
-      <p className="text-lg text-gray-700 dark:text-gray-300 mb-12">
-        Em breve você poderá assistir aqui os vídeos e relatos de empresas que já confiaram na Fedumenti Group.
-      </p>
+const ITEMS: MediaItem[] = [
+  {
+    id: 'depo1',
+    kind: 'video',
+    title: 'Cliente A',
+    subtitle: 'Diretor • Setor X',
+    poster: '/assets/depo1-poster.jpg',
+    sources: [
+      { src: '/assets/depo1.webm', type: 'video/webm' },
+      { src: '/assets/depo1.mp4', type: 'video/mp4' },
+    ],
+  },
+  {
+    id: 'depo2',
+    kind: 'video',
+    title: 'Cliente B',
+    subtitle: 'CEO • Setor Y',
+    poster: '/assets/depo2-poster.jpg',
+    sources: [
+      { src: '/assets/depo2.webm', type: 'video/webm' },
+      { src: '/assets/depo2.mp4', type: 'video/mp4' },
+    ],
+  },
 
-      {/* Placeholder para vídeos futuros */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <div className="aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-500">
-          Espaço reservado para vídeo do cliente
-        </div>
-        <div className="aspect-video bg-gray-200 dark:bg-gray-800 rounded-lg flex items-center justify-center text-gray-500">
-          Espaço reservado para vídeo do cliente
-        </div>
+  // Slots vazios (mostra “em breve” com cartinha vazia)
+  ...Array.from({ length: 8 }).map((_, i) => ({
+    id: `soon-${i}`,
+    kind: 'video' as const,
+    title: 'Em breve',
+    subtitle: 'Novo depoimento',
+    poster: '/assets/soon.jpg', // coloque um placeholder leve
+    sources: [], // sem fontes => vídeo não toca
+  })),
+];
+
+export default function DepoimentosPage() {
+  // JSON-LD simples
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: ITEMS.slice(0, 2).map((v, idx) => ({
+      '@type': 'Review',
+      position: idx + 1,
+      author: { '@type': 'Person', name: v.title },
+      reviewBody: v.subtitle,
+      itemReviewed: { '@type': 'Organization', name: 'Fedumenti Group' },
+    })),
+  };
+
+  return (
+    <main className="max-w-6xl mx-auto px-6 py-12">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <header className="mb-8 text-center">
+        <h1 className="text-3xl md:text-4xl font-extrabold">Depoimentos Reais</h1>
+        <p className="mt-2 muted">Experiências e resultados compartilhados por clientes.</p>
+      </header>
+
+      <CurvedMediaCarousel items={ITEMS} autoplayMs={7000} aspect="landscape" />
+
+      <div className="text-center mt-12">
+        <a href="/lp/trafego-pago" className="btn-primary">
+          Quero resultados assim →
+        </a>
       </div>
     </main>
   );

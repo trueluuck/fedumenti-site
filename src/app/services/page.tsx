@@ -1,128 +1,142 @@
-// src/app/services/page.tsx
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ReactNode } from "react";
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Serviços",
-  description: "Soluções completas de growth e tecnologia.",
+  title: 'Serviços',
+  description: 'Soluções completas para acelerar seu crescimento digital.',
 };
 
 type Service = {
-  id: string;
+  icon: string;
   title: string;
+  href?: string;
   desc: string;
-  icon: ReactNode;
-  href: string;
 };
 
-const surface =
-  "rounded-2xl bg-white dark:bg-gray-900 shadow-lg ring-1 ring-gray-200/70 dark:ring-white/10 transition hover:shadow-xl hover:ring-gray-300/90 dark:hover:ring-white/25";
-
 const services: Service[] = [
-  // Destaques (com LP no Tráfego)
-  { id: "trafego-pago",      title: "Tráfego Pago",           desc: "Google Ads, Meta Ads, LinkedIn Ads e otimização contínua de performance.", icon: "🚀", href: "/lp/trafego-pago" },
-  { id: "sites-lps",         title: "Sites & Landing Pages",  desc: "Experiências rápidas, responsivas e orientadas à conversão.",               icon: "🛠️", href: "#sites-lps" },
-  { id: "branding",          title: "Branding & Design",      desc: "Identidade visual, diretrizes e materiais para fortalecer sua marca.",     icon: "🎨", href: "#branding" },
-  { id: "automacao-crm",     title: "Automação & CRM",        desc: "Integrações, fluxos e nutrição de leads para vender no automático.",       icon: "🔗", href: "#automacao-crm" },
-  { id: "seo",               title: "SEO & Conteúdo",         desc: "Conteúdo estratégico, autoridade orgânica e crescimento sustentável.",     icon: "📈", href: "#seo" },
-  { id: "bi",                title: "BI & Dashboards",        desc: "Métricas claras, dados confiáveis e decisões mais rápidas.",               icon: "📊", href: "#bi" },
-
-  // Catálogo original
-  { id: "redes-sociais",     title: "Redes Sociais",          desc: "Conteúdo e gestão de redes sociais para engajamento.",                      icon: "📱", href: "#redes-sociais" },
-  { id: "google-360",        title: "Google 360°",            desc: "Experiências imersivas e presença digital no Google.",                      icon: "📸", href: "#google-360" },
-  { id: "marketplaces",      title: "Marketplaces",           desc: "Integração e gestão em múltiplos marketplaces.",                            icon: "🛒", href: "#marketplaces" },
-  { id: "assessoria-digital",title: "Assessoria Digital",     desc: "Consultoria para transformar digitalmente seu negócio.",                    icon: "💼", href: "#assessoria-digital" },
-  { id: "video-mobile",      title: "Vídeo Mobile",           desc: "Produção de conteúdo em vídeo para redes sociais.",                         icon: "🎥", href: "#video-mobile" },
-  { id: "treinamentos",      title: "Treinamentos & Palestras",desc:"Capacitação para equipes e líderes.",                                      icon: "🎤", href: "#treinamentos" },
+  {
+    icon: '🚀',
+    title: 'Tráfego Pago',
+    href: '/lp/trafego-pago',
+    desc:
+      'Planejamento, execução e otimização em Google Ads, Meta Ads e LinkedIn Ads. Campanhas orientadas a metas (CAC, ROAS, LTV) com testes A/B e rotina de aceleração.',
+  },
+  {
+    icon: '🛠️',
+    title: 'Sites & Landing Pages',
+    href: '/lp/sites',
+    desc:
+      'Páginas rápidas, responsivas e SEO-ready, com foco em conversão. Integração com formulários, CRM e mensuração de eventos.',
+  },
+  {
+    icon: '🎨',
+    title: 'Branding & Design',
+    href: '/lp/branding-design',
+    desc:
+      'Identidade visual, guias de marca e materiais. Consistência estética e linguagem que comunicam valor e confiança.',
+  },
+  {
+    icon: '🔗',
+    title: 'Automação & CRM',
+    href: '/lp/automacao-crm',
+    desc:
+      'Integrações, fluxos automatizados e nutrição de leads. Funil claro (MQL → SQL → Venda) e redução de atritos.',
+  },
+  {
+    icon: '📈',
+    title: 'SEO & Conteúdo',
+    href: '/lp/seo-conteudo',
+    desc:
+      'SEO técnico + conteúdo estratégico para autoridade orgânica. Performance, indexação e relevância sustentáveis.',
+  },
+  {
+    icon: '📊',
+    title: 'BI & Dashboards',
+    href: '/lp/bi-dashboards',
+    desc:
+      'Dados confiáveis em tempo real. Unificação de fontes (Ads, CRM, ERP) em painéis com KPIs de negócio.',
+  },
+  {
+    icon: '📱',
+    title: 'Redes Sociais',
+    href: '/lp/redes-sociais',
+    desc:
+      'Calendário editorial, produção de conteúdo e community care. Engajamento com propósito e meta.',
+  },
+  {
+    icon: '📸',
+    title: 'Google 360°',
+    href: '/lp/google-360',
+    desc:
+      'Imagens e tours 360° para reforçar presença local e digital. Otimizado para mapas e busca.',
+  },
+  {
+    icon: '🛒',
+    title: 'Marketplaces',
+    href: '/lp/marketplaces',
+    desc:
+      'Integração, catálogo e performance multi-marketplace. Gestão de preço, promoções e mídia.',
+  },
+  {
+    icon: '💼',
+    title: 'Assessoria Digital',
+    href: '/lp/assessoria-digital',
+    desc:
+      'Consultoria hands-on para transformação digital. Roadmap priorizado e acompanhamento do time.',
+  },
+  {
+    icon: '🎥',
+    title: 'Vídeo Mobile',
+    href: '/lp/video-mobile',
+    desc:
+      'Conteúdo nativo para social, formatos por plataforma. Foco em CTR e retenção.',
+  },
+  {
+    icon: '🎤',
+    title: 'Treinamentos & Palestras',
+    href: '/lp/treinamentos-palestras',
+    desc:
+      'Capacitação prática para squads. Atribuição, mídia paga, funil e cultura de dados.',
+  },
 ];
 
 export default function ServicesPage() {
   return (
     <main className="max-w-6xl mx-auto px-6 py-12">
-      <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold">Nossos serviços</h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">
-          Clique em qualquer card para saber mais (Tráfego Pago já tem LP dedicada).
+      <header className="mb-10 text-center">
+        <h1 className="text-3xl font-bold">Serviços</h1>
+        <p className="mt-2 muted">
+          Um portfólio completo para tracionar resultado, com execução ágil e foco em negócio.
         </p>
       </header>
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="grid gap-6 md:grid-cols-2">
         {services.map((s) => (
-          <Link
-            key={s.id}
-            href={s.href}
-            aria-label={`${s.title} — acessar`}
-            className={`group block p-6 ${surface} focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black/50 dark:focus-visible:ring-white/50`}
-          >
-            <article className="h-full">
-              <div className="text-4xl mb-2 transition group-hover:scale-105">{s.icon}</div>
-              <h2 className="text-lg font-semibold">{s.title}</h2>
-              <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">{s.desc}</p>
-              <div className="mt-4 inline-flex items-center text-sm font-medium text-gray-900 dark:text-gray-100">
-                Acessar <span className="ml-1 transition-transform group-hover:translate-x-0.5">→</span>
-              </div>
-            </article>
-          </Link>
+          <article key={s.title} className="surface p-6 flex gap-4">
+            <div className="text-3xl shrink-0">{s.icon}</div>
+            <div className="space-y-2">
+              <h3 className="text-lg font-semibold">{s.title}</h3>
+              <p className="text-sm leading-relaxed muted">{s.desc}</p>
+
+              {!!s.href && (
+                <div className="pt-1">
+                  <a
+                    href={s.href}
+                    className="inline-flex items-center gap-2 font-semibold text-fg hover:opacity-80"
+                  >
+                    Acessar <span aria-hidden>→</span>
+                  </a>
+                </div>
+              )}
+            </div>
+          </article>
         ))}
+      </section>
+
+      <div className="text-center mt-12">
+        <a href="/contact" className="btn-primary">
+          Falar com o time →
+        </a>
       </div>
-
-      {/* ——— Seções âncora rápidas (conteúdo breve por enquanto) ——— */}
-      <section id="sites-lps" className="mt-16 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Sites & Landing Pages</h3>
-        <p className="text-gray-600 dark:text-gray-300">Experiências rápidas, responsivas e orientadas à conversão.</p>
-      </section>
-
-      <section id="branding" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Branding & Design</h3>
-        <p className="text-gray-600 dark:text-gray-300">Identidade visual, diretrizes e materiais para fortalecer sua marca.</p>
-      </section>
-
-      <section id="automacao-crm" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Automação & CRM</h3>
-        <p className="text-gray-600 dark:text-gray-300">Integrações, fluxos e nutrição de leads para vender no automático.</p>
-      </section>
-
-      <section id="seo" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">SEO & Conteúdo</h3>
-        <p className="text-gray-600 dark:text-gray-300">Conteúdo estratégico, autoridade orgânica e crescimento sustentável.</p>
-      </section>
-
-      <section id="bi" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">BI & Dashboards</h3>
-        <p className="text-gray-600 dark:text-gray-300">Métricas claras, dados confiáveis e decisões mais rápidas.</p>
-      </section>
-
-      {/* Originais */}
-      <section id="redes-sociais" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Redes Sociais</h3>
-        <p className="text-gray-600 dark:text-gray-300">Conteúdo e gestão de redes sociais para engajamento.</p>
-      </section>
-
-      <section id="google-360" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Google 360°</h3>
-        <p className="text-gray-600 dark:text-gray-300">Experiências imersivas e presença digital no Google.</p>
-      </section>
-
-      <section id="marketplaces" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Marketplaces</h3>
-        <p className="text-gray-600 dark:text-gray-300">Integração e gestão em múltiplos marketplaces.</p>
-      </section>
-
-      <section id="assessoria-digital" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Assessoria Digital</h3>
-        <p className="text-gray-600 dark:text-gray-300">Consultoria para transformar digitalmente seu negócio.</p>
-      </section>
-
-      <section id="video-mobile" className="mt-12 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Vídeo Mobile</h3>
-        <p className="text-gray-600 dark:text-gray-300">Produção de conteúdo em vídeo para redes sociais.</p>
-      </section>
-
-      <section id="treinamentos" className="mt-12 mb-6 scroll-mt-24">
-        <h3 className="text-2xl font-bold mb-2">Treinamentos & Palestras</h3>
-        <p className="text-gray-600 dark:text-gray-300">Capacitação para equipes e líderes.</p>
-      </section>
     </main>
   );
 }

@@ -2,279 +2,202 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 
-type FloatingCtaProps = {
+type Props = {
+  /** Seção alvo para “ir ao formulário” (id ou seletor CSS). Ex.: "#lead-form" */
   href?: string;
+  /** Rótulo do botão principal antes de rolar */
   label?: string;
+  /** Rótulo quando o usuário já rolou a página */
   scrolledLabel?: string;
+
+  /** Elemento sentinel para esconder o CTA quando visível (ex.: "#lead-form") */
   targetSelector?: string;
-  whatsappNumber?: string;        // '5511999999999'
-  whatsappLabel?: string;
-  whatsappText?: string;          // texto base (antes de anexar UTM)
-  threshold?: number;             // 0..1
-  idleMs?: number;                // inatividade até pulsar
-  pulseMs?: number;               // duração do pulso
-  debounceMs?: number;            // debounce de scroll
-  returningBadgeText?: string;    // fallback quando <24h
-  returningKey?: string;          // chave no localStorage
-  badgeHideAfterMs?: number;      // tempo até esconder badge
-  cookieName?: string;            // nome do cookie
-  cookieMaxDays?: number;         // validade do cookie
+
+  /** Mostra botão WhatsApp 24h */
+  whatsappNumber?: string;             // Ex.: "5542999217736"
+  whatsappLabel?: string;              // Ex.: "WhatsApp 24h"
+  whatsappText?: string;               // Ex.: "Olá! Quero aumentar minhas vendas com tráfego pago."
+
+  /** Mostra botão “Proposta em 24h” (link para /contact por padrão) */
+  proposalHref?: string;               // Ex.: "/contact"
+  proposalLabel?: string;              // Ex.: "Proposta em 24h"
+
+  /** (Opcional) Mostra botão para ligar */
+  phoneNumber?: string;                // Ex.: "+5542999217736"
+  phoneLabel?: string;                 // Ex.: "Ligar"
+
+  /** Quanto de rolagem (%) precisa para exibir o CTA (0–1). Default: 0.25 */
+  threshold?: number;
+
+  /** Esconder em desktop (só mobile) */
+  mobileOnly?: boolean;
 };
-
-/** Helpers de cookie (client-only). */
-function getCookie(name: string): string | null {
-  if (typeof document === 'undefined') return null;
-  const match = document.cookie.match(
-    new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)')
-  );
-  return match ? decodeURIComponent(match[1]) : null;
-}
-
-function setCookie(name: string, value: string, days: number) {
-  if (typeof document === 'undefined') return;
-  const d = new Date();
-  d.setTime(d.getTime() + days * 86400000);
-  const expires = `expires=${d.toUTCString()}`;
-  document.cookie = `${name}=${encodeURIComponent(value)}; ${expires}; path=/; SameSite=Lax`;
-}
 
 export default function FloatingCta({
   href = '#lead-form',
   label = 'Quero vender mais agora',
   scrolledLabel = 'Pronto para escalar?',
   targetSelector = '#lead-form',
-  whatsappNumber = '5511999999999',
-  whatsappLabel = 'Falar no WhatsApp',
+  whatsappNumber,
+  whatsappLabel = 'WhatsApp 24h',
   whatsappText = 'Olá! Quero aumentar minhas vendas com tráfego pago.',
+  proposalHref = '/contact',
+  proposalLabel = 'Proposta em 24h',
+  phoneNumber,
+  phoneLabel = 'Ligar',
   threshold = 0.25,
-  idleMs = 10000,
-  pulseMs = 3500,
-  debounceMs = 150,
-  returningBadgeText = '24h',
-  returningKey = 'lp_seen_at',
-  badgeHideAfterMs = 6000,
-  cookieName = 'lp_seen_at',
-  cookieMaxDays = 365,
-}: FloatingCtaProps) {
-  const [hidden, setHidden] = useState(false);
-  const [scrolledHalf, setScrolledHalf] = useState(false);
-  const [utmSuffix, setUtmSuffix] = useState<string>('');
-  const [attention, setAttention] = useState(false);
+  mobileOnly = false,
+}: Props) {
+  const [visible, setVisible] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const reducedMotion = usePrefersReducedMotion();
 
-  // Badge retornante
-  const [isReturning, setIsReturning] = useState(false);
-  const [badgeText, setBadgeText] = useState<string>(returningBadgeText);
-  const [showBadge, setShowBadge] = useState(false);
-
-  const idleTimerRef = useRef<number | null>(null);
-  const pulseTimerRef = useRef<number | null>(null);
-  const debTimerRef = useRef<number | null>(null);
-  const badgeTimerRef = useRef<number | null>(null);
-
-  // ------- debounce -------
-  const debounced = (fn: () => void) => {
-    if (debTimerRef.current) window.clearTimeout(debTimerRef.current);
-    debTimerRef.current = window.setTimeout(fn, debounceMs);
-  };
-
-  // ------- idle / attention pulse -------
-  const clearIdleTimers = () => {
-    if (idleTimerRef.current) window.clearTimeout(idleTimerRef.current);
-    if (pulseTimerRef.current) window.clearTimeout(pulseTimerRef.current);
-    idleTimerRef.current = null;
-    pulseTimerRef.current = null;
-  };
-
-  const startIdle = () => {
-    clearIdleTimers();
-    idleTimerRef.current = window.setTimeout(() => {
-      setAttention(true);
-      pulseTimerRef.current = window.setTimeout(() => setAttention(false), pulseMs);
-    }, idleMs);
-  };
-
-  const userActivity = () => {
-    setAttention(false);
-    startIdle();
-  };
-
-  // ------- badge retornante: localStorage + cookie -------
+  // Trata “aparecer após rolar X%”
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      const now = Date.now();
-      const lsRaw = window.localStorage.getItem(returningKey);
-      const ckRaw = getCookie(cookieName);
-      const lsTs = lsRaw ? parseInt(lsRaw, 10) : NaN;
-      const ckTs = ckRaw ? parseInt(ckRaw, 10) : NaN;
-
-      const hasPrev = !Number.isNaN(lsTs) || !Number.isNaN(ckTs);
-      if (hasPrev) {
-        setIsReturning(true);
-        const prev = Math.min(
-          Number.isNaN(lsTs) ? Infinity : lsTs,
-          Number.isNaN(ckTs) ? Infinity : ckTs
-        );
-        const diffMs = now - prev;
-        const days = Math.floor(diffMs / 86400000);
-        setBadgeText(days >= 1 ? `Retornou há ${days} dia${days > 1 ? 's' : ''}` : returningBadgeText);
-        setShowBadge(true);
-        if (badgeTimerRef.current) window.clearTimeout(badgeTimerRef.current);
-        badgeTimerRef.current = window.setTimeout(() => setShowBadge(false), badgeHideAfterMs);
-      }
-
-      // Atualiza persistência para o retorno futuro
-      window.localStorage.setItem(returningKey, String(now));
-      setCookie(cookieName, String(now), cookieMaxDays);
-    } catch {
-      // ignore storage errors
+    function onScroll() {
+      const y = window.scrollY || 0;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docH > 0 ? y / docH : 0;
+      setScrolled(progress > threshold);
+      setVisible(progress > threshold);
     }
-    return () => {
-      if (badgeTimerRef.current) window.clearTimeout(badgeTimerRef.current);
-    };
-  }, [returningKey, returningBadgeText, badgeHideAfterMs, cookieName, cookieMaxDays]);
+    onScroll(); // estado inicial
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [threshold]);
 
-  // ------- visibilidade por IntersectionObserver + fallback -------
+  // Esconde quando a seção alvo estiver totalmente visível
   useEffect(() => {
-    if (typeof window === 'undefined') return;
     const el = document.querySelector(targetSelector);
     if (!el) return;
 
-    const obs = new IntersectionObserver(
-      ([entry]) => setHidden(entry.isIntersecting),
-      { root: null, threshold }
+    const io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[0];
+        if (e.isIntersecting && e.intersectionRatio > 0.35) {
+          setVisible(false);
+        } else if (scrolled) {
+          setVisible(true);
+        }
+      },
+      { threshold: [0, 0.35, 1] }
     );
-    obs.observe(el);
 
-    const onScrollShowHide = () => {
-      debounced(() => {
-        const rect = (el as HTMLElement).getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const visible = rect.top < vh * (1 - threshold) && rect.bottom > vh * threshold;
-        setHidden(visible);
-      });
-    };
+    io.observe(el);
+    return () => io.disconnect();
+  }, [targetSelector, scrolled]);
 
-    window.addEventListener('scroll', onScrollShowHide, { passive: true });
-    return () => {
-      obs.disconnect();
-      window.removeEventListener('scroll', onScrollShowHide);
-    };
-  }, [targetSelector, threshold, debounceMs]);
-
-  // ------- troca de label após 50% do scroll -------
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const onScrollHalf = () => {
-      debounced(() => {
-        const doc = document.documentElement;
-        const max = (doc.scrollHeight - doc.clientHeight) || 1;
-        const pct = window.scrollY / max;
-        setScrolledHalf(pct >= 0.5);
-      });
-    };
-    onScrollHalf();
-    window.addEventListener('scroll', onScrollHalf, { passive: true });
-    return () => window.removeEventListener('scroll', onScrollHalf);
-  }, [debounceMs]);
-
-  // ------- UTM dinâmica na mensagem do WhatsApp -------
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const buildSuffix = () => {
-      const { origin, pathname, search } = window.location;
-      const urlWithUtm = `${origin}${pathname}${search}`;
-      setUtmSuffix(`\n\nFonte: ${urlWithUtm}`);
-    };
-    buildSuffix();
-    const onNavChange = () => buildSuffix();
-    window.addEventListener('popstate', onNavChange);
-    window.addEventListener('hashchange', onNavChange);
-    return () => {
-      window.removeEventListener('popstate', onNavChange);
-      window.removeEventListener('hashchange', onNavChange);
-    };
+  // Não renderiza em desktop se mobileOnly = true
+  const isDesktop = useMemo(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(min-width: 768px)').matches;
   }, []);
+  if (mobileOnly && isDesktop) return null;
 
-  // ------- atenção/pulso após inatividade -------
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    startIdle();
-    const resetEvents: Array<keyof WindowEventMap> = ['mousemove', 'keydown', 'touchstart', 'scroll'];
-    resetEvents.forEach((evt) => window.addEventListener(evt, userActivity, { passive: true }));
-    return () => {
-      clearIdleTimers();
-      resetEvents.forEach((evt) => window.removeEventListener(evt, userActivity as any));
-      if (debTimerRef.current) window.clearTimeout(debTimerRef.current);
-    };
-  }, [idleMs, pulseMs, debounceMs]);
-
-  const waHref = useMemo(() => {
-    const fullMsg = `${whatsappText}${utmSuffix}`;
-    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fullMsg)}`;
-  }, [whatsappNumber, whatsappText, utmSuffix]);
-
-  const currentLabel = scrolledHalf ? scrolledLabel : label;
+  // Animação simples (respeita reduced motion)
+  const wrapperClasses =
+    'fixed inset-x-0 bottom-3 z-[60] px-3 sm:px-6 pointer-events-none';
+  const railClasses =
+    'mx-auto max-w-3xl pointer-events-auto rounded-2xl bg-white/90 dark:bg-neutral-900/90 backdrop-blur shadow-lg ring-1 ring-black/10 dark:ring-white/10 p-2 sm:p-3 flex flex-col sm:flex-row sm:items-center sm:gap-3';
 
   return (
     <div
-      className={[
-        'fixed bottom-6 right-6 z-[150]',
-        'transition-all duration-300',
-        hidden ? 'opacity-0 pointer-events-none translate-y-2' : 'opacity-100 translate-y-0',
-      ].join(' ')}
+      className={wrapperClasses}
+      role="region"
+      aria-label="Ações rápidas"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible
+          ? 'translateY(0)'
+          : reducedMotion
+          ? 'translateY(0)'
+          : 'translateY(12px)',
+        transition: reducedMotion ? 'opacity 150ms linear' : 'all 220ms ease',
+        pointerEvents: visible ? 'auto' : 'none',
+      }}
     >
-      <div className="flex items-center gap-2 max-sm:flex-col">
-        {/* CTA principal com badge invertida neon */}
-        <div className="relative">
-          <a
-            href={href}
-            aria-label={currentLabel}
-            className={[
-              "inline-flex items-center justify-center rounded-full px-5 py-3",
-              "bg-lime-400 text-black font-semibold shadow-xl ring-1 ring-lime-300",
-              "hover:bg-lime-300 hover:ring-lime-200",
-              "transition focus:outline-none focus-visible:ring-2 focus-visible:ring-black whitespace-nowrap",
-              attention ? "motion-safe:animate-pulse" : "",
-            ].join(' ')}
-          >
-            <span className="mr-2">⚡</span>{currentLabel}
-          </a>
-
-          {isReturning && showBadge && (
-            <span
-              className="
-                absolute -top-2 -right-2
-                inline-flex items-center justify-center
-                h-6 min-w-6 px-2
-                rounded-full bg-lime-300 text-black text-[11px] font-bold
-                ring-1 ring-black/10 shadow-md
-              "
-              aria-label="Tempo de resposta estimado"
-              title="Tempo de resposta estimado"
-            >
-              {badgeText}
-            </span>
-          )}
+      <div className={railClasses}>
+        {/* Mensagem/Headline curta */}
+        <div className="px-2 pb-2 sm:pb-0">
+          <p className="text-sm font-semibold text-gray-900 dark:text-white">
+            {scrolled ? scrolledLabel : label}
+          </p>
+          <p className="text-xs text-gray-600 dark:text-gray-300">
+            Fale com o time e receba um plano de 90 dias.
+          </p>
         </div>
 
-        {/* WhatsApp */}
-        <a
-          href={waHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={whatsappLabel}
-          className={[
-            "inline-flex items-center justify-center rounded-full px-5 py-3",
-            "bg-black text-lime-300 font-semibold shadow-xl ring-1 ring-lime-400/40",
-            "hover:bg-slate-900 hover:text-lime-200",
-            "transition focus:outline-none focus-visible:ring-2 focus-visible:ring-lime-400 whitespace-nowrap",
-            attention ? "motion-safe:animate-pulse" : "",
-          ].join(' ')}
-        >
-          <span className="mr-2">💬</span>{whatsappLabel}
-        </a>
+        <div className="flex flex-1 flex-wrap items-center gap-2 sm:justify-end">
+          {/* Botão principal: vai ao formulário */}
+          <a
+            href={href}
+            className="inline-flex items-center justify-center rounded-full bg-black text-white dark:bg-white dark:text-black px-4 py-2 text-sm font-semibold hover:opacity-90 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-black dark:focus-visible:ring-white"
+            data-cta="primary"
+          >
+            Ir ao formulário
+          </a>
+
+          {/* WhatsApp 24h */}
+          {whatsappNumber && (
+            <a
+              href={`https://wa.me/${normalizePhone(whatsappNumber)}?text=${encodeURIComponent(
+                whatsappText
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500/90 text-white px-4 py-2 text-sm font-semibold hover:bg-emerald-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-emerald-500"
+              data-cta="whatsapp"
+            >
+              {whatsappLabel}
+            </a>
+          )}
+
+          {/* Proposta em 24h */}
+          {proposalHref && (
+            <a
+              href={proposalHref}
+              className="inline-flex items-center justify-center rounded-full ring-1 ring-gray-300 dark:ring-white/20 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white"
+              data-cta="proposal-24h"
+            >
+              {proposalLabel}
+            </a>
+          )}
+
+          {/* Ligar agora */}
+          {phoneNumber && (
+            <a
+              href={`tel:${phoneNumber}`}
+              className="inline-flex items-center justify-center rounded-full ring-1 ring-gray-300 dark:ring-white/20 px-4 py-2 text-sm font-semibold text-gray-900 dark:text-white hover:bg-black/5 dark:hover:bg-white/5 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-900 dark:focus-visible:ring-white"
+              data-cta="call"
+            >
+              {phoneLabel}
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
+}
+
+/* -------- utils -------- */
+
+function normalizePhone(p?: string) {
+  if (!p) return '';
+  return p.replace(/[^\d]/g, '');
+}
+
+function usePrefersReducedMotion() {
+  const [prefers, setPrefers] = useState(false);
+  const mq = useRef<MediaQueryList | null>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.matchMedia) return;
+    mq.current = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefers(!!mq.current.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefers(!!e.matches);
+    mq.current.addEventListener?.('change', handler);
+    return () => mq.current?.removeEventListener?.('change', handler);
+  }, []);
+
+  return prefers;
 }

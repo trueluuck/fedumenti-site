@@ -1,13 +1,16 @@
-'use client'
+// src/components/sections/AboutSection.tsx
+'use client';
 
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+import Section from '@/components/common/Section';
+import Link from 'next/link';
 
 export default function AboutSection() {
   return (
-    <section id="about" className="py-20 px-6 md:px-16 transition-colors duration-300">
-      <div className="max-w-6xl mx-auto text-center">
+    <Section id="about">
+      <div className="text-center">
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-6"
+          className="text-4xl md:text-5xl font-bold mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -15,8 +18,9 @@ export default function AboutSection() {
         >
           Quem Somos
         </motion.h2>
+
         <motion.p
-          className="text-lg md:text-xl max-w-3xl mx-auto"
+          className="text-lg md:text-xl mx-auto max-w-3xl muted"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9 }}
@@ -26,7 +30,13 @@ export default function AboutSection() {
           promovendo inovação, eficiência e transformação digital em diversos setores. Nossa equipe une
           expertise técnica com visão estratégica para entregar resultados concretos e escaláveis.
         </motion.p>
+
+        <div className="mt-8">
+          <Link href="/about" className="btn-outline">
+            Conheça nossa história →
+          </Link>
+        </div>
       </div>
-    </section>
-  )
+    </Section>
+  );
 }

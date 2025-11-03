@@ -9,17 +9,21 @@ export const metadata: Metadata = {
 
 export default function PesquisaPage() {
   return (
-    <main className="max-w-6xl mx-auto px-6 py-20 space-y-12">
-      <header className="text-center">
-        <h1 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+    <main className="max-w-6xl mx-auto px-6 pt-24 pb-16">
+      {/* Header com tokens do tema */}
+      <header className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-fg mb-3">
           Pesquisas Fedumenti Group
         </h1>
-        <p className="text-lg text-gray-700 dark:text-gray-300">
+        <p className="text-lg muted">
           Escolha o tipo de formulário e participe das nossas pesquisas.
         </p>
       </header>
 
-      <FormsSwitcher />
+      {/* Card “container” opcional para dar unidade visual */}
+      <section className="surface p-4 md:p-6">
+        <FormsSwitcher />
+      </section>
     </main>
   );
 }

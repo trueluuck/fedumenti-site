@@ -7,14 +7,24 @@ export const metadata: Metadata = {
   description: 'Aulas em formato vertical (shorts) para clientes e comunidade.',
 };
 
+/**
+ * Agora cada item pode usar:
+ * - ytId: string            → vídeo no YouTube (não listado recomendado)
+ * - stream: {provider,id}   → Cloudflare Stream, Mux etc.
+ * - sources: []             → fallback local (evite MP4s pesados no Vercel)
+ *
+ * Dica: prefira ytId ou stream para não estourar o limite de 100MB do Vercel.
+ */
 const ITEMS: MediaItem[] = [
+  // YouTube (substitua pelo ID real do vídeo não listado)
   {
     id: 'short1',
     kind: 'video',
     title: 'Short #1',
     subtitle: 'Conteúdo vertical',
     poster: '/assets/cursos/SHORT1.jpg',
-    sources: [{ src: '/assets/cursos/SHORT1.mp4', type: 'video/mp4' }],
+    ytId: 'COLOQUE_AQUI_ID_DO_YOUTUBE_1',
+    sources: [], // evita mp4 local
   },
   {
     id: 'short2',
@@ -22,15 +32,19 @@ const ITEMS: MediaItem[] = [
     title: 'Short #2',
     subtitle: 'Conteúdo vertical',
     poster: '/assets/cursos/SHORT2.jpg',
-    sources: [{ src: '/assets/cursos/SHORT2.mp4', type: 'video/mp4' }],
+    ytId: 'COLOQUE_AQUI_ID_DO_YOUTUBE_2',
+    sources: [],
   },
+
+  // Cloudflare Stream / Mux (troque provider e id conforme sua plataforma)
   {
     id: 'short3',
     kind: 'video',
     title: 'Short #3',
     subtitle: 'Conteúdo vertical',
     poster: '/assets/cursos/SHORT3.jpg',
-    sources: [{ src: '/assets/cursos/SHORT3.mp4', type: 'video/mp4' }],
+    stream: { provider: 'cloudflare', id: 'COLOQUE_AQUI_ID_DO_STREAM_1' },
+    sources: [],
   },
   {
     id: 'short4',
@@ -38,43 +52,23 @@ const ITEMS: MediaItem[] = [
     title: 'Short #4',
     subtitle: 'Conteúdo vertical',
     poster: '/assets/cursos/SHORT4.jpg',
-    sources: [{ src: '/assets/cursos/SHORT4.mp4', type: 'video/mp4' }],
+    stream: { provider: 'cloudflare', id: 'COLOQUE_AQUI_ID_DO_STREAM_2' },
+    sources: [],
   },
-  {
-    id: 'short5',
-    kind: 'video',
-    title: 'Short #5',
-    subtitle: 'Conteúdo vertical',
-    poster: '/assets/cursos/SHORT5.jpg',
-    sources: [{ src: '/assets/cursos/SHORT5.mp4', type: 'video/mp4' }],
-  },
-  {
-    id: 'short6',
-    kind: 'video',
-    title: 'Short #6',
-    subtitle: 'Conteúdo vertical',
-    poster: '/assets/cursos/SHORT6.jpg',
-    sources: [{ src: '/assets/cursos/SHORT6.mp4', type: 'video/mp4' }],
-  },
-  {
-    id: 'short7',
-    kind: 'video',
-    title: 'Short #7',
-    subtitle: 'Conteúdo vertical',
-    poster: '/assets/cursos/SHORT7.jpg',
-    sources: [{ src: '/assets/cursos/SHORT7.mp4', type: 'video/mp4' }],
-  },
-  {
-    id: 'short8',
-    kind: 'video',
-    title: 'Short #8',
-    subtitle: 'Conteúdo vertical',
-    poster: '/assets/cursos/SHORT8.jpg',
-    sources: [{ src: '/assets/cursos/SHORT8.mp4', type: 'video/mp4' }],
-  },
-  // slots “Em breve” (mantêm a grade cheia se faltar arquivo)
-  ...Array.from({ length: 4 }).map((_, i) => ({
-    id: `soon-${i}`,
+
+  // Se quiser manter alguns locais durante o DEV, ok — mas evite no deploy
+  // {
+  //   id: 'short5',
+  //   kind: 'video',
+  //   title: 'Short #5',
+  //   subtitle: 'Conteúdo vertical',
+  //   poster: '/assets/cursos/SHORT5.jpg',
+  //   sources: [{ src: '/assets/cursos/SHORT5.mp4', type: 'video/mp4' }],
+  // },
+
+  // Slots “Em breve” para preencher a grade
+  ...Array.from({ length: 6 }).map((_, i) => ({
+    id: `soon-${i + 1}`,
     kind: 'video' as const,
     title: 'Em breve',
     subtitle: 'Novo módulo',

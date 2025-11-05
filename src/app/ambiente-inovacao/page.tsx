@@ -1,54 +1,26 @@
+// src/app/ambiente-inovacao/page.tsx
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import ClientView from './ClientView';
 
 export const metadata: Metadata = {
   title: 'Ambiente de Inovação',
-  description: 'Estamos inseridos em um ecossistema de inovação (incubadora).',
+  description: 'Detalhes do ambiente de inovação e seus recursos.',
 };
 
-export default function AmbienteInovacaoPage() {
+export default function Page() {
+  // Tudo aqui continua sendo Server Component.
+  // O hook fica isolado em ClientView e protegido por <Suspense>.
   return (
-    <main className="mx-auto max-w-6xl px-6 py-12">
-      <header className="mb-8 text-center">
-        <h1 className="text-3xl font-bold">Ambiente de Inovação</h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">
-          Convivemos com startups, universidades e parceiros estratégicos.
-        </p>
-      </header>
-
-      <section className="grid gap-8 md:grid-cols-2">
-        <figure className="rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10">
-          <img
-            src="/assets/sprint-ambiente.jpg"
-            alt="Área colaborativa do ambiente de inovação"
-            className="w-full h-full object-cover"
-          />
-        </figure>
-
-        <div className="rounded-2xl border border-gray-200 dark:border-white/10 p-6 bg-white dark:bg-gray-900 shadow">
-          <h2 className="text-xl font-semibold">Por que isso importa</h2>
-          <ul className="mt-3 space-y-2 text-gray-700 dark:text-gray-300">
-            <li>• Acesso a talentos e mentores.</li>
-            <li>• Parcerias para P&D e testes rápidos.</li>
-            <li>• Cultura de experimentação e dados.</li>
-          </ul>
-
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              className="inline-flex items-center rounded-full bg-gray-900 text-white dark:bg-white dark:text-gray-900 px-5 py-2.5 font-semibold hover:opacity-90 transition"
-              href="https://maps.google.com/?q=Fedumenti Group, Rua Exemplo 123"
-              target="_blank" rel="noreferrer"
-            >
-              Visitar nosso endereço →
-            </a>
-            <a
-              className="inline-flex items-center rounded-full border border-gray-300 dark:border-white/20 px-5 py-2.5 font-semibold hover:bg-gray-50 dark:hover:bg-white/5 transition"
-              href="/contato"
-            >
-              Fale com a gente
-            </a>
-          </div>
+    <Suspense fallback={
+      <main className="max-w-6xl mx-auto px-6 py-12">
+        <div className="animate-pulse surface p-6">
+          <div className="h-6 w-48 rounded bg-gray-200 dark:bg-white/10" />
+          <div className="mt-4 h-4 w-80 rounded bg-gray-200 dark:bg-white/10" />
         </div>
-      </section>
-    </main>
+      </main>
+    }>
+      <ClientView />
+    </Suspense>
   );
 }

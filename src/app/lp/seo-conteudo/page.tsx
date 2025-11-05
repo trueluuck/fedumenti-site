@@ -1,25 +1,24 @@
-import type { Metadata } from "next";
-import ServiceLPBase from "@/app/lp/common/ServiceLPBase";
+// src/app/lp/seo-conteudo/page.tsx
+import type { Metadata } from 'next';
+import { Suspense } from 'react';
+import ClientView from './ClientView';
 
 export const metadata: Metadata = {
-  title: "SEO & Conteúdo • Fedumenti Group",
-  description: "Conteúdo estratégico e SEO técnico para crescer organicamente.",
+  title: 'SEO & Conteúdo • Fedumenti Group',
+  description: 'SEO técnico + conteúdo com foco em autoridade e performance.',
 };
 
 export default function Page() {
   return (
-    <ServiceLPBase
-      title="SEO & Conteúdo"
-      subtitle="Autoridade orgânica com conteúdo consistente e SEO técnico."
-      badges={["On-page", "Conteúdo", "Tech SEO"]}
-      hero={{ heroImage: { src: "/assets/posters/seo.jpg", alt: "SEO & Conteúdo" } }}
-      benefits={[
-        { icon: "🔍", title: "Pesquisa", desc: "Intenção, volume e dificuldade." },
-        { icon: "🧱", title: "SEO técnico", desc: "Arquitetura, metadados, performance." },
-        { icon: "✍️", title: "Conteúdo", desc: "Calendário, pautas e revisão." },
-        { icon: "📊", title: "Mensuração", desc: "Tráfego, posições e conversões." },
-      ]}
-      ctaLabel="Quero crescer no orgânico"
-    />
+    <Suspense fallback={
+      <main className="max-w-6xl mx-auto px-6 py-12">
+        <div className="animate-pulse surface p-6">
+          <div className="h-6 w-56 rounded bg-gray-200 dark:bg-white/10" />
+          <div className="mt-4 h-4 w-80 rounded bg-gray-200 dark:bg-white/10" />
+        </div>
+      </main>
+    }>
+        <ClientView />
+    </Suspense>
   );
 }

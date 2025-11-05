@@ -2,7 +2,7 @@
 import type { Metadata } from 'next';
 import LeadFormStub from '@/components/lp/LeadFormStub';
 import FloatingCta from '@/components/lp/FloatingCta';
-import LiteYouTube from '@/components/common/LiteYouTube';
+import LiteYouTube from '@/components/common/LiteYoutube';
 
 export const metadata: Metadata = {
   title: 'Tráfego Pago • Growth Performance',

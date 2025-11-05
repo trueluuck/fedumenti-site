@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import LiteYouTube from '@/components/common/LiteYouTube';
+import LiteYouTube from '@/components/common/LiteYoutube';
 
 const SLIDE_INTERVAL = 6500; // ms
 

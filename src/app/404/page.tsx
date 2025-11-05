@@ -1,5 +1,4 @@
-// src/app/404/page.tsx
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -17,16 +16,11 @@ export default function Custom404() {
           Ops, essa página não existe
         </h1>
         <p className="mt-3 text-base text-muted">
-          Use o menu superior ou os atalhos abaixo para continuar navegando.
+          Use o menu ou os atalhos abaixo para continuar navegando.
         </p>
-
         <div className="mt-8 flex items-center justify-center gap-3">
-          <Link href="/" className="btn-primary">
-            Voltar para a Home
-          </Link>
-          <Link href="/contact" className="btn-outline">
-            Falar com o time
-          </Link>
+          <Link href="/" className="btn-primary">Voltar para a Home</Link>
+          <Link href="/contact" className="btn-outline">Falar com o time</Link>
         </div>
       </section>
     </main>

@@ -1,84 +1,70 @@
+// src/components/common/LiteYouTube.tsx
 'use client';
 
 import { useState, useMemo } from 'react';
 
 type Props = {
-  /** Ex.: "aqz-KE-bpKQ" */
   videoId: string;
   title: string;
-  /** Inicia já tocando ao clicar (default: true) */
-  autoPlay?: boolean;
-  /** Classe extra para o wrapper */
+  posterQuality?: 'maxresdefault' | 'hqdefault' | 'mqdefault';
   className?: string;
-  /** Miniatura custom; por padrão usa i.ytimg.com */
-  posterUrl?: string;
 };
 
+/**
+ * Embed leve do YouTube (nocookie) que só carrega o iframe após o clique.
+ * Evita LCP ruim e bloqueios de tracking.
+ */
 export default function LiteYouTube({
   videoId,
   title,
-  autoPlay = true,
-  className = '',
-  posterUrl,
+  posterQuality = 'hqdefault',
+  className,
 }: Props) {
   const [activated, setActivated] = useState(false);
 
-  // Poster padrão HQ do YouTube
-  const thumb = useMemo(
-    () => posterUrl ?? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-    [posterUrl, videoId]
+  const poster = useMemo(
+    () => `https://i.ytimg.com/vi/${videoId}/${posterQuality}.jpg`,
+    [videoId, posterQuality]
   );
 
-  // URL do player (nocookie) só quando ativado
-  const playerSrc = useMemo(() => {
-    const base = `https://www.youtube-nocookie.com/embed/${videoId}`;
-    const params = new URLSearchParams({
-      rel: '0',
-      modestbranding: '1',
-      playsinline: '1',
-      ...(autoPlay ? { autoplay: '1' } : {}),
-    });
-    return `${base}?${params.toString()}`;
-  }, [videoId, autoPlay]);
-
-  return (
-    <div
-      className={`relative aspect-video w-full overflow-hidden rounded-xl bg-black ${className}`}
-      aria-label={title}
-    >
-      {!activated ? (
-        <button
-          type="button"
-          className="group absolute inset-0 w-full h-full"
-          onClick={() => setActivated(true)}
-          aria-label={`Reproduzir vídeo: ${title}`}
-        >
-          {/* Poster */}
-          <img
-            src={thumb}
-            alt=""
-            className="h-full w-full object-cover opacity-90 transition group-hover:opacity-100"
-            loading="lazy"
-            decoding="async"
-          />
-          {/* Gradiente + botão play */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
-          <div className="pointer-events-none absolute inset-0 grid place-items-center">
-            <span className="grid h-16 w-16 place-items-center rounded-full bg-white/90 text-black shadow-lg transition group-hover:scale-105">
-              ▶
-            </span>
-          </div>
-        </button>
-      ) : (
+  if (activated) {
+    return (
+      <div className={className}>
         <iframe
-          className="absolute inset-0 h-full w-full"
-          src={playerSrc}
+          className="h-full w-full aspect-video rounded-xl"
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`}
           title={title}
           loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         />
-      )}
-    </div>
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={() => setActivated(true)}
+      aria-label={`Assistir: ${title}`}
+      className={`group relative block w-full overflow-hidden rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${className ?? ''}`}
+      style={{ aspectRatio: '16 / 9' }}
+    >
+      <img
+        src={poster}
+        alt={`Prévia do vídeo: ${title}`}
+        className="h-full w-full object-cover"
+        loading="lazy"
+      />
+      {/* overlay play */}
+      <div className="absolute inset-0 grid place-items-center bg-black/30 group-hover:bg-black/20 transition-colors">
+        <div className="h-16 w-16 rounded-full bg-white/90 grid place-items-center group-hover:scale-105 transition-transform">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path d="M8 5v14l11-7L8 5z" fill="black" />
+          </svg>
+        </div>
+      </div>
+      <span className="sr-only">{title}</span>
+    </button>
   );
 }

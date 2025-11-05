@@ -1,6 +1,4 @@
-// src/app/not-found.tsx
-// Server Component – sem hooks de navegação (seguro para build/prerender)
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -11,17 +9,11 @@ export default function NotFound() {
           Página não encontrada
         </h1>
         <p className="mt-3 text-base text-muted">
-          A URL pode ter sido movida, renomeada ou nunca existiu. Confira o endereço
-          ou volte para a página inicial.
+          A URL pode ter sido movida, renomeada ou nunca existiu.
         </p>
-
         <div className="mt-8 flex items-center justify-center gap-3">
-          <Link href="/" className="btn-primary">
-            Voltar para a Home
-          </Link>
-          <Link href="/services" className="btn-outline">
-            Ver serviços
-          </Link>
+          <Link href="/" className="btn-primary">Voltar para a Home</Link>
+          <Link href="/services" className="btn-outline">Ver serviços</Link>
         </div>
       </section>
     </main>

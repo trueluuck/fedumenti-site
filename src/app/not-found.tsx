@@ -1,24 +1,26 @@
 // src/app/not-found.tsx
-import Link from 'next/link';
+// Server Component – sem hooks de navegação (seguro para build/prerender)
+import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <main className="max-w-4xl mx-auto px-6 py-20">
-      <section className="surface p-8 text-center">
-        <div className="text-6xl">😕</div>
-        <h1 className="mt-4 text-2xl md:text-3xl font-bold">
+    <main className="min-h-[70vh] grid place-items-center px-6 py-20 bg-bg text-fg">
+      <section className="max-w-xl text-center">
+        <p className="text-sm font-semibold tracking-wider text-muted">Erro 404</p>
+        <h1 className="mt-2 text-3xl md:text-4xl font-extrabold">
           Página não encontrada
         </h1>
-        <p className="mt-2 muted">
-          O recurso que você tentou acessar não existe ou foi movido.
+        <p className="mt-3 text-base text-muted">
+          A URL pode ter sido movida, renomeada ou nunca existiu. Confira o endereço
+          ou volte para a página inicial.
         </p>
 
-        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-8 flex items-center justify-center gap-3">
           <Link href="/" className="btn-primary">
             Voltar para a Home
           </Link>
           <Link href="/services" className="btn-outline">
-            Ver nossos serviços
+            Ver serviços
           </Link>
         </div>
       </section>

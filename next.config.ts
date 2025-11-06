@@ -14,7 +14,6 @@ const nextConfig = {
     deviceSizes: [360, 480, 640, 768, 1024, 1280, 1536, 1920, 2560],
     imageSizes: [16, 24, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 ano
-    // Libera domínios externos caso usar <Image /> neles
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'i.ytimg.com' },
@@ -23,6 +22,7 @@ const nextConfig = {
   },
 
   compiler: {
+    // WHY: remove apenas logs de info/debug em prod; mantém error/warn.
     removeConsole:
       process.env.NODE_ENV === 'production'
         ? { exclude: ['error', 'warn'] }
@@ -45,7 +45,6 @@ const nextConfig = {
 
   async headers() {
     return [
-      // Cache estático pesado
       {
         source: '/assets/:path*',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
@@ -61,20 +60,29 @@ const nextConfig = {
           { key: 'Access-Control-Allow-Origin', value: '*' },
         ],
       },
-      // Security (moderado para não atrapalhar embeds)
       {
         source: '/:path*',
         headers: [
           { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
           { key: 'X-Content-Type-Options', value: 'nosniff' },
           { key: 'X-DNS-Prefetch-Control', value: 'on' },
-          // Ajuste permissões de APIs do device (mantive restrito)
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
           },
         ],
       },
+    ];
+  },
+
+  async rewrites() {
+    return [
+      // Regra genérica: foo.jpg → foo-1280.jpg (útil quando o código referencia sem sufixo)
+      { source: '/assets/posters/:name(.*).jpg', destination: '/assets/posters/:name-1280.jpg' },
+
+      // Temporários (substitua quando subir os arquivos corretos):
+      { source: '/assets/posters/sites-landing-pages.jpg', destination: '/assets/posters/sites-1280.jpg' },
+      { source: '/assets/posters/trafego-pago.jpg', destination: '/assets/posters/google360-1280.jpg' },
     ];
   },
 };

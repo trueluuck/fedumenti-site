@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import './globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/ui/Navbar';
@@ -33,14 +32,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${inter.variable} ${poppins.variable}`} // << injeta --font-sans / --font-heading sem CLS
+      className={`${inter.variable} ${poppins.variable}`} // WHY: injeta --font-sans / --font-heading sem CLS
     >
       <head>
-        {/* Preloads de posters (LCP do carrossel) */}
-        <link rel="preload" as="image" href="/assets/posters/reflorestamento.jpg" />
-        <link rel="preload" as="image" href="/assets/posters/financie-startup.jpg" />
-        <link rel="preload" as="image" href="/assets/posters/google360.jpg" />
-        <link rel="preload" as="image" href="/assets/posters/indicacoes.jpg" />
+        {/* WHY: Preload apenas arquivos que existem (usar variações -1280) para evitar 404 e melhorar LCP */}
+        <link rel="preload" as="image" href="/assets/posters/reflorestamento-1280.jpg" />
+        <link rel="preload" as="image" href="/assets/posters/financie-startup-1280.jpg" />
+        <link rel="preload" as="image" href="/assets/posters/google360-1280.jpg" />
+        <link rel="preload" as="image" href="/assets/posters/indicacoes-1280.jpg" />
 
         {/* Otimizações p/ YouTube (nocookie) */}
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />

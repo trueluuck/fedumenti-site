@@ -4,6 +4,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import VideoPlayer from "@/components/common/VideoPlayer";
 
 /** Slides (1º = vídeo sem poster) */
 const SLIDES: Array<

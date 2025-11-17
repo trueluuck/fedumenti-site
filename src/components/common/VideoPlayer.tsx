@@ -1,4 +1,4 @@
-// src/components/common/VideoPlayer.tsx
+// FILE: src/components/common/VideoPlayer.tsx
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -10,10 +10,8 @@ type Props = {
   preload?: "auto" | "metadata" | "none";
   muted?: boolean;
   playsInline?: boolean;
-  // optional callbacks for debugging/analytics
-  onPlayAttempt?: () => void;
-  onPlaySuccess?: () => void;
-  onPlayFail?: (err: unknown) => void;
+  controls?: boolean;
+  onReady?: () => void;
 };
 
 export default function VideoPlayer({
@@ -24,67 +22,64 @@ export default function VideoPlayer({
   preload = "metadata",
   muted = true,
   playsInline = true,
-  onPlayAttempt,
-  onPlaySuccess,
-  onPlayFail,
+  controls = false,
+  onReady,
 }: Props) {
   const ref = useRef<HTMLVideoElement | null>(null);
-  const [attempted, setAttempted] = useState(false);
+  const [autoplayAttempted, setAutoplayAttempted] = useState(false);
+  const [autoplaySucceeded, setAutoplaySucceeded] = useState(false);
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!src) return;
+    setLoadedSrc(src);
+  }, [src]);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video) return;
-
-    // ensure attributes that increase autoplay success
+    if (!video || !loadedSrc) return;
     video.muted = muted;
     video.playsInline = playsInline;
     video.loop = loop;
     video.preload = preload;
-
-    // Try to play once mounted (use a tiny timeout to allow layout)
     let mounted = true;
     const tryPlay = async () => {
       if (!mounted) return;
       try {
-        onPlayAttempt?.();
-        setAttempted(true);
-        // call play() and handle its promise
+        setAutoplayAttempted(true);
         const p = video.play();
-        if (p !== undefined) {
-          await p;
+        if (p !== undefined) await p;
+        if (mounted) {
+          setAutoplaySucceeded(true);
+          onReady?.();
         }
-        onPlaySuccess?.();
       } catch (err) {
-        // Autoplay prevented or error — leave controls for user
-        onPlayFail?.(err);
+        setAutoplaySucceeded(false);
       }
     };
-
-    // Small delay helps in some browsers / heavy pages
-    const t = window.setTimeout(tryPlay, 120);
+    // slight delay helps in heavy pages
+    const t = window.setTimeout(tryPlay, 80);
     return () => {
       mounted = false;
       clearTimeout(t);
-      // cleanup: pause video
       try {
         video.pause();
       } catch {}
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [src, muted, playsInline, loop, preload]);
+  }, [loadedSrc, muted, playsInline, loop, preload, onReady]);
 
   return (
     <video
       ref={ref}
       className={className}
-      src={src}
+      src={loadedSrc ?? undefined}
       poster={poster}
       muted={muted}
       playsInline={playsInline}
       loop={loop}
       preload={preload}
-      // aria role
-      aria-label="Vídeo de destaque"
+      controls={controls || !autoplaySucceeded}
+      aria-hidden={false}
     />
   );
 }

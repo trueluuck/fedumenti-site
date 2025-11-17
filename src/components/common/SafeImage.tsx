@@ -1,26 +1,12 @@
+// FILE: src/components/common/SafeImage.tsx
 "use client";
-
 import Image, { ImageProps } from "next/image";
 import { useMemo, useState } from "react";
 
-/**
- * WHY: evita quebra visual quando a imagem solicitada não existe ou o sufixo de tamanho difere.
- * Estratégia:
- * 1) tenta src original;
- * 2) se 404, tenta forçar "-1280" antes do ".jpg|.png|.webp";
- * 3) se falhar, usa fallback.
- */
 type Props = ImageProps & {
   fallbackSrc?: string;
-  trySizes?: Array<640 | 1280 | 1920 | 2560>;
+  trySizes?: number[];
 };
-
-function withSizeSuffix(url: string, size: number) {
-  // "/assets/posters/foo.jpg" -> "/assets/posters/foo-1280.jpg" (se já tem sufixo, mantém)
-  const [base, query = ""] = url.split("?");
-  if (/-\d{3,4}\.(jpg|jpeg|png|webp|avif)$/i.test(base)) return url; // já tem sufixo
-  return base.replace(/\.(jpg|jpeg|png|webp|avif)$/i, `-${size}$&`) + (query ? `?${query}` : "");
-}
 
 export default function SafeImage({
   src,
@@ -32,19 +18,19 @@ export default function SafeImage({
   const [current, setCurrent] = useState<string | any>(src);
   const candidates = useMemo(() => {
     const s = typeof src === "string" ? src : (src as any);
-    if (typeof s !== "string") return [];
-    return [s, ...trySizes.map((sz) => withSizeSuffix(s, sz)), fallbackSrc].filter(Boolean);
+    if (typeof s !== "string") return [fallbackSrc];
+    const arr = [s, ...trySizes.map((sz) => s.replace(/\.(jpg|jpeg|png|webp|avif)$/i, `-${sz}.$1`)), fallbackSrc];
+    return Array.from(new Set(arr));
   }, [src, trySizes, fallbackSrc]);
 
   const [idx, setIdx] = useState(0);
 
   return (
     <Image
-      {...rest}
+      {...(rest as ImageProps)}
       src={current}
-      alt={alt}
+      alt={alt as string}
       onError={() => {
-        // WHY: tenta próximo candidato apenas uma vez por erro
         const next = idx + 1;
         if (next < candidates.length) {
           setIdx(next);

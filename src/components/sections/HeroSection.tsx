@@ -13,7 +13,7 @@ const SLIDES: Array<
 > = [
   {
     kind: 'video',
-    src: '/assets/hero-video.mp4',
+    src: 'public/assets/hero-video.mp4',
     title: 'Tecnologia e crescimento para o seu negócio',
     subtitle: 'Mídia, dados e produto para escalar receita com previsibilidade.',
   },

@@ -1,20 +1,13 @@
 import type { NextConfig } from "next";
 
-let withBundleAnalyzer: (cfg: NextConfig) => NextConfig;
-try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const _with = require("@next/bundle-analyzer")({ enabled: process.env.ANALYZE === "true" || process.env.ANALYZE === "1" });
-  withBundleAnalyzer = _with;
-} catch (err) {
-  withBundleAnalyzer = (cfg: NextConfig) => cfg;
-}
-
 const baseConfig: NextConfig = {
   reactStrictMode: true,
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
   poweredByHeader: false,
   productionBrowserSourceMaps: false,
+  // Silences Turbopack/webpack conflict on Next.js 16+
+  turbopack: {},
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 480, 640, 768, 1024, 1280, 1536, 1920, 2560],
@@ -64,4 +57,4 @@ const baseConfig: NextConfig = {
   }
 };
 
-export default withBundleAnalyzer(baseConfig);
+export default baseConfig;

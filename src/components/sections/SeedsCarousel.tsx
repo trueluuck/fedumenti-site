@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
 
 // ID do vídeo (nocookie)
 const YT_ID = 'fJNfL1QP-mI';
@@ -37,10 +38,7 @@ export default function SeedsCarousel() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   // respeita prefers-reduced-motion: se true, não auto-avança nem toca vídeo
-  const prefersReducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   // auto-avanço
   useEffect(() => {

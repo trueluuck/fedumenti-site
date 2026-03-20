@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import LiteYouTube from '@/components/common/LiteYoutube';
+import { usePrefersReducedMotion } from '@/hooks/usePrefersReducedMotion';
+import LiteYouTube from '@/components/common/LiteYouTube';
 
 const SLIDE_INTERVAL = 6500; // ms
 
@@ -203,16 +204,4 @@ export default function HeroCarousel() {
   );
 }
 
-/* === utils === */
-function usePrefersReducedMotion() {
-  const [prefers, setPrefers] = useState(false);
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefers(mq.matches);
-    const onChange = (e: MediaQueryListEvent) => setPrefers(e.matches);
-    mq.addEventListener?.('change', onChange);
-    return () => mq.removeEventListener?.('change', onChange);
-  }, []);
-  return prefers;
-}
+

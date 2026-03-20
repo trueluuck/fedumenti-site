@@ -50,7 +50,7 @@ export default function LeadFormStub() {
             <input
               name="phone"
               className="w-full rounded-md border border-white/10 bg-black/30 px-3 py-2 text-white focus:outline-none focus:ring-2 focus:ring-lime-400/40"
-              placeholder="(42) 99999-9999"
+              placeholder="(42) 9 9921-7736"
             />
           </div>
         </div>

@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Fedumenti Group — Site Institucional
 
-## Getting Started
+Site oficial do **Fedumenti Group**, empresa de tecnologia, inovação e performance digital sediada em Guarapuava, PR.
 
-First, run the development server:
+## 🚀 Stack Tecnológico
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+| Tecnologia | Versão | Uso |
+|---|---|---|
+| [Next.js](https://nextjs.org) | 15+ (App Router) | Framework principal |
+| [React](https://reactjs.org) | 19 | UI |
+| [Tailwind CSS](https://tailwindcss.com) | 4+ | Estilização (Aurora, Glassmorphism) |
+| [Lucide React](https://lucide.dev) | Latest | Ícones |
+| [OpenAI](https://platform.openai.com) | Assistants API v2 | Chatbot KATIA |
+| [Framer Motion](https://framer.com/motion) | Latest | Animações (componentes selecionados) |
+
+## 📁 Estrutura Principal
+
+```
+src/
+├── app/                    # Roteamento App Router
+│   ├── page.tsx            # Homepage
+│   ├── about/              # Quem Somos
+│   ├── services/           # Serviços
+│   ├── contact/            # Contato
+│   ├── lp/                 # Landing Pages (Google 360, Reflorestamento, etc.)
+│   └── api/chat/           # API Route — KATIA (OpenAI Assistants)
+├── components/
+│   ├── ui/                 # Navbar, Footer
+│   ├── sections/           # HeroSection, ClientsCarousel, etc.
+│   ├── chat/               # FloatingChatbot (KATIA), ChatbotWrapper
+│   ├── common/             # CookieBanner, SafeImage, AnalyticsGate
+│   └── lp/                 # Componentes exclusivos de LPs
+├── contexts/               # ThemeContext
+├── hooks/                  # usePrefersReducedMotion, useScrollY
+└── lib/                    # utils (cn), helpers SEO
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤖 Chatbot KATIA
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Assistente virtual front-door integrada via **OpenAI Assistants API v2** (ID: `asst_OHTDVTh6L0y03KiXtB9jJzBS`).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Treinada como secretária virtual da Fedumenti Group (pt-BR)
+- Fluxo: cliente vs. novo lead → Menu numérico → Handoff WhatsApp
+- LGPD compliant: coleta mínima com consentimento explícito
+- Configurável via `.env.local`:
+  ```
+  OPENAI_API_KEY=sk-...
+  OPENAI_ASSISTANT_ID=asst_OHTDVTh6L0y03KiXtB9jJzBS
+  ```
 
-## Learn More
+## 🛠️ Rodando Localmente
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm install
+cp .env.example .env.local   # preencha as variáveis
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Acesse: [http://localhost:3000](http://localhost:3000)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📬 Contato
 
-## Deploy on Vercel
+- **WhatsApp**: [(42) 9 9921-7736](https://wa.me/5542999217736)
+- **E-mail**: contato@fedumentigroup.com.br
+- **CNPJ**: 26.306.303/0001-20
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Fedumenti Group — Tecnologia com Propósito*

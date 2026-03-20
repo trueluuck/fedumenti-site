@@ -23,15 +23,12 @@ const baseConfig: NextConfig = {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "i.ytimg.com" },
-      { protocol: "https", hostname: "yt3.ggpht.com" }
+      { protocol: "https", hostname: "yt3.ggpht.com" },
+      { protocol: "https", hostname: "img.youtube.com" }
     ]
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false
-  },
-  modularizeImports: {
-    "lucide-react": { transform: "lucide-react/dist/esm/icons/{{member}}", skipDefaultConversion: true },
-    "lodash-es": { transform: "lodash-es/{{member}}" }
   },
   experimental: {
     optimizePackageImports: ["framer-motion", "lucide-react"]
@@ -60,9 +57,9 @@ const baseConfig: NextConfig = {
   },
   async rewrites() {
     return [
-      { source: "/assets/posters/:name(.*).jpg", destination: "/assets/posters/:name-1280.jpg" },
-      { source: "/assets/posters/sites-landing-pages.jpg", destination: "/assets/posters/sites-1280.jpg" },
-      { source: "/assets/posters/trafego-pago.jpg", destination: "/assets/posters/google360-1280.jpg" }
+      { source: "/assets/posters/:name(branding-design|financie-startup|google360|indicacoes|reflorestamento|sites).jpg", destination: "/assets/posters/:name-1280.webp" },
+      { source: "/assets/posters/sites-1280.jpg", destination: "/assets/posters/sites-1280.webp" },
+      { source: "/assets/posters/trafego-pago.jpg", destination: "/assets/posters/google360-1280.webp" }
     ];
   }
 };

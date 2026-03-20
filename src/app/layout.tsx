@@ -2,10 +2,12 @@ import './globals.css';
 import type { Metadata } from 'next';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
+import ChatbotWrapper from '@/components/chat/ChatbotWrapper';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import CookieBanner from '@/components/common/CookieBanner';
 import AnalyticsGate from '@/components/analytics/AnalyticsGate';
 import { Suspense } from 'react';
+import { inter, poppins } from './fonts';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fedumentigroup.com.br'),
@@ -41,16 +43,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" as="image" href="/assets/posters/indicacoes.jpg" />
       </head>
 
-      <body className="bg-bg text-fg transition-colors duration-300">
+      <body className={`${inter.variable} ${poppins.variable} font-sans bg-background text-foreground transition-colors duration-300 antialiased`}>
+        <div className="aurora-blur" aria-hidden="true" />
         <ThemeProvider>
-          {/* Qualquer componente que possa usar usePathname/useSearchParams deve ficar dentro de Suspense */}
           <Suspense fallback={null}>
             <Navbar />
           </Suspense>
 
-          {/* Colocamos o children em Suspense para cobrir páginas que usem esses hooks também */}
           <Suspense fallback={null}>
-            <main className="pt-20 min-h-screen">{children}</main>
+            <main className="relative z-10 min-h-screen pt-20">{children}</main>
           </Suspense>
 
           <Footer />
@@ -58,6 +59,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Suspense fallback={null}>
             <CookieBanner />
             <AnalyticsGate />
+            <ChatbotWrapper />
+
           </Suspense>
         </ThemeProvider>
       </body>

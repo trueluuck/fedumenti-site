@@ -1,21 +1,18 @@
-// src/components/sections/ClientsCarousel.tsx
 'use client';
 
 import Image from 'next/image';
-import { motion, useAnimation, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 
 const clients = [
-  { name: 'Cliente 1', logo: '/assets/clients/cliente1.png' },
-  { name: 'Cliente 2', logo: '/assets/clients/cliente2.png' },
-  { name: 'Cliente 3', logo: '/assets/clients/cliente3.png' },
-  { name: 'Cliente 4', logo: '/assets/clients/cliente4.png' },
-  { name: 'Cliente 5', logo: '/assets/clients/cliente5.png' },
-  { name: 'Cliente 6', logo: '/assets/clients/cliente6.png' },
-  { name: 'Cliente 7', logo: '/assets/clients/cliente7.png' },
-  { name: 'Cliente 8', logo: '/assets/clients/cliente8.png' },
-  { name: 'Cliente 9', logo: '/assets/clients/cliente9.png' },
+  { name: 'Cliente 1',  logo: '/assets/clients/cliente1.png' },
+  { name: 'Cliente 2',  logo: '/assets/clients/cliente2.png' },
+  { name: 'Cliente 3',  logo: '/assets/clients/cliente3.png' },
+  { name: 'Cliente 4',  logo: '/assets/clients/cliente4.png' },
+  { name: 'Cliente 5',  logo: '/assets/clients/cliente5.png' },
+  { name: 'Cliente 6',  logo: '/assets/clients/cliente6.png' },
+  { name: 'Cliente 7',  logo: '/assets/clients/cliente7.png' },
+  { name: 'Cliente 8',  logo: '/assets/clients/cliente8.png' },
+  { name: 'Cliente 9',  logo: '/assets/clients/cliente9.png' },
   { name: 'Cliente 10', logo: '/assets/clients/cliente10.png' },
   { name: 'Cliente 11', logo: '/assets/clients/cliente11.png' },
   { name: 'Cliente 12', logo: '/assets/clients/cliente12.png' },
@@ -28,111 +25,92 @@ const clients = [
   { name: 'Cliente 19', logo: '/assets/clients/cliente19.png' },
   { name: 'Cliente 20', logo: '/assets/clients/cliente20.png' },
 ];
+
+// Duplicate for seamless infinite loop
+const loopTrack = [...clients, ...clients];
+
 export default function ClientsCarousel() {
-  const controls = useAnimation();
-  const router = useRouter();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const reducedMotion = useReducedMotion();
-
-  // velocidade px/s
-  const SPEED = 48;
-
-  // triplica a lista para continuidade perfeita
-  const items = useMemo(() => [...clients, ...clients, ...clients], []);
-
-  const startLoop = useCallback(async () => {
-    if (reducedMotion) return;
-    const track = trackRef.current;
-    if (!track) return;
-
-    const totalWidth = track.getBoundingClientRect().width;
-    const unitWidth = totalWidth / 3;
-    const duration = Math.max(10, unitWidth / SPEED);
-
-    await controls.start({
-      x: ['0%', '-100%'],
-      transition: { repeat: Infinity, duration, ease: 'linear' },
-    });
-  }, [controls, reducedMotion]);
-
-  const stopLoop = useCallback(() => controls.stop(), [controls]);
+  const animRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    startLoop();
-
-    const onResize = () => {
-      stopLoop();
-      const id = setTimeout(() => startLoop(), 150);
-      return () => clearTimeout(id);
-    };
-
-    window.addEventListener('resize', onResize);
+    const el = animRef.current;
+    if (!el) return;
+    const pause = () => { el.style.animationPlayState = 'paused'; };
+    const play  = () => { el.style.animationPlayState = 'running'; };
+    el.addEventListener('mouseenter', pause);
+    el.addEventListener('mouseleave', play);
     return () => {
-      window.removeEventListener('resize', onResize);
-      stopLoop();
+      el.removeEventListener('mouseenter', pause);
+      el.removeEventListener('mouseleave', play);
     };
-  }, [startLoop, stopLoop]);
-
-  // interações pausam o loop
-  const handlePointerDown = () => stopLoop();
-  const handlePointerUp = () => startLoop();
-  const handleMouseEnter = () => stopLoop();
-  const handleMouseLeave = () => startLoop();
-  const handleWheel = () => stopLoop();
-  const handleScroll = () => stopLoop();
+  }, []);
 
   return (
-    <section className="py-6 border-t border-gray-200 dark:border-gray-800 bg-gray-50/70 dark:bg-gray-900/70 backdrop-blur-sm transition-colors">
-      <div className="max-w-6xl mx-auto text-center mb-3">
-        <h2
-          className="
-            text-base md:text-lg font-semibold
-            text-gray-800 dark:text-gray-200
-            tracking-wide
-          "
-        >
-          Empresas que já confiaram na Fedumenti Group
-        </h2>
-        <div className="mt-2 h-px w-40 mx-auto bg-gradient-to-r from-transparent via-gray-300 to-transparent dark:via-white/20" />
+    <section className="relative w-full">
+      {/* Top separator line */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-border/60 to-transparent" />
+
+      {/* Main band */}
+      <div className="relative py-7 bg-card/30 dark:bg-background/60 backdrop-blur-sm">
+
+        {/* Label row */}
+        <div className="flex items-center gap-4 px-10 mb-6">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-border/40" />
+          <p className="shrink-0 text-[10px] font-extrabold uppercase tracking-[0.3em] text-muted-foreground/60 whitespace-nowrap select-none">
+            Empresas que já confiaram na Fedumenti
+          </p>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-border/40" />
+        </div>
+
+        {/* Fade masks */}
+        <div className="absolute left-0 top-0 bottom-0 w-28 z-10 pointer-events-none
+                        bg-gradient-to-r from-card/80 dark:from-background/80 to-transparent" />
+        <div className="absolute right-0 top-0 bottom-0 w-28 z-10 pointer-events-none
+                        bg-gradient-to-l from-card/80 dark:from-background/80 to-transparent" />
+
+        {/* Scrolling strip */}
+        <div className="overflow-hidden w-full">
+          <div
+            ref={animRef}
+            className="flex items-center clients-marquee"
+            style={{ width: 'max-content', gap: '2rem' }}
+          >
+            {loopTrack.map((client, idx) => (
+              <div
+                key={`${client.name}-${idx}`}
+                className="
+                  group flex-shrink-0 flex items-center justify-center
+                  h-14 w-[110px] px-3 rounded-xl
+                  border border-transparent
+                  hover:border-border/50 hover:bg-accent/20 hover:shadow-sm
+                  transition-all duration-300 cursor-default
+                "
+                title={client.name}
+              >
+                <Image
+                  src={client.logo}
+                  alt={client.name}
+                  width={96}
+                  height={40}
+                  sizes="96px"
+                  className="
+                    h-9 w-auto max-w-[96px] object-contain select-none
+                    grayscale opacity-35
+                    group-hover:grayscale-0 group-hover:opacity-100
+                    transition-all duration-500
+                  "
+                  draggable={false}
+                  loading={idx < clients.length ? 'eager' : 'lazy'}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
-      <div
-        className="overflow-hidden relative w-full"
-        ref={containerRef}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onWheel={handleWheel}
-        onScroll={handleScroll}
-      >
-        <motion.div
-          ref={trackRef}
-          className="flex gap-6 will-change-transform"
-          animate={controls}
-        >
-          {items.map((client, idx) => (
-            <button
-              key={`${client.name}-${idx}`}
-              onClick={() => router.push('/depoimentos')}
-              className="flex items-center justify-center min-w-[64px] px-2 focus:outline-none"
-              aria-label={`Ver depoimentos (${client.name})`}
-            >
-              <Image
-                src={client.logo}
-                alt={client.name}
-                width={56}
-                height={32}
-                sizes="(max-width: 768px) 56px, 64px"
-                className="object-contain opacity-70 hover:opacity-100 transition-opacity duration-300"
-                loading={idx < clients.length ? 'eager' : 'lazy'}
-                draggable={false}
-              />
-            </button>
-          ))}
-        </motion.div>
-      </div>
+      {/* Bottom separator */}
+      <div className="h-px w-full bg-gradient-to-r from-transparent via-border/60 to-transparent" />
+
     </section>
   );
 }

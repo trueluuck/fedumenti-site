@@ -24,7 +24,22 @@ const baseConfig: NextConfig = {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error", "warn"] } : false
   },
   experimental: {
-    optimizePackageImports: ["framer-motion", "lucide-react"]
+    optimizePackageImports: ["lucide-react"]
+  },
+  async redirects() {
+    return [
+      { source: "/lp/google-360", destination: "/google-360", permanent: true },
+      { source: "/lp/financie-startup", destination: "/linxar/hub", permanent: true },
+      { source: "/about", destination: "/sobre", permanent: true },
+      { source: "/contact", destination: "/contato", permanent: true },
+      { source: "/services", destination: "/", permanent: false },
+      { source: "/cursos", destination: "/", permanent: false },
+      { source: "/depoimentos", destination: "/", permanent: false },
+      { source: "/empresas", destination: "/", permanent: false },
+      { source: "/indicacoes", destination: "/", permanent: false },
+      { source: "/pesquisa", destination: "/", permanent: false },
+      { source: "/lp/:slug*", destination: "/", permanent: false },
+    ];
   },
   async headers() {
     return [

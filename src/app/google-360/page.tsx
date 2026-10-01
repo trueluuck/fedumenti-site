@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import CurvedCarousel, { TourItem } from '@/components/lp/google360/CurvedCarousel';
+import CurvedCarousel, { TourItem } from '@/components/google360/CurvedCarousel';
 import { Camera, CheckCircle2, MapPin, Eye, Search, ShieldCheck } from 'lucide-react';
 
 export const metadata: Metadata = {

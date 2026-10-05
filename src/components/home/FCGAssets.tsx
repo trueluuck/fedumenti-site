@@ -23,13 +23,13 @@ export default function FCGAssets() {
           <div className="p-8 rounded-xl border border-slate-200 bg-white flex flex-col justify-between space-y-6 hover:border-slate-300 transition-colors">
             <div className="space-y-4">
               <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">
-                Software & Commerce Intelligence
+                Commerce Intelligence · 4 Verticais
               </span>
               <h3 className="text-2xl font-bold text-slate-950 tracking-tight">
-                Linxar
+                Ecossistema Linxar
               </h3>
               <p className="text-slate-600 text-sm leading-relaxed">
-                Plataforma de inteligência de catálogo e distribuição de produtos. Desenvolvida para indústrias, atacadistas e grandes sellers automatizarem a publicação de milhares de SKUs em múltiplos marketplaces, licitações públicas e canais integrados.
+                A principal infraestrutura de orquestração de dados de e-commerce do Brasil. Desenhada para dominar a jornada completa do produto: da indústria ao consumidor final, cobrindo varejo autônomo e marketplaces (Hub), compras públicas e licitações (Pref), dropshipping descentralizado (Workplace) e infraestrutura invisível via API Headless (Middleware).
               </p>
             </div>
 
@@ -38,7 +38,7 @@ export default function FCGAssets() {
                 href="/linxar"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-slate-900 hover:text-blue-600 transition-colors"
               >
-                Acessar página da Linxar
+                Conhecer o ecossistema Linxar
                 <ArrowRight size={15} />
               </Link>
             </div>

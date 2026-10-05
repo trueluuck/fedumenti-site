@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Users2, PackageCheck, Zap, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Linxar Workplace — Sellers e Afiliados Dropshipping | FCG',
+  title: 'Linxar Workplace — Dropshipping & Redes Descentralizadas | FCG',
   description:
-    'Linxar Workplace: ambiente de integração entre fornecedores com estoque e sellers digitais com catálogo enriquecido e sincronizado.',
+    'A Malha de Distribuição da Linxar: ecossistema B2B2C conectando indústrias e fornecedores a sellers de dropshipping e afiliados.',
 };
 
 export default function LinxarWorkplacePage() {
@@ -12,44 +12,52 @@ export default function LinxarWorkplacePage() {
     <div className="bg-white min-h-screen py-16 sm:py-24">
       <div className="container-xl max-w-4xl mx-auto space-y-16">
         
-        {/* Hero */}
+        {/* Hero Executivo */}
         <div className="space-y-4">
-          <p className="text-xs uppercase font-mono tracking-widest text-slate-500 font-semibold">
-            Linxar Workplace · Sellers & Dropshipping
-          </p>
+          <div className="flex items-center gap-3 text-xs font-mono text-slate-500 uppercase tracking-wider">
+            <span className="font-semibold text-slate-900">Vertical 03 · Linxar Workplace</span>
+            <span>•</span>
+            <span>A Malha de Distribuição</span>
+            <span>•</span>
+            <span className="text-amber-700 font-semibold">Em Breve (Expansão de Canal)</span>
+          </div>
 
           <h1 className="text-3xl sm:text-5xl font-bold text-slate-950 tracking-tight leading-tight">
-            Conecte fornecedores a redes de vendedores digitais.
+            Dropshipping & Redes Descentralizadas
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            Conectamos fornecedores com estoque real a uma rede de sellers e afiliados digitais prontos para vender com anúncios já otimizados e enriquecidos por IA.
+          <p className="text-base sm:text-xl text-slate-700 leading-relaxed font-medium">
+            O futuro do comércio é descentralizado. Esta vertical transforma a tecnologia da Linxar no elo perfeito entre quem produz e quem vende, surfando a onda da economia de afiliados.
+          </p>
+
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            Criamos um ecossistema B2B2C sem atrito, conectando indústrias e fornecedores diretamente a sellers de dropshipping e redes de afiliados com estoques sincronizados em tempo real e catálogo padronizado em alta resolução.
           </p>
         </div>
 
-        {/* Pilares */}
+        {/* Pilares Executivos */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-xl border border-slate-200 bg-white space-y-3">
-            <Users2 size={20} className="text-slate-900" />
-            <h3 className="font-bold text-slate-950 text-base">Rede de Vendas</h3>
+            <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">Proposta de Valor</span>
+            <h3 className="font-bold text-slate-950 text-base">Ecossistema B2B2C</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Indústrias multiplicam seus canais de distribuição sem precisar gerenciar contas de terceiros manualmente.
+              Conexão direta e sem fricção entre quem tem produto físico e quem domina canais de tráfego, audiência e vendas digitais.
             </p>
           </div>
 
           <div className="p-6 rounded-xl border border-slate-200 bg-white space-y-3">
-            <PackageCheck size={20} className="text-slate-900" />
-            <h3 className="font-bold text-slate-950 text-base">Catálogo Pronto</h3>
+            <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">Aceleração com IA</span>
+            <h3 className="font-bold text-slate-950 text-base">Replicação em Escala</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              O seller recebe produtos com imagens em fundo branco, atributos fiscais, NCM, títulos SEO e descrições completas.
+              Catálogo unificado e homologado pronto para replicação em milhares de pontas de venda sem perda de qualidade visual ou de SEO.
             </p>
           </div>
 
           <div className="p-6 rounded-xl border border-slate-200 bg-white space-y-3">
-            <Zap size={20} className="text-slate-900" />
-            <h3 className="font-bold text-slate-950 text-base">Sincronização</h3>
+            <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">Orquestração Operacional</span>
+            <h3 className="font-bold text-slate-950 text-base">Estoque Real & Fulfillment</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              Estoque e pedidos sincronizados automaticamente para evitar ruptura, cancelamento e atritos operacionais.
+              Sincronização de estoque em milissegundos, rastreio transparente de comissões, repasses automatizados e fulfillment assistido.
             </p>
           </div>
         </div>
@@ -57,20 +65,20 @@ export default function LinxarWorkplacePage() {
         {/* Call to Action */}
         <div className="p-8 rounded-xl bg-slate-50 border border-slate-200 space-y-4">
           <h2 className="text-xl font-bold text-slate-950">
-            Parceria pioneira para indústrias e sellers
+            Seja parceiro na expansão do Linxar Workplace
           </h2>
           <p className="text-sm text-slate-600 leading-relaxed">
-            Entre em contato para participar da primeira fase de integração do Linxar Workplace.
+            Se você representa uma indústria com volume de estoque ou uma rede consolidada de sellers e afiliados, participe da primeira fase de testes da vertical.
           </p>
 
           <div className="pt-2">
             <a
-              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Linxar%20Workplace"
+              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Linxar%20Workplace%20(Dropshipping)"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary text-xs uppercase tracking-wider"
             >
-              Falar no WhatsApp
+              Falar com o Time de Parcerias
             </a>
           </div>
         </div>

@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { ExternalLink, Check, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Linxar Hub — Automação de Catálogo e Marketplaces | FCG',
+  title: 'Linxar Hub — Varejo Autônomo & Marketplaces | FCG',
   description:
-    'Linxar Hub: automação de catálogo para indústrias e grandes sellers publicarem em escala no Mercado Livre, Shopee, Amazon, Magalu e outros marketplaces.',
+    'O Motor de Tração da Linxar: transformando indústrias, atacadistas e grandes sellers em máquinas de vendas omnicanais com Zero Digitação.',
 };
 
 export default function LinxarHubPage() {
@@ -33,8 +33,8 @@ export default function LinxarHubPage() {
       tokens: '1 Milhão de Tokens de IA/mês',
       features: [
         'Títulos e descrições otimizados para SEO',
-        'Fotos de estúdio em fundo branco',
-        'Multiplicador de canais',
+        'Fotos de estúdio em fundo branco (#FFFFFF)',
+        'Multiplicador de canais simultâneos',
         'Emissão simplificada',
       ],
       ctaText: 'Assinar na Linxar',
@@ -49,10 +49,10 @@ export default function LinxarHubPage() {
       skus: '1.000 SKUs sob gestão',
       tokens: '5 Milhões de Tokens de IA/mês',
       features: [
-        'Katie SAC 24h autônoma',
-        'Repricer de BuyBox',
-        'Faturamento automatizado',
-        'Guardião de NCM e catálogo',
+        'Katie SAC 24h autônoma no tom da marca',
+        'Repricer e ganhador de BuyBox na madrugada',
+        'Faturamento mãos-livres automático',
+        'Guardião de integridade de NCM e catálogo',
       ],
       ctaText: 'Assinar Growth',
       href: 'https://linxar.com.br/pt#planos',
@@ -61,14 +61,14 @@ export default function LinxarHubPage() {
       name: 'ENTERPRISE',
       price: 'R$ 2.497',
       period: '/ mês',
-      sub: 'Para grandes distribuidores',
+      sub: 'Para grandes distribuidores e indústrias',
       skus: '4.000 SKUs sob gestão',
       tokens: '15 Milhões de Tokens de IA/mês',
       features: [
         'Gestão multi-CNPJ em 1 painel',
-        'Importador de catálogos externos',
-        'Radar de oportunidades B2B',
-        'Gerente de conta dedicado',
+        'Importador inteligente de catálogos externos',
+        'Radar de novas oportunidades B2B',
+        'Suporte e gerente de conta dedicado',
       ],
       ctaText: 'Falar com Consultor',
       href: 'https://linxar.com.br/pt#planos',
@@ -79,18 +79,26 @@ export default function LinxarHubPage() {
     <div className="bg-white min-h-screen py-16 sm:py-24">
       <div className="container-xl space-y-16">
         
-        {/* Hero */}
-        <div className="max-w-3xl space-y-4">
-          <p className="text-xs uppercase font-mono tracking-widest text-slate-500 font-semibold">
-            Linxar Hub · Operação Omnichannel
-          </p>
+        {/* Hero Executivo Linxar Hub */}
+        <div className="max-w-4xl space-y-5">
+          <div className="flex items-center gap-3 text-xs font-mono text-slate-500 uppercase tracking-wider">
+            <span className="font-semibold text-slate-900">Vertical 01 · Linxar Hub</span>
+            <span>•</span>
+            <span>O Motor de Tração</span>
+            <span>•</span>
+            <span className="text-emerald-700 font-semibold">Disponível e Tracionando</span>
+          </div>
 
-          <h1 className="text-3xl sm:text-5xl font-bold text-slate-950 tracking-tight leading-tight">
-            Automatize seu catálogo de produtos.
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-950 tracking-tight leading-tight">
+            Varejo Autônomo & Marketplaces
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 leading-relaxed font-normal">
-            A infraestrutura líder de automação de produtos para indústrias, atacadistas e grandes sellers. Inteligência artificial que transforma dados brutos em anúncios completos para múltiplos canais.
+          <p className="text-base sm:text-xl text-slate-700 leading-relaxed font-medium">
+            A vertical que já está no campo de batalha validando a nossa tecnologia, gerando caixa e erradicando o trabalho braçal do varejo B2B e B2C.
+          </p>
+
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            Transformamos indústrias, atacadistas e grandes sellers em máquinas de vendas omnicanais com o conceito de <strong>"Zero Digitação"</strong>: enriquecimento proprietário de SKUs, padronização visual cirúrgica em lote e publicação automatizada com cálculo de DIFAL para 27 UFs.
           </p>
 
           <div className="pt-2">
@@ -100,9 +108,36 @@ export default function LinxarHubPage() {
               rel="noopener noreferrer"
               className="btn-primary"
             >
-              Acessar site oficial linxar.com.br/pt
+              Acessar plataforma linxar.com.br/pt
               <ExternalLink size={15} />
             </a>
+          </div>
+        </div>
+
+        {/* Pilares de Engenharia da Vertical */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="p-6 rounded-xl border border-slate-200 bg-white space-y-2">
+            <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">Proposta de Valor</span>
+            <h3 className="font-bold text-slate-950 text-base">Zero Digitação</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Transforme cadastros brutos e planilhas confusas em anúncios campeões prontos para vender nos maiores canais do país.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-xl border border-slate-200 bg-white space-y-2">
+            <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">Aceleração com IA</span>
+            <h3 className="font-bold text-slate-950 text-base">Padronização Cirúrgica</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Enriquecimento proprietário de SKUs e tratamento visual com fotos em fundo branco (#FFFFFF) em lote para aprovação imediata.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-xl border border-slate-200 bg-white space-y-2">
+            <span className="text-xs uppercase font-mono text-slate-500 font-semibold block">Orquestração Fiscal</span>
+            <h3 className="font-bold text-slate-950 text-base">DIFAL 27 UFs & Multi-Canal</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Publicação simultânea no Mercado Livre, Shopee, Amazon, Magalu e mais 10 canais com regras tributárias verificadas.
+            </p>
           </div>
         </div>
 

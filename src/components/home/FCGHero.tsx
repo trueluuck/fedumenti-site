@@ -1,42 +1,39 @@
 import Link from 'next/link';
-import { ArrowRight, Building2, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function FCGHero() {
   return (
-    <section className="relative pt-16 pb-20 md:pt-24 md:pb-28 bg-white border-b border-slate-100">
+    <section className="py-20 sm:py-28 bg-white border-b border-slate-200">
       <div className="container-xl">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          {/* Badge Holding */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold uppercase tracking-widest text-slate-700">
-            <Building2 size={14} className="text-blue-600" />
+        <div className="max-w-3xl space-y-6">
+          <p className="text-xs uppercase font-mono tracking-widest text-slate-500 font-semibold">
             Fedumenti Group · Holding de Tecnologia
-          </div>
-
-          {/* Headline */}
-          <h1 className="font-heading font-black text-4xl sm:text-6xl md:text-7xl text-slate-900 tracking-tight leading-[1.08] text-balance">
-            Construindo e acelerando o futuro da <span className="text-blue-600">tecnologia no Brasil.</span>
-          </h1>
-
-          {/* Subtitle Explicativo Puro FCG */}
-          <p className="text-lg sm:text-xl text-slate-600 font-normal max-w-3xl mx-auto leading-relaxed text-pretty">
-            A <strong>FCG (Fedumenti Group)</strong> é uma holding empresarial e venture builder sediada em Guarapuava/PR. Desenvolvemos soluções proprietárias de software, operamos ativos de tecnologia e impulsionamos negócios digitais de alto impacto.
           </p>
 
-          {/* Ações Institucionais */}
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-950 tracking-tight leading-tight text-balance">
+            Tecnologia e escala para empresas consolidadas.
+          </h1>
+
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl text-pretty font-normal">
+            A FCG é um grupo de tecnologia focado no empreendedor que já construiu uma operação sólida e busca estrutura proprietária de software, inteligência de dados e eficiência para acelerar sua expansão no mercado digital.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
               href="/sobre"
-              className="w-full sm:w-auto btn-primary-lg shadow-sm"
+              className="btn-primary"
             >
-              Conhecer a FCG
-              <ArrowRight size={18} />
+              Sobre a holding
+              <ArrowRight size={16} />
             </Link>
 
             <a
-              href="#portfolio"
-              className="w-full sm:w-auto btn-outline-lg"
+              href="https://wa.me/5542999217736"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-outline"
             >
-              Ver Empresas & Ativos
+              Contato direto
             </a>
           </div>
         </div>

@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import CurvedCarousel, { TourItem } from '@/components/google360/CurvedCarousel';
-import { Camera, CheckCircle2, MapPin, Eye, Search, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Google 360° — Tour Virtual por R$ 499 | FCG',
+  title: 'Google 360° — Presença Oficial no Google Maps | FCG',
   description:
-    'Leve seus clientes para dentro da sua empresa no Google Maps com tour virtual em alta definição. Valor único de R$ 499,00 pela FCG.',
+    'Tour virtual em alta definição publicado diretamente no Google Maps e Street View da sua empresa por R$ 499,00 valor único.',
 };
 
 const TOURS: TourItem[] = [
@@ -43,148 +43,95 @@ const TOURS: TourItem[] = [
 
 export default function Google360Page() {
   return (
-    <div className="bg-white min-h-screen">
-      {/* Hero Section */}
-      <section className="py-16 sm:py-20 border-b border-slate-100">
-        <div className="container-xl">
-          <div className="max-w-3xl mx-auto text-center space-y-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold uppercase tracking-wider text-emerald-800">
-              <Camera size={14} className="text-emerald-600" />
-              Serviço FCG · Presença Oficial no Google Maps
+    <div className="bg-white min-h-screen py-16 sm:py-24">
+      <div className="container-xl space-y-16">
+        
+        {/* Header Hero Google 360 */}
+        <div className="max-w-3xl space-y-4">
+          <p className="text-xs uppercase font-mono tracking-widest text-slate-500 font-semibold">
+            Serviço FCG · Presença Oficial no Google Maps
+          </p>
+
+          <h1 className="text-3xl sm:text-5xl font-bold text-slate-950 tracking-tight leading-tight">
+            Tour Virtual Google 360° para Empresas
+          </h1>
+
+          <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+            Captação fotográfica profissional em HDR e integração direta no perfil da sua empresa no Google Maps e Street View. Aumente o engajamento local, a confiança e a visibilidade nas buscas.
+          </p>
+
+          {/* Preço Fixo Limpo */}
+          <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="border-l-2 border-slate-900 pl-4 py-1">
+              <span className="text-xs font-mono text-slate-500 uppercase block">Valor Único</span>
+              <span className="text-2xl font-bold text-slate-950">R$ 499,00</span>
+              <span className="text-xs text-slate-500 block">Sem mensalidades</span>
             </div>
 
-            <h1 className="font-heading font-black text-4xl sm:text-6xl text-slate-900 tracking-tight leading-tight">
-              Tour Virtual <span className="text-blue-600">Google 360°</span>
-            </h1>
-
-            <p className="text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed">
-              Abra as portas do seu estabelecimento 24 horas por dia para quem pesquisa na sua região. Mais visitas, maior credibilidade e autoridade no Google.
-            </p>
-
-            {/* Price Badge */}
-            <div className="inline-flex flex-col items-center p-6 rounded-2xl bg-slate-50 border border-slate-200 mt-2">
-              <span className="text-xs uppercase font-mono font-bold tracking-wider text-slate-500">
-                Valor Único e Transparente
-              </span>
-              <div className="flex items-baseline gap-1 mt-1">
-                <span className="text-lg font-bold text-slate-600">R$</span>
-                <span className="text-5xl font-black font-heading tracking-tight text-slate-900">499</span>
-                <span className="text-sm font-semibold text-slate-500">,00</span>
-              </div>
-              <span className="text-xs text-slate-500 mt-1">
-                Sem mensalidades · Sessão completa com publicação oficial
-              </span>
-            </div>
-
-            <div className="pt-2">
-              <a
-                href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20quero%20agendar%20um%20Tour%20Google%20360%20por%20R%24%20499"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-green text-base px-8 py-4 shadow-sm hover:shadow"
-              >
-                Contratar Tour no WhatsApp
-              </a>
-            </div>
+            <a
+              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20Tour%20Google%20360%20por%20R%24%20499"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Agendar tour no WhatsApp
+              <ArrowRight size={15} />
+            </a>
           </div>
         </div>
-      </section>
 
-      {/* Exemplos Interativos */}
-      <section className="py-16 bg-slate-50/60 border-b border-slate-200/80">
-        <div className="container-xl">
-          <div className="max-w-3xl mx-auto text-center mb-10 space-y-2">
-            <h2 className="font-heading font-black text-2xl sm:text-4xl text-slate-900">
-              Navegue em Trabalhos Reais
+        {/* Exemplos Interativos Reais */}
+        <div className="space-y-6 pt-4 border-t border-slate-200">
+          <div className="space-y-1">
+            <h2 className="text-xl sm:text-2xl font-bold text-slate-950 tracking-tight">
+              Demonstrações em Estabelecimentos Reais
             </h2>
-            <p className="text-sm sm:text-base text-slate-600">
-              Arraste para girar a visualização e use as setas para trocar de estabelecimento.
+            <p className="text-sm text-slate-600">
+              Navegue pelos tours interativos clicando e arrastando nos modelos abaixo:
             </p>
           </div>
 
           <CurvedCarousel items={TOURS} autoplayMs={9000} />
         </div>
-      </section>
 
-      {/* Vantagens */}
-      <section className="py-20 bg-white border-b border-slate-100">
-        <div className="container-xl">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card p-8 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                <Eye size={24} />
-              </div>
-              <h3 className="font-heading font-black text-xl text-slate-900">
-                Experiência Imersiva
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                O cliente conhece a infraestrutura, higiene e conforto da sua empresa antes de sair de casa, aumentando a decisão de compra imediata.
-              </p>
+        {/* O que está incluso */}
+        <div className="p-8 rounded-xl border border-slate-200 bg-slate-50 space-y-6 max-w-3xl">
+          <h3 className="text-lg font-bold text-slate-950">
+            Escopo incluso no pacote:
+          </h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-700">
+            <div className="flex items-start gap-2.5">
+              <CheckCircle2 size={18} className="text-slate-900 shrink-0 mt-0.5" />
+              <span>Sessão fotográfica esférica HDR profissional</span>
             </div>
-
-            <div className="card p-8 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <Search size={24} />
-              </div>
-              <h3 className="font-heading font-black text-xl text-slate-900">
-                SEO Local Superior
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Fichas do Perfil da Empresa no Google com fotos em 360 graus geram o dobro de interesse e sobem no ranking de buscas locais da cidade.
-              </p>
+            <div className="flex items-start gap-2.5">
+              <CheckCircle2 size={18} className="text-slate-900 shrink-0 mt-0.5" />
+              <span>Tratamento e costura 360° em alta resolução</span>
             </div>
-
-            <div className="card p-8 space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
-                <ShieldCheck size={24} />
-              </div>
-              <h3 className="font-heading font-black text-xl text-slate-900">
-                Ativo Permanente
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Você paga apenas R$ 499 uma única vez e o tour permanece ativo na conta oficial do seu negócio sem nenhum custo extra.
-              </p>
+            <div className="flex items-start gap-2.5">
+              <CheckCircle2 size={18} className="text-slate-900 shrink-0 mt-0.5" />
+              <span>Publicação direta na ficha oficial no Google Maps</span>
+            </div>
+            <div className="flex items-start gap-2.5">
+              <CheckCircle2 size={18} className="text-slate-900 shrink-0 mt-0.5" />
+              <span>Sem custos de renovação anual ou hospedagem</span>
             </div>
           </div>
 
-          {/* O que está incluso */}
-          <div className="mt-16 max-w-2xl mx-auto rounded-2xl border border-slate-200 p-8 bg-slate-50/50">
-            <h4 className="font-heading font-bold text-lg text-slate-900 mb-4 text-center">
-              O que está incluso no pacote de R$ 499,00:
-            </h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
-                <span>Captação fotográfica profissional HDR</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
-                <span>Tratamento e costura 360° esférica</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
-                <span>Interligação dos pontos de navegação</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 size={16} className="text-emerald-600 shrink-0" />
-                <span>Publicação direta no Google Maps</span>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Final */}
-          <div className="mt-12 text-center">
+          <div className="pt-2">
             <a
-              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20quero%20agendar%20um%20Tour%20Google%20360%20por%20R%24%20499"
+              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20Tour%20Google%20360%20por%20R%24%20499"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-green text-base px-10 py-4 shadow-sm"
+              className="btn-primary text-xs uppercase tracking-wider"
             >
-              Falar com o Especialista no WhatsApp
+              Falar com o fotógrafo no WhatsApp
             </a>
           </div>
         </div>
-      </section>
+
+      </div>
     </div>
   );
 }

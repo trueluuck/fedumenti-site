@@ -3,22 +3,22 @@ import type { Metadata } from 'next';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 import { Suspense } from 'react';
-import { inter, outfit } from './fonts';
+import { inter } from './fonts';
 import CookieBanner from '@/components/common/CookieBanner';
 import AnalyticsGate from '@/components/analytics/AnalyticsGate';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fedumentigroup.com.br'),
   title: {
-    default: 'FCG — Fedumenti Group | Tecnologia e Inovação',
-    template: '%s | FCG Fedumenti Group',
+    default: 'FCG — Fedumenti Group | Grupo de Tecnologia e Escala Digital',
+    template: '%s | FCG — Fedumenti Group',
   },
   description:
-    'FCG é a holding proprietária da Linxar — infraestrutura de IA para automatizar catálogos e escalar vendas no comércio brasileiro.',
+    'Grupo de tecnologia focado em estruturar e escalar operações no mercado digital para empreendedores e empresas já consolidadas.',
   openGraph: {
     title: 'FCG — Fedumenti Group',
     description:
-      'Holding proprietária da Linxar, plataforma de Commerce Intelligence com IA para o comércio brasileiro.',
+      'Holding de tecnologia focada no empreendedor consolidado que busca escala no mercado digital.',
     url: 'https://www.fedumentigroup.com.br',
     siteName: 'FCG — Fedumenti Group',
     locale: 'pt_BR',
@@ -27,19 +27,19 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'FCG — Fedumenti Group',
-    description: 'Holding proprietária da Linxar — Commerce Intelligence para o Brasil.',
+    description: 'Grupo de tecnologia e inovação para escala no mercado digital.',
   },
   robots: { index: true, follow: true },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${outfit.variable}`}>
+    <html lang="pt-BR" className={inter.variable}>
       <head>
         <link rel="preconnect" href="https://linxar.com.br" />
         <link rel="dns-prefetch" href="https://linxar.com.br" />
       </head>
-      <body className="bg-white text-slate-900 antialiased min-h-screen font-sans">
+      <body className="bg-white text-slate-900 antialiased min-h-screen font-sans selection:bg-slate-200 selection:text-slate-900">
         <Suspense fallback={null}>
           <Navbar />
         </Suspense>

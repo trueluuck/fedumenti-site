@@ -36,6 +36,7 @@
 
 @layer base {
   html {
+    font-size: 93.75%; /* 15px base scale para proporção visual elegante e refinada */
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -53,7 +54,7 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-outfit), var(--font-sans);
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
     color: #0f172a;
     font-weight: 700;
   }

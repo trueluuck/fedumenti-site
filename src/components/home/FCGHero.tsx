@@ -33,7 +33,7 @@ export default function FCGHero() {
 
           {/* Subtitle Comercial */}
           <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal text-pretty">
-            A FCG é a holding estratégica focada no empresário consolidado que quer ampliar suas vendas, modernizar processos e construir canais digitais lucrativos sem perder tempo com agências amadoras.
+            A FCG é a holding estratégica focada no empresário consolidado que quer ampliar suas vendas, modernizar processos e construir canais digitais lucrativos.
           </p>
 
           {/* CTAs Comerciais */}

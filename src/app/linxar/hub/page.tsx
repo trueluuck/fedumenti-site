@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { ExternalLink, Check, ArrowRight, Layers } from 'lucide-react';
+import { ExternalLink, Check, ArrowRight, Layers, CheckCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Linxar Hub — Varejo Autônomo & Marketplaces | FCG',
@@ -76,28 +76,28 @@ export default function LinxarHubPage() {
   ];
 
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-screen pt-28 pb-20 sm:pt-36 sm:pb-28 border-b border-slate-800">
+    <div className="bg-[#f8fafc] text-slate-900 min-h-screen pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="container-xl space-y-16">
         
         {/* Hero Executivo Linxar Hub */}
         <div className="max-w-4xl space-y-5">
-          <div className="flex items-center gap-3 text-xs font-mono text-slate-400 uppercase tracking-wider">
-            <span className="font-bold text-blue-400">Vertical 01 · Linxar Hub</span>
-            <span>•</span>
-            <span>O Motor de Tração</span>
-            <span>•</span>
-            <span className="text-emerald-400 font-bold">Disponível e Tracionando</span>
+          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-wider">
+            <span className="font-bold text-blue-700">Vertical 01 · Linxar Hub</span>
+            <span className="text-slate-400">•</span>
+            <span className="text-slate-600">O Motor de Tração</span>
+            <span className="text-slate-400">•</span>
+            <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">Disponível e Tracionando</span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-extrabold text-slate-950 tracking-tight leading-tight">
             Varejo Autônomo & Marketplaces
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
+          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal">
             A vertical que já está no campo de batalha validando a nossa tecnologia, gerando caixa e erradicando o trabalho braçal do varejo B2B e B2C.
           </p>
 
-          <p className="text-sm sm:text-base text-slate-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
             Transformamos indústrias, atacadistas e grandes sellers em máquinas de vendas omnicanais com o conceito de <strong>"Zero Digitação"</strong>: enriquecimento proprietário de SKUs, padronização visual em lote e publicação automatizada com cálculo de DIFAL para 27 UFs.
           </p>
 
@@ -106,58 +106,58 @@ export default function LinxarHubPage() {
               href="https://linxar.com.br/pt"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-xs font-bold text-slate-950 hover:bg-slate-200 transition-colors shadow-lg"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-7 py-3.5 text-xs font-bold text-white hover:bg-slate-800 transition-colors shadow-sm"
             >
               <span>Acessar plataforma linxar.com.br/pt</span>
-              <ExternalLink size={15} />
+              <ExternalLink size={14} />
             </a>
           </div>
         </div>
 
         {/* Pilares de Engenharia da Vertical */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 sm:p-8 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl space-y-2">
-            <span className="text-[10px] uppercase font-mono text-blue-400 font-bold block">Proposta de Valor</span>
-            <h3 className="font-bold text-white text-lg">Zero Digitação</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+          <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-xs space-y-2">
+            <span className="text-[10px] uppercase font-mono text-blue-700 font-bold block">Proposta de Valor</span>
+            <h3 className="font-bold text-slate-950 text-lg">Zero Digitação</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Transforme cadastros brutos e planilhas confusas em anúncios campeões prontos para vender nos maiores canais do país.
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl space-y-2">
-            <span className="text-[10px] uppercase font-mono text-cyan-400 font-bold block">Aceleração com IA</span>
-            <h3 className="font-bold text-white text-lg">Padronização Cirúrgica</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+          <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-xs space-y-2">
+            <span className="text-[10px] uppercase font-mono text-blue-700 font-bold block">Aceleração com IA</span>
+            <h3 className="font-bold text-slate-950 text-lg">Padronização Cirúrgica</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Enriquecimento proprietário de SKUs e tratamento visual com fotos em fundo branco (#FFFFFF) em lote para aprovação imediata.
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl space-y-2">
-            <span className="text-[10px] uppercase font-mono text-emerald-400 font-bold block">Orquestração Fiscal</span>
-            <h3 className="font-bold text-white text-lg">DIFAL 27 UFs & Multi-Canal</h3>
-            <p className="text-xs text-slate-400 leading-relaxed">
+          <div className="p-6 sm:p-8 rounded-3xl border border-slate-200 bg-white shadow-xs space-y-2">
+            <span className="text-[10px] uppercase font-mono text-emerald-700 font-bold block">Orquestração Fiscal</span>
+            <h3 className="font-bold text-slate-950 text-lg">DIFAL 27 UFs & Multi-Canal</h3>
+            <p className="text-xs text-slate-600 leading-relaxed">
               Publicação simultânea no Mercado Livre, Shopee, Amazon, Magalu e mais 10 canais com regras tributárias verificadas.
             </p>
           </div>
         </div>
 
         {/* Canais */}
-        <div className="p-6 rounded-2xl border border-slate-800 bg-slate-900/40 space-y-2">
-          <span className="text-[10px] uppercase font-mono text-slate-400 font-bold block tracking-wider">
+        <div className="p-6 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-2">
+          <span className="text-[10px] uppercase font-mono text-slate-500 font-bold block tracking-wider">
             Canais de Venda Integrados
           </span>
-          <p className="text-xs sm:text-sm text-slate-300 font-mono leading-relaxed">
+          <p className="text-xs sm:text-sm text-slate-700 font-mono leading-relaxed">
             Mercado Livre · Shopee · Amazon BR · Magalu · VTEX · Nuvemshop · Shopify · Tray · Casas Bahia · MadeiraMadeira · Carrefour · KaBuM
           </p>
         </div>
 
-        {/* Planos */}
+        {/* Planos (Linxar Light Cards) */}
         <div className="space-y-6">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
               Capacidade e Planos
             </h2>
-            <p className="text-slate-400 text-sm">
+            <p className="text-slate-600 text-sm mt-1">
               Contratação e ativação realizadas diretamente na plataforma Linxar:
             </p>
           </div>
@@ -166,32 +166,32 @@ export default function LinxarHubPage() {
             {plans.map((p) => (
               <div
                 key={p.name}
-                className={`p-6 rounded-2xl border flex flex-col justify-between transition-all ${
+                className={`p-6 sm:p-8 rounded-3xl border flex flex-col justify-between transition-all ${
                   p.highlight
-                    ? 'border-blue-500 bg-slate-900/90 shadow-[0_0_30px_rgba(37,99,235,0.2)]'
-                    : 'border-slate-800 bg-slate-900/40 hover:border-slate-700'
+                    ? 'border-blue-500 bg-white shadow-xl ring-2 ring-blue-500/20'
+                    : 'border-slate-200 bg-white shadow-xs hover:border-slate-300'
                 }`}
               >
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-                    <span className="font-bold text-white">{p.name}</span>
-                    {p.highlight && <span className="font-bold text-blue-400">Mais Escolhido</span>}
+                  <div className="flex items-center justify-between text-xs font-mono">
+                    <span className="font-bold text-slate-900">{p.name}</span>
+                    {p.highlight && <span className="font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-full">Mais Escolhido</span>}
                   </div>
 
                   <div>
-                    <span className="text-3xl font-black text-white">{p.price}</span>
-                    <span className="text-xs text-slate-400 ml-1">{p.period}</span>
-                    <p className="text-xs text-slate-400 mt-0.5">{p.sub}</p>
+                    <span className="text-3xl font-extrabold text-slate-950">{p.price}</span>
+                    <span className="text-xs text-slate-500 ml-1">{p.period}</span>
+                    <p className="text-xs text-slate-500 mt-0.5">{p.sub}</p>
                   </div>
 
-                  <div className="pt-3 border-t border-slate-800 text-xs text-slate-300 space-y-2">
-                    <p className="font-semibold text-slate-100">{p.skus}</p>
-                    <p className="text-slate-400 font-mono text-[11px]">{p.tokens}</p>
-                    <ul className="space-y-1.5 pt-1">
+                  <div className="pt-3 border-t border-slate-100 text-xs text-slate-700 space-y-2">
+                    <p className="font-bold text-slate-900">{p.skus}</p>
+                    <p className="text-slate-500 font-mono text-[11px]">{p.tokens}</p>
+                    <ul className="space-y-2 pt-1">
                       {p.features.map((f, idx) => (
                         <li key={idx} className="flex items-start gap-1.5">
-                          <Check size={14} className="text-blue-400 shrink-0 mt-0.5" />
-                          <span className="text-slate-300">{f}</span>
+                          <Check size={14} className="text-blue-600 shrink-0 mt-0.5" />
+                          <span className="text-slate-600">{f}</span>
                         </li>
                       ))}
                     </ul>
@@ -205,8 +205,8 @@ export default function LinxarHubPage() {
                     rel="noopener noreferrer"
                     className={`w-full py-2.5 text-xs uppercase tracking-wider font-bold text-center block rounded-xl transition-colors ${
                       p.highlight
-                        ? 'bg-blue-600 hover:bg-blue-500 text-white shadow-lg'
-                        : 'bg-white hover:bg-slate-200 text-slate-950'
+                        ? 'bg-blue-600 hover:bg-blue-700 text-white shadow-md'
+                        : 'bg-slate-900 hover:bg-slate-800 text-white'
                     }`}
                   >
                     {p.ctaText}
@@ -218,12 +218,12 @@ export default function LinxarHubPage() {
         </div>
 
         {/* Rodapé da LP */}
-        <div className="pt-4 border-t border-slate-800">
+        <div className="pt-4 border-t border-slate-200">
           <a
             href="https://linxar.com.br/pt"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-bold text-white hover:text-blue-400 transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-bold text-slate-950 hover:text-blue-600 transition-colors"
           >
             <span>Acessar demonstração completa em linxar.com.br/pt</span>
             <ArrowRight size={15} />

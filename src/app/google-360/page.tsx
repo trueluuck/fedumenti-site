@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import CurvedCarousel, { TourItem } from '@/components/google360/CurvedCarousel';
-import { CheckCircle2, ArrowRight, Camera } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Camera, PhoneCall, ShieldCheck, MapPin } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Google 360° — Presença Oficial no Google Maps | FCG',
@@ -43,53 +43,57 @@ const TOURS: TourItem[] = [
 
 export default function Google360Page() {
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-screen pt-28 pb-20 sm:pt-36 sm:pb-28 border-b border-slate-800">
+    <div className="bg-[#f8fafc] text-slate-900 min-h-screen pt-32 pb-20 sm:pt-40 sm:pb-28">
       <div className="container-xl space-y-16">
         
         {/* Header Hero Google 360 */}
-        <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3.5 py-1">
-            <Camera size={14} className="text-cyan-400" />
-            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-cyan-400 font-semibold">
-              Serviço FCG · Presença Oficial no Google Maps
+        <div className="max-w-3xl space-y-5">
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1">
+            <Camera size={14} className="text-blue-700" />
+            <span className="text-[11px] font-mono uppercase tracking-widest text-blue-800 font-bold">
+              Serviço Comercial FCG · Presença Oficial no Google Maps
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
             Tour Virtual Google 360° para Empresas
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed font-normal">
-            Captação fotográfica profissional em HDR e integração direta no perfil da sua empresa no Google Maps e Street View. Aumente o engajamento local, a confiança e a visibilidade nas buscas.
+          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal">
+            Captação fotográfica profissional esférica em HDR e publicação direta na ficha da sua empresa no Google Maps e Street View. Aumente o engajamento local, a autoridade imediata e a visibilidade nas buscas.
           </p>
 
-          {/* Preço Fixo Limpo */}
-          <div className="pt-3 flex flex-col sm:flex-row items-start sm:items-center gap-6">
-            <div className="border-l-2 border-cyan-500 pl-4 py-1">
-              <span className="text-[10px] font-mono text-slate-500 uppercase block">Valor Único</span>
-              <span className="text-3xl font-black text-white">R$ 499,00</span>
-              <span className="text-xs text-slate-400 block">Sem mensalidades ou anuidades</span>
+          {/* Card de Preço Fixo Limpo (Linxar Style) */}
+          <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-6">
+            <div className="bg-white border border-slate-200/80 rounded-2xl p-5 shadow-xs">
+              <span className="text-[10px] font-mono text-slate-500 uppercase font-semibold block">Valor Único Sem Mensalidade</span>
+              <div className="flex items-baseline gap-1 mt-0.5">
+                <span className="text-3xl font-extrabold text-slate-950">R$ 499,00</span>
+                <span className="text-xs text-slate-500 font-medium">taxa única</span>
+              </div>
+              <span className="text-[11px] text-emerald-600 font-semibold block mt-1">✓ Sem custos anuais ou de renovação</span>
             </div>
 
             <a
               href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20Tour%20Google%20360%20por%20R%24%20499"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-xs font-bold text-slate-950 hover:bg-slate-200 transition-colors shadow-lg"
+              className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-7 py-4 text-xs font-bold text-white hover:bg-slate-800 transition-all shadow-md hover:scale-[1.01]"
             >
-              <span>Agendar tour no WhatsApp</span>
-              <ArrowRight size={15} />
+              <PhoneCall size={14} />
+              <span>Agendar Tour pelo WhatsApp</span>
+              <ArrowRight size={14} />
             </a>
           </div>
         </div>
 
         {/* Exemplos Interativos Reais com Padrão Facade Otimizado */}
-        <div className="space-y-6 pt-4 border-t border-slate-800">
+        <div className="space-y-6 pt-4 border-t border-slate-200">
           <div className="space-y-1">
-            <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+            <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
               Demonstrações em Estabelecimentos Reais
             </h2>
-            <p className="text-sm text-slate-400 font-normal">
+            <p className="text-sm text-slate-500 font-normal">
               Navegue pelos tours interativos clicando e arrastando nos modelos abaixo:
             </p>
           </div>
@@ -97,40 +101,44 @@ export default function Google360Page() {
           <CurvedCarousel items={TOURS} autoplayMs={9000} />
         </div>
 
-        {/* O que está incluso */}
-        <div className="p-8 sm:p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl space-y-6 max-w-3xl shadow-xl">
-          <h3 className="text-lg font-bold text-white">
-            Escopo incluso no pacote:
+        {/* O que está incluso (Painel Soft Linxar) */}
+        <div className="p-8 sm:p-10 rounded-3xl border border-slate-200/90 bg-white shadow-xs space-y-6 max-w-3xl">
+          <h3 className="text-lg font-bold text-slate-950">
+            Escopo incluso no pacote de R$ 499:
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-300">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-slate-700 font-medium">
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="text-cyan-400 shrink-0 mt-0.5" />
+              <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
               <span>Sessão fotográfica esférica HDR profissional</span>
             </div>
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="text-cyan-400 shrink-0 mt-0.5" />
+              <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
               <span>Tratamento e costura 360° em alta resolução</span>
             </div>
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="text-cyan-400 shrink-0 mt-0.5" />
+              <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
               <span>Publicação direta na ficha oficial no Google Maps</span>
             </div>
             <div className="flex items-start gap-2.5">
-              <CheckCircle2 size={18} className="text-cyan-400 shrink-0 mt-0.5" />
+              <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
               <span>Sem custos de renovação anual ou hospedagem</span>
             </div>
           </div>
 
-          <div className="pt-2">
+          <div className="pt-2 border-t border-slate-100 flex items-center justify-between">
+            <span className="text-xs text-slate-500">
+              Ativação em até 72 horas após a sessão
+            </span>
+
             <a
               href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20um%20Tour%20Google%20360%20por%20R%24%20499"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-slate-200 transition-colors shadow-md"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 hover:text-blue-600 transition-colors"
             >
-              <span>Falar com o fotógrafo no WhatsApp</span>
-              <ArrowRight size={14} />
+              <span>Falar com o fotógrafo credenciado</span>
+              <ArrowRight size={13} />
             </a>
           </div>
         </div>

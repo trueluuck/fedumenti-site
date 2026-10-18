@@ -5,7 +5,7 @@ import Script from 'next/script';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 type Props = {
-  gaId?: string; // opcional, pode vir por prop OU via env NEXT_PUBLIC_GA_ID
+  gaId?: string;
 };
 
 declare global {
@@ -15,13 +15,9 @@ declare global {
   }
 }
 
-// Consentimento válido para GA:
 function hasConsent(): boolean {
   try {
-    // Compat com seu CookieBanner atual
-    const v1 = localStorage.getItem('fg-consent');         // 'granted' | 'denied'
-    const v2 = localStorage.getItem('cookie-consent');     // 'accepted' | 'rejected'
-    return v1 === 'granted' || v2 === 'accepted';
+    return localStorage.getItem('fg-consent') === 'granted';
   } catch {
     return false;
   }
@@ -39,22 +35,20 @@ export default function AnalyticsGate({ gaId }: Props) {
     setEnabled(Boolean(GA_ID) && hasConsent());
   }, [GA_ID]);
 
-  // Reage a mudanças de consentimento (mesma aba + outras abas)
+  // Reage a mudanças de consentimento disparadas pelo CookieBanner
   useEffect(() => {
-    const onStorage = () => setEnabled(Boolean(GA_ID) && hasConsent());
-    const onConsent = () => setEnabled(Boolean(GA_ID) && hasConsent());
-    window.addEventListener('storage', onStorage);
-    window.addEventListener('consentchange', onConsent as any);
+    const update = () => setEnabled(Boolean(GA_ID) && hasConsent());
+    window.addEventListener('storage', update);
+    window.addEventListener('consentchange', update);
     return () => {
-      window.removeEventListener('storage', onStorage);
-      window.removeEventListener('consentchange', onConsent as any);
+      window.removeEventListener('storage', update);
+      window.removeEventListener('consentchange', update);
     };
   }, [GA_ID]);
 
-  // Pageview a cada navegação (se habilitado)
+  // Pageview a cada navegação
   useEffect(() => {
     if (!enabled || !GA_ID) return;
-    // gtag pode ainda não estar pronto no primeiro tick; pequeno timeout ajuda
     const id = window.setTimeout(() => {
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'page_view', {
@@ -62,7 +56,7 @@ export default function AnalyticsGate({ gaId }: Props) {
           page_path: pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : ''),
         });
       }
-    }, 0);
+    }, 50);
     return () => window.clearTimeout(id);
   }, [enabled, GA_ID, pathname, searchParams]);
 
@@ -70,14 +64,11 @@ export default function AnalyticsGate({ gaId }: Props) {
 
   return (
     <>
-      {/* gtag loader */}
       <Script
         id="ga4-loader"
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
       />
-
-      {/* gtag init */}
       <Script id="ga4-init" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];

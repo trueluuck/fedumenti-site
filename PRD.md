@@ -1,5 +1,5 @@
 # PRD — Product Requirements Document
-## Fedumenti Group Website · v1.2 · Março 2026
+## Fedumenti Group (FCG) Portal · v2.0 · Outubro 2026
 
 ---
 
@@ -7,87 +7,83 @@
 
 | Campo | Valor |
 |---|---|
-| **Nome** | Fedumenti Group Website |
-| **Visão** | Hub digital de tecnologia e inovação — atrair leads, converter clientes e exibir impacto ESG |
-| **Empresa** | FCGROUP / Fedumenti Group · Guarapuava, PR · CNPJ 26.306.303/0001-20 |
-| **Stakeholders** | Equipe interna, clientes B2B, parceiros, investidores |
+| **Produto** | Portal Institucional da Holding Fedumenti Group (FCG) |
+| **Visão** | Vitrine institucional de tecnologia proprietária, holding venture builder e orquestração de dados corporativos (Ecossistema Linxar & Google 360°) |
+| **Empresa** | Fedumenti Group Tecnologia Ltda · Guarapuava, PR · CNPJ 26.306.303/0001-20 |
+| **Ecossistema** | Incubada na Sprint UTFPR, chancelada por Sebrae Startups e Google for Startups |
+| **Stakeholders** | Empresas consolidadas, indústrias, atacadistas, grandes sellers, investidores e parceiros B2B/B2G |
 
 ---
 
-## 🎯 Objetivos de Negócio
+## 🎯 Objetivos Estratégicos de Negócio
 
-1. **Autoridade de Marca** — Posicionar-se como referência em tecnologia digital e inovação em Guarapuava e região
-2. **Geração de Leads** — Captar contatos qualificados via LPs, formulários e chatbot KATIA
-3. **Transparência ESG** — Demonstrar iniciativas reais (Reflorestamento, Financie a Startup)
-4. **Escalabilidade Técnica** — Estrutura modular para adição rápida de serviços e LPs
+1. **Autoridade de Holding & Deep Tech**: Posicionar a FCG como holding de tecnologia focada em criar infraestrutura de software e inteligência de dados, afastando-se definitivamente do modelo de agência convencional.
+2. **Exibição do Ecossistema Linxar**: Apresentar com clareza as 4 verticais estratégicas da Linxar (Hub, Pref, Workplace e Middleware), direcionando tráfego qualificado para contratação e parcerias.
+3. **Conversão de Presença no Google Maps (Google 360°)**: Oferecer e converter o serviço profissional de tour esférico em HDR no Google Maps por valor único fixo de R$ 499,00.
+4. **Governança & Compliance LGPD**: Garantir transparência de dados corporativos, chancelas acadêmicas/governamentais e consentimento de cookies em total conformidade com a LGPD.
 
 ---
 
-## 👤 Público-Alvo
+## 👤 Público-Alvo e ICP (Ideal Customer Profile)
 
-| Segmento | Perfil | Necessidade |
+| Segmento | Perfil | Demanda Atendida |
 |---|---|---|
-| CEOs / Diretores | PMEs de Guarapuava e PR | Aceleração digital, resultados mensuráveis |
-| Responsáveis de Marketing | Empresas B2B | Tráfego pago, SEO, Google 360, Redes Sociais |
-| Parceiros / Investidores | Ecossistema de inovação | Cases de sucesso, ESG, credibilidade |
+| **CEOs e Diretores de Indústrias/Atacados** | Empresas com faturamento estável e operação sólida | Fim da digitação manual de produtos, automação PIM AI, DIFAL 27 UFs e multicanal |
+| **Empresas Locais e Regionais** | Estabelecimentos físicos, clínicas, escritórios | Autoridade local com Tour Virtual 360° oficial no Google Maps |
+| **Fundos, Investidores & Governo** | Ecossistemas de inovação e compras públicas (B2G) | Infraestrutura de dados auditável, GovTech (Linxar Pref) e API Headless |
 
 ---
 
-## ✅ Requisitos Funcionais
+## 🧱 Arquitetura e Stack Tecnológico
 
-| ID | Requisito | Status |
-|---|---|---|
-| RF01 | Navbar responsiva com tema claro/escuro | ✅ Implementado |
-| RF02 | Hero carousel com vídeo + imagens + CTAs | ✅ Implementado |
-| RF03 | Carrossel de logos de clientes (marquee) | ✅ Implementado (redesign v1.2) |
-| RF04 | Seção de serviços com grid + LPs dedicadas | ✅ Implementado |
-| RF05 | Landing Pages: Google 360°, Reflorestamento, Financie a Startup, SEO, Sites | ✅ Implementado |
-| RF06 | Chatbot KATIA (OpenAI Assistants API, fluxo front-door) | ✅ Implementado (v0.2) |
-| RF07 | Analytics GA4 + Pixel com consentimento LGPD | ✅ Implementado |
-| RF08 | Página "Quem Somos" com mapa e incubadora | ✅ Implementado |
-| RF09 | Footer com redes sociais (links reais), CNPJ, WhatsApp | ✅ Implementado |
-| RF10 | Formulário de lead (stub) com captura de WhatsApp | ✅ Implementado |
-| RF11 | Página de Depoimentos / Empresas | ✅ Implementado |
-| RF12 | PWA básico | 🔜 Fase 2 |
+- **Framework**: Next.js 15+ (App Router)
+- **Runtime & UI**: React 19 (Server Components + Client Components otimizados)
+- **Estilização**: Tailwind CSS v4 via `@theme` (Design System B2B Enterprise / Dark Slate)
+- **Ícones**: Lucide React
+- **Performance**: Padrão Facade para iframes de mídia externa; zero carregamento redundante de WebGL no LCP
+- **Compliance & Telemetria**: Gate de consentimento reativo LGPD sem quebra de sessão (`fg-consent` + `consentchange` event bus) conectado ao Google Analytics 4
 
 ---
 
-## 🛠️ Requisitos Não-Funcionais
+## ✅ Requisitos Funcionais (RF)
 
-| ID | Requisito | Meta |
-|---|---|---|
-| RNF01 | Performance (LCP) | < 2s |
-| RNF02 | Design System | Tailwind v4 tokens, glassmorphism, Aurora |
-| RNF03 | SEO | Meta tags dinâmicas, sitemap, JSON-LD |
-| RNF04 | Acessibilidade | ARIA labels, reduced-motion, contraste AA |
-| RNF05 | Segurança LGPD | PII apenas com consentimento; chaves em `.env.local` |
-| RNF06 | Responsividade | Mobile-first, testado em 320px–1920px |
-
----
-
-## 🤖 Chatbot KATIA (RF06 — Detalhamento)
-
-- **Modelo**: OpenAI Assistants API v2 · `gpt-4o-mini`
-- **ID do Assistente**: `asst_OHTDVTh6L0y03KiXtB9jJzBS`
-- **Fluxo**:
-  1. Pergunta se é cliente (sim → pede CNPJ / não → menu principal)
-  2. Menu numérico: Orçamento, Diagnóstico, Suporte, Arquivo, Humano, FAQ
-  3. Handoff para WhatsApp `wa.me/5542999217736` se opção 5 ou 2x fallback
-- **UI**: Avatar feminino (KATIA), botão CTA verde WhatsApp, quick replies
-- **LGPD**: Coleta nome/empresa/telefone apenas com consentimento explícito
+| ID | Requisito | Escopo | Status |
+|---|---|---|---|
+| **RF01** | **Floating Glassmorphism Navbar** | Barra suspensa centralizada (`rounded-full`, `backdrop-blur-xl`), logo FCG, links e botão direto para WhatsApp da diretoria | ✅ Implementado |
+| **RF02** | **Hero "Show, Don't Tell" com Mockup macOS** | Tipografia contrastante, badge monoespaçado e moldura de janela de terminal/browser com dashboard de orquestração ao vivo | ✅ Implementado |
+| **RF03** | **Barra de Prova Social e Chancelas** | Exibição de autoridade institucional: UTFPR Sprint, Google for Startups, Sebrae Startups e CNPJ | ✅ Implementado |
+| **RF04** | **Tese FCG (A Fricção vs A Engenharia)** | Estrutura comparativa B2B demonstrando as dores de digitação manual vs a tecnologia proprietária da FCG | ✅ Implementado |
+| **RF05** | **Vitrine de Ativos Controlados** | Cards dos negócios da holding: Linxar (Commerce Intelligence) e Google 360° HDR | ✅ Implementado |
+| **RF06** | **Google 360° com Padrão Facade** | Carrossel de demonstrações reais em alta resolução montando iframes interativos sob demanda | ✅ Implementado |
+| **RF07** | **Apresentação do Ecossistema Linxar (4 Verticais)** | Páginas dedicadas: Linxar Hub (`/linxar/hub`), Linxar Pref (`/linxar/pref`), Linxar Workplace (`/linxar/workplace`), Linxar Middleware (`/linxar/middleware`) | ✅ Implementado |
+| **RF08** | **Banner LGPD Reativo** | Consentimento atômico no `localStorage` sem recarregamento forçado de tela | ✅ Implementado |
+| **RF09** | **Página Institucional "Sobre a Holding"** | História, incubação tecnológica, dados corporativos e governança | ✅ Implementado |
+| **RF10** | **Canais de Contato Corporativo** | WhatsApp oficial, e-mail institucional e endereço de sede operacional | ✅ Implementado |
 
 ---
 
-## 🛣️ Roadmap
+## 🛠️ Requisitos Não-Funcionais (RNF)
+
+| ID | Requisito | Meta | Status |
+|---|---|---|---|
+| **RNF01** | Performance (LCP) | < 1.8s (Otimização via Facade em iframes e remoção de vídeos pesados no Hero) | ✅ Atingido |
+| **RNF02** | Integridade de Build | Checagem de tipos estrita (TypeScript) e ESLint ativos durante o build | ✅ Atingido |
+| **RNF03** | SEO & Indexação | Sitemap atualizado com rotas canônicas ativas e `/robots.txt` oficial | ✅ Atingido |
+| **RNF04** | Acessibilidade | SkipLink para navegação por teclado, ARIA labels em botões e contraste WCAG AA | ✅ Atingido |
+| **RNF05** | Zero Código Morto | Remoção de dependências legadas de IA, pacotes de conversão de vídeo e componentes órfãos | ✅ Atingido |
+
+---
+
+## 🛣️ Roadmap de Evolução
 
 | Fase | Escopo | Status |
 |---|---|---|
-| **Fase 1** | Homepage, Serviços, LPs, UI completa, KATIA v0.2 | ✅ Concluído |
-| **Fase 2** | Envio real de e-mail (API Route + Resend/Brevo), PWA | 🔜 Próxima |
-| **Fase 3** | Painel admin para Blog / Notícias (CMS headless) | 🔜 Futuro |
-| **Fase 4** | Otimização avançada: cache headers Vercel, CDN de imagens | 🔜 Futuro |
-| **Fase 5** | KATIA v1.0 — Function Calling (CRM, agendamento real) | 🔜 Futuro |
+| **v1.0 - v1.2** | Versão legado (Agência, LPs de marketing digital, protótipo de chatbot) | 📦 Descontinuada / Arquivada |
+| **v2.0** | Saneamento profundo, Design System B2B Enterprise, Floating Navbar, Facade no G360, Linxar Hub & Holding FCG | ✅ Concluído |
+| **v2.1** | Formulário nativo corporativo com envio via Server Action (Resend / webhook direto de CRM) | 🔜 Próxima |
+| **v2.2** | Integração direta da documentação OpenAPI interativa em `/linxar/middleware` | 🔜 Futuro |
+| **v2.3** | Área de imprensa e comunicados oficiais da holding (Investor Relations) | 🔜 Futuro |
 
 ---
 
-*Fedumenti Group — Tecnologia com Propósito · 2026*
+*Fedumenti Group (FCG) — Tecnologia Proprietária para Empresas Consolidadas · 2026*

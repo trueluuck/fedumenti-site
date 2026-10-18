@@ -1,4 +1,3 @@
-// src/app/sitemap.ts
 import type { MetadataRoute } from 'next';
 
 const baseUrl = 'https://www.fedumentigroup.com.br';
@@ -6,20 +5,23 @@ const baseUrl = 'https://www.fedumentigroup.com.br';
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
-  const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${baseUrl}/`, lastModified: now, changeFrequency: 'weekly', priority: 1 },
-    { url: `${baseUrl}/services`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${baseUrl}/depoimentos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/empresas`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${baseUrl}/pesquisa`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${baseUrl}/sobre`, lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
-    { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: 'yearly', priority: 0.5 },
-
-    // LPs
-    { url: `${baseUrl}/lp/trafego-pago`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
-    { url: `${baseUrl}/lp/reflorestamento`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${baseUrl}/lp/financie-startup`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+  const routes = [
+    { path: '', changeFrequency: 'weekly' as const, priority: 1.0 },
+    { path: '/sobre', changeFrequency: 'monthly' as const, priority: 0.8 },
+    { path: '/contato', changeFrequency: 'monthly' as const, priority: 0.8 },
+    { path: '/politicas', changeFrequency: 'yearly' as const, priority: 0.5 },
+    { path: '/google-360', changeFrequency: 'weekly' as const, priority: 0.9 },
+    { path: '/linxar', changeFrequency: 'weekly' as const, priority: 0.95 },
+    { path: '/linxar/hub', changeFrequency: 'weekly' as const, priority: 0.9 },
+    { path: '/linxar/pref', changeFrequency: 'monthly' as const, priority: 0.7 },
+    { path: '/linxar/workplace', changeFrequency: 'monthly' as const, priority: 0.7 },
+    { path: '/linxar/middleware', changeFrequency: 'monthly' as const, priority: 0.7 },
   ];
 
-  return staticRoutes;
+  return routes.map((r) => ({
+    url: `${baseUrl}${r.path}`,
+    lastModified: now,
+    changeFrequency: r.changeFrequency,
+    priority: r.priority,
+  }));
 }

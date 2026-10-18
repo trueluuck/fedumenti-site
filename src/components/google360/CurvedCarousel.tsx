@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Compass, Eye } from 'lucide-react';
 
 export type TourItem = {
   id: string;
@@ -29,7 +29,7 @@ export default function CurvedCarousel({ items, autoplayMs = 8000 }: Props) {
   const beginInteraction = useCallback(() => {
     setPaused(true);
     if (pauseTimeout.current) window.clearTimeout(pauseTimeout.current);
-    pauseTimeout.current = window.setTimeout(() => setPaused(false), 5000) as unknown as number;
+    pauseTimeout.current = window.setTimeout(() => setPaused(false), 7000) as unknown as number;
   }, []);
 
   const next = useCallback(() => setIndex((i) => (i + 1) % total), [total]);
@@ -54,13 +54,13 @@ export default function CurvedCarousel({ items, autoplayMs = 8000 }: Props) {
       Array.from({ length: total }, (_, i) => (
         <button
           key={i}
-          aria-label={`Ir ao item ${i + 1}`}
+          aria-label={`Ir ao tour ${i + 1}`}
           onClick={() => {
             beginInteraction();
             setIndex(i);
           }}
           className={`h-1.5 rounded-full transition-all duration-300 ${
-            i === index ? 'w-8 bg-blue-600' : 'w-2 bg-slate-200 hover:bg-slate-300'
+            i === index ? 'w-8 bg-blue-600' : 'w-2 bg-slate-300 hover:bg-slate-400'
           }`}
         />
       )),
@@ -68,82 +68,103 @@ export default function CurvedCarousel({ items, autoplayMs = 8000 }: Props) {
   );
 
   return (
-    <div className="relative py-6">
+    <div className="relative py-4 space-y-6">
       {/* Header com controles */}
-      <div className="mb-6 flex items-center justify-between px-2">
-        <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1 text-xs font-bold text-slate-700">
-          <span className="text-slate-400">TOUR</span>
-          <span className="font-mono text-slate-900">
+      <div className="flex items-center justify-between px-2">
+        <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-100 px-3.5 py-1 text-xs font-bold text-slate-800">
+          <span className="text-slate-400 font-mono">TOUR VIRTUAL</span>
+          <span className="font-mono text-blue-600">
             {String(index + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
           </span>
         </div>
 
         <div className="hidden md:flex gap-2">
           <button
-            aria-label="Anterior"
-            onClick={() => { beginInteraction(); prev(); }}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all hover:bg-slate-50 hover:border-slate-300"
+            aria-label="Tour Anterior"
+            onClick={() => {
+              beginInteraction();
+              prev();
+            }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all hover:bg-slate-100 hover:border-slate-300 shadow-sm"
           >
             <ChevronLeft size={18} />
           </button>
           <button
-            aria-label="Próximo"
-            onClick={() => { beginInteraction(); next(); }}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all hover:bg-slate-50 hover:border-slate-300"
+            aria-label="Próximo Tour"
+            onClick={() => {
+              beginInteraction();
+              next();
+            }}
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition-all hover:bg-slate-100 hover:border-slate-300 shadow-sm"
           >
             <ChevronRight size={18} />
           </button>
         </div>
       </div>
 
-      {/* Main Track */}
+      {/* Main Track (Facade Pattern: Apenas o ativo monta iframe real) */}
       <div
         ref={wrapRef}
         className="relative w-full overflow-hidden"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
       >
-        <div className="relative mx-auto h-[60vw] lg:h-[40vw] md:h-[50vw] max-h-[600px] min-h-[300px]">
-          <SlideFrame item={items[iPrev]} position="left" blurred onClick={() => { beginInteraction(); prev(); }} />
-          <SlideFrame item={items[index]} position="center" />
-          <SlideFrame item={items[iNext]} position="right" blurred onClick={() => { beginInteraction(); next(); }} />
+        <div className="relative mx-auto h-[60vw] lg:h-[40vw] md:h-[50vw] max-h-[600px] min-h-[320px]">
+          <SlideFrame
+            item={items[iPrev]}
+            position="left"
+            onClick={() => {
+              beginInteraction();
+              prev();
+            }}
+          />
+          <SlideFrame item={items[index]} position="center" isActive />
+          <SlideFrame
+            item={items[iNext]}
+            position="right"
+            onClick={() => {
+              beginInteraction();
+              next();
+            }}
+          />
         </div>
 
         {/* Mobile Indicators */}
         <div className="mt-6 flex justify-center gap-2 md:hidden">{indicators}</div>
       </div>
 
-      {/* Thumbnails list */}
-      <div className="mt-12">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+      {/* Thumbnails list com Facade (Sem iframes embutidos) */}
+      <div className="pt-4 border-t border-slate-200">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5">
           {items.map((it, i) => (
             <button
               key={it.id}
-              onClick={() => { beginInteraction(); setIndex(i); }}
-              className={`group text-left rounded-xl p-2.5 transition-all border ${
+              onClick={() => {
+                beginInteraction();
+                setIndex(i);
+              }}
+              className={`group text-left rounded-xl p-3 transition-all border ${
                 i === index
-                  ? 'border-blue-600 bg-blue-50/30 ring-1 ring-blue-600/30'
-                  : 'border-slate-200 bg-white hover:border-slate-300'
+                  ? 'border-blue-600 bg-blue-50/40 ring-2 ring-blue-600/20 shadow-md'
+                  : 'border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50'
               }`}
             >
-              <div className="aspect-video w-full overflow-hidden rounded-lg bg-slate-100">
-                <iframe
-                  src={it.src}
-                  loading="lazy"
-                  className="pointer-events-none h-full w-full scale-105 opacity-90 group-hover:opacity-100"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  allow="accelerometer; gyroscope; fullscreen"
-                />
-              </div>
-              <div className="mt-2.5 px-0.5">
-                <div className={`line-clamp-1 text-xs font-bold ${i === index ? 'text-blue-600' : 'text-slate-900'}`}>
-                  {it.title}
+              <div className="aspect-video w-full overflow-hidden rounded-lg bg-gradient-to-br from-slate-900 to-slate-800 p-2.5 flex flex-col justify-between text-white relative">
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[9px] text-blue-400 font-bold">360° HDR</span>
+                  <Compass size={14} className="text-slate-400 group-hover:rotate-45 transition-transform" />
                 </div>
-                {it.subtitle && (
-                  <div className="line-clamp-1 text-[10px] text-slate-500 mt-0.5">
-                    {it.subtitle}
-                  </div>
-                )}
+                <div className="space-y-0.5">
+                  <span className="line-clamp-1 text-xs font-bold text-slate-100">{it.title}</span>
+                  <span className="text-[10px] text-slate-400 font-mono block">{it.subtitle}</span>
+                </div>
+              </div>
+
+              <div className="mt-2 flex items-center justify-between text-[11px] font-semibold text-slate-700">
+                <span className={i === index ? 'text-blue-600 font-bold' : ''}>
+                  {i === index ? 'Visualizando' : 'Explorar'}
+                </span>
+                <Eye size={12} className={i === index ? 'text-blue-600' : 'text-slate-400'} />
               </div>
             </button>
           ))}
@@ -156,47 +177,59 @@ export default function CurvedCarousel({ items, autoplayMs = 8000 }: Props) {
 function SlideFrame({
   item,
   position,
-  blurred,
+  isActive,
   onClick,
 }: {
   item: TourItem;
   position: 'left' | 'center' | 'right';
-  blurred?: boolean;
+  isActive?: boolean;
   onClick?: () => void;
 }) {
-  const base = 'absolute top-1/2 -translate-y-1/2 w-[90%] sm:w-[85%] md:w-[80%] aspect-video rounded-2xl overflow-hidden transition-all duration-500';
+  const base =
+    'absolute top-1/2 -translate-y-1/2 w-[90%] sm:w-[85%] md:w-[80%] aspect-video rounded-2xl overflow-hidden transition-all duration-500';
 
   const styles = {
-    center: 'left-1/2 -translate-x-1/2 z-30 scale-100 shadow-xl border border-slate-200 bg-white',
-    left: 'left-0 origin-left -translate-x-[15%] scale-[0.85] z-10 opacity-30 hover:opacity-70 blur-[1px] border border-slate-200',
-    right: 'right-0 origin-right translate-x-[15%] scale-[0.85] z-10 opacity-30 hover:opacity-70 blur-[1px] border border-slate-200',
+    center: 'left-1/2 -translate-x-1/2 z-30 scale-100 shadow-2xl border border-slate-300 bg-slate-900',
+    left: 'left-0 origin-left -translate-x-[15%] scale-[0.85] z-10 opacity-30 hover:opacity-75 blur-[1px] border border-slate-300 bg-slate-900',
+    right: 'right-0 origin-right translate-x-[15%] scale-[0.85] z-10 opacity-30 hover:opacity-75 blur-[1px] border border-slate-300 bg-slate-900',
   };
 
   return (
-    <div className={`${base} ${styles[position]} ${onClick ? 'cursor-pointer pointer-events-auto' : 'pointer-events-auto'}`}>
-      <button
-        onClick={onClick}
-        className="group relative h-full w-full overflow-hidden"
-        aria-label={position === 'center' ? item.title : `Ir para ${item.title}`}
-        disabled={position === 'center'}
-      >
-        <iframe
-          src={item.src}
-          className="h-full w-full"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allow="accelerometer; gyroscope; fullscreen"
-        />
+    <div
+      className={`${base} ${styles[position]} ${
+        onClick ? 'cursor-pointer pointer-events-auto' : 'pointer-events-auto'
+      }`}
+    >
+      {isActive ? (
+        // Iframe montado unicamente no slide ativo
+        <div className="relative h-full w-full">
+          <iframe
+            src={item.src}
+            className="h-full w-full"
+            loading="eager"
+            referrerPolicy="no-referrer-when-downgrade"
+            allow="accelerometer; gyroscope; fullscreen"
+          />
 
-        {position === 'center' && (
           <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
-            <div className="inline-flex flex-col rounded-xl bg-slate-900/80 px-4 py-2.5 text-white backdrop-blur-md">
+            <div className="inline-flex flex-col rounded-xl bg-slate-950/85 px-4 py-2.5 text-white backdrop-blur-md border border-slate-800 shadow-lg">
               <span className="text-sm sm:text-base font-bold">{item.title}</span>
-              {item.subtitle && <span className="text-[11px] text-slate-300">{item.subtitle}</span>}
+              {item.subtitle && <span className="text-[11px] text-slate-300 font-mono">{item.subtitle}</span>}
             </div>
           </div>
-        )}
-      </button>
+        </div>
+      ) : (
+        // Facade estático para slides secundários (sem custo de iframe)
+        <button
+          onClick={onClick}
+          className="group relative h-full w-full flex flex-col items-center justify-center p-6 text-center text-white bg-gradient-to-br from-slate-900 to-slate-950"
+          aria-label={`Ver tour de ${item.title}`}
+        >
+          <Compass size={40} className="text-blue-400 mb-3 group-hover:scale-110 transition-transform" />
+          <span className="text-lg font-bold">{item.title}</span>
+          <span className="text-xs text-slate-400 mt-1 font-mono">Clique para carregar em 360°</span>
+        </button>
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ExternalLink, ArrowRight, Layers } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Linxar — O Ecossistema de Commerce Intelligence | FCG',
@@ -82,21 +82,24 @@ export default function LinxarBrandPage() {
   ];
 
   return (
-    <div className="bg-white min-h-screen py-16 sm:py-24">
+    <div className="bg-slate-950 text-slate-100 min-h-screen pt-28 pb-20 sm:pt-36 sm:pb-28 border-b border-slate-800">
       <div className="container-xl space-y-20">
         
         {/* Tese Executiva / Hero Linxar */}
         <div className="max-w-4xl space-y-6">
-          <p className="text-xs uppercase font-mono tracking-widest text-slate-500 font-semibold">
-            FCG (Fedumenti Group) · Divisão de Tecnologia
-          </p>
+          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-3.5 py-1">
+            <Layers size={14} className="text-blue-400" />
+            <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-blue-400 font-semibold">
+              FCG (Fedumenti Group) · Divisão de Tecnologia
+            </span>
+          </div>
 
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-slate-950 tracking-tight leading-tight">
+          <h1 className="text-4xl sm:text-6xl font-black text-white tracking-tight leading-tight">
             O Ecossistema Linxar de Commerce Intelligence
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-600 leading-relaxed font-normal">
-            A Linxar deixou de ser apenas um produto para se tornar a <strong>principal infraestrutura de orquestração de dados de e-commerce do Brasil</strong>. Sob o guarda-chuva da FCG, chancelada por Google for Startups, Sebrae e UTFPR, o nosso ecossistema foi desenhado para dominar a jornada completa do produto: da indústria ao consumidor final, passando por ERPs e compras governamentais.
+          <p className="text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
+            A Linxar consolidou-se como a <strong>principal infraestrutura de orquestração de dados de e-commerce do Brasil</strong>. Sob o guarda-chuva da FCG, chancelada por Google for Startups, Sebrae e UTFPR, nosso ecossistema domina a jornada completa do produto: da indústria ao consumidor final.
           </p>
 
           <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -104,9 +107,9 @@ export default function LinxarBrandPage() {
               href="https://linxar.com.br/pt"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-xs font-bold text-slate-950 hover:bg-slate-200 transition-colors shadow-lg"
             >
-              Acessar plataforma linxar.com.br
+              <span>Acessar plataforma linxar.com.br</span>
               <ExternalLink size={15} />
             </a>
 
@@ -114,20 +117,20 @@ export default function LinxarBrandPage() {
               href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20parceria%20estrat%C3%A9gica%20na%20Linxar"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 px-6 py-3 text-xs font-bold text-slate-300 hover:border-slate-500 hover:text-white transition-colors"
             >
-              Falar com Relações Estratégicas
+              <span>Falar com Relações Estratégicas</span>
             </a>
           </div>
         </div>
 
         {/* 4 Verticais Executivas */}
         <div className="space-y-10">
-          <div className="border-b border-slate-200 pb-4">
-            <h2 className="text-2xl font-bold text-slate-950 tracking-tight">
+          <div className="border-b border-slate-800 pb-4">
+            <h2 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               As Quatro Verticais Estratégicas
             </h2>
-            <p className="text-sm text-slate-600 mt-1">
+            <p className="text-sm text-slate-400 mt-1">
               Estruturadas para cobrir toda a cadeia de dados comerciais do país:
             </p>
           </div>
@@ -136,57 +139,57 @@ export default function LinxarBrandPage() {
             {verticals.map((v) => (
               <div
                 key={v.title}
-                className="p-8 rounded-xl border border-slate-200 bg-white flex flex-col justify-between space-y-6 hover:border-slate-300 transition-colors"
+                className="p-8 sm:p-10 rounded-3xl border border-slate-800 bg-slate-900/60 backdrop-blur-xl flex flex-col justify-between space-y-6 hover:border-blue-500/40 transition-all duration-300 shadow-xl"
               >
                 <div className="space-y-5">
                   {/* Topo do Card */}
-                  <div className="flex items-center justify-between text-xs font-mono text-slate-500 border-b border-slate-100 pb-3">
-                    <span className="font-semibold text-slate-700">{v.tagline}</span>
-                    <span>{v.status}</span>
+                  <div className="flex items-center justify-between text-xs font-mono border-b border-slate-800 pb-3">
+                    <span className="font-bold text-blue-400">{v.tagline}</span>
+                    <span className="text-slate-400">{v.status}</span>
                   </div>
 
                   {/* Título e Subtítulo */}
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-950">
+                    <h3 className="text-2xl font-black text-white">
                       {v.title}
                     </h3>
-                    <p className="text-xs font-mono uppercase text-slate-500 mt-0.5">
+                    <p className="text-xs font-mono uppercase text-slate-400 mt-0.5">
                       {v.subtitle}
                     </p>
                   </div>
 
                   {/* Pitch Executivo */}
-                  <p className="text-sm text-slate-700 font-medium leading-relaxed">
+                  <p className="text-sm text-slate-300 font-medium leading-relaxed">
                     {v.pitch}
                   </p>
 
                   {/* 3 Blocos de Engenharia */}
-                  <div className="space-y-3 pt-2 text-xs leading-relaxed text-slate-600 border-t border-slate-100">
+                  <div className="space-y-3 pt-3 text-xs leading-relaxed text-slate-400 border-t border-slate-800">
                     <div>
-                      <strong className="text-slate-900 block font-semibold">Proposta de Valor:</strong>
+                      <strong className="text-slate-200 block font-semibold">Proposta de Valor:</strong>
                       <span>{v.valueProp}</span>
                     </div>
 
                     <div>
-                      <strong className="text-slate-900 block font-semibold">Aceleração com IA:</strong>
+                      <strong className="text-slate-200 block font-semibold">Aceleração com IA:</strong>
                       <span>{v.ai}</span>
                     </div>
 
                     <div>
-                      <strong className="text-slate-900 block font-semibold">Orquestração:</strong>
+                      <strong className="text-slate-200 block font-semibold">Orquestração:</strong>
                       <span>{v.orchestration}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Ações */}
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs">
+                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs">
                   {v.isExternal ? (
                     <a
                       href={v.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 font-semibold text-slate-900 hover:text-blue-600 transition-colors"
+                      className="inline-flex items-center gap-1.5 font-bold text-white hover:text-blue-400 transition-colors"
                     >
                       <span>{v.cta}</span>
                       <ExternalLink size={13} />
@@ -194,7 +197,7 @@ export default function LinxarBrandPage() {
                   ) : (
                     <Link
                       href={v.href}
-                      className="inline-flex items-center gap-1.5 font-semibold text-slate-900 hover:text-blue-600 transition-colors"
+                      className="inline-flex items-center gap-1.5 font-bold text-white hover:text-blue-400 transition-colors"
                     >
                       <span>{v.cta}</span>
                       <ArrowRight size={13} />
@@ -204,7 +207,7 @@ export default function LinxarBrandPage() {
                   {v.internalHref && (
                     <Link
                       href={v.internalHref}
-                      className="text-slate-500 hover:text-slate-900 transition-colors font-mono"
+                      className="text-slate-400 hover:text-white transition-colors font-mono"
                     >
                       Ver detalhes
                     </Link>
@@ -216,24 +219,25 @@ export default function LinxarBrandPage() {
         </div>
 
         {/* Fechamento Tese de Longo Prazo */}
-        <div className="p-8 sm:p-10 rounded-xl bg-slate-50 border border-slate-200 space-y-4 max-w-4xl">
-          <span className="text-xs font-mono uppercase tracking-widest text-slate-500 font-semibold block">
+        <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-800 space-y-4 max-w-4xl shadow-2xl">
+          <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-blue-400 font-bold block">
             Visão de Longo Prazo
           </span>
-          <h3 className="text-xl sm:text-2xl font-bold text-slate-950 tracking-tight">
+          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
             Pavimentando os trilhos do comércio digital brasileiro.
           </h3>
-          <p className="text-sm text-slate-700 leading-relaxed">
-            Ao apresentar esta estrutura, a FCG deixa claro que não está construindo "mais um sistema de gestão", mas sim pavimentando os trilhos por onde passará todo o comércio eletrônico e licitatório do Brasil na próxima década. A máquina de vendas foi desenhada para escalar em todas as direções.
+          <p className="text-sm text-slate-300 leading-relaxed font-normal">
+            A FCG não desenvolve sistemas pontuais de gestão, mas sim a infraestrutura pela qual trafegará o catálogo e a tributação de produtos do país. Nossa tecnologia foi desenhada para operar silenciosa, robusta e em alta escala.
           </p>
           <div className="pt-2">
             <a
               href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20uma%20apresenta%C3%A7%C3%A3o%20institucional%20do%20Ecossistema%20Linxar"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary text-xs uppercase tracking-wider"
+              className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-xs font-bold text-slate-950 hover:bg-slate-200 transition-colors shadow-md"
             >
-              Solicitar Apresentação Estratégica
+              <span>Solicitar Apresentação Estratégica</span>
+              <ArrowRight size={14} />
             </a>
           </div>
         </div>

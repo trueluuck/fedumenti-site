@@ -10,19 +10,19 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="relative min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#f8fafc] text-slate-900 overflow-hidden px-4 sm:px-6 lg:px-8 pt-32 pb-24">
-      {/* Background glow sutil e limpo */}
+    <div className="relative min-h-[calc(100vh-80px)] flex items-center justify-center bg-[#fdfcfa] text-slate-900 overflow-hidden px-4 sm:px-6 lg:px-8 pt-32 pb-24">
+      {/* Background glow com tom bordô/vinho aveludado */}
       <div
         aria-hidden="true"
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] bg-gradient-to-b from-blue-100/40 via-indigo-50/20 to-transparent blur-3xl pointer-events-none -z-10"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[450px] bg-gradient-to-b from-[#881337]/10 via-[#581c87]/5 to-transparent blur-3xl pointer-events-none -z-10"
       />
 
       <div className="max-w-4xl mx-auto text-center space-y-8">
         
-        {/* Frase 1 (Headline) */}
+        {/* Frase 1 (Headline com o degradê bordô / vinho / púrpura nobre da FCG) */}
         <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-950 leading-[1.08] text-balance">
           Sua empresa já fatura no mercado tradicional.{' '}
-          <span className="bg-gradient-to-r from-slate-950 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#881337] via-[#9d174d] to-[#701a75] bg-clip-text text-transparent">
             Nós lideramos sua expansão no digital.
           </span>
         </h1>
@@ -38,7 +38,7 @@ export default function HomePage() {
             href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20a%20holding%20FCG."
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-slate-900 px-8 py-4 text-sm font-bold text-white hover:bg-slate-800 transition-all hover:scale-[1.01] shadow-md"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-full bg-slate-900 hover:bg-[#881337] px-8 py-4 text-sm font-bold text-white transition-all hover:scale-[1.01] shadow-md hover:shadow-[#881337]/20"
           >
             <PhoneCall size={16} />
             <span>Entrar em Contato</span>
@@ -46,7 +46,7 @@ export default function HomePage() {
 
           <Link
             href="/servicos"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-4 text-sm font-bold text-slate-800 hover:bg-slate-50 hover:text-slate-950 transition-all shadow-xs"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-4 text-sm font-bold text-slate-800 hover:bg-slate-50 hover:border-[#9d174d]/40 hover:text-[#881337] transition-all shadow-xs"
           >
             <span>Conhecer Nossas Soluções</span>
             <ArrowRight size={16} />

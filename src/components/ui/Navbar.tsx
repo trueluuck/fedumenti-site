@@ -57,12 +57,12 @@ export default function Navbar() {
           href="/"
           className="flex items-center gap-2.5 tracking-tight hover:opacity-85 transition-opacity"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#881337] to-[#701a75] text-xs font-black text-white shadow-xs">
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-gradient-to-br from-[#881337] via-[#9f1239] to-[#be123c] text-xs font-black text-white shadow-xs">
             FCG
           </span>
           <div className="flex flex-col leading-none">
             <span className="font-bold text-sm text-slate-900 tracking-tight">Fedumenti Group</span>
-            <span className="font-mono text-[9px] uppercase tracking-widest text-[#9d174d] font-semibold">
+            <span className="font-mono text-[9px] uppercase tracking-widest text-[#9f1239] font-semibold">
               Tech Holding
             </span>
           </div>

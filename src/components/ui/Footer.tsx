@@ -68,8 +68,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/sobre" className="text-slate-600 hover:text-slate-950 transition-colors">
-                  Sobre a Empresa
+                <Link href="/contato" className="text-slate-600 hover:text-slate-950 transition-colors">
+                  Fale Conosco
                 </Link>
               </li>
             </ul>

@@ -158,14 +158,6 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Link Adicional: Sobre */}
-          <Link
-            href="/sobre"
-            className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
-          >
-            Sobre
-          </Link>
-
         </div>
 
         {/* CTA Direct Contact: "Entrar em Contato" */}
@@ -233,18 +225,11 @@ export default function Navbar() {
 
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between px-2">
               <Link
-                href="/sobre"
-                onClick={() => setMobileOpen(false)}
-                className="text-xs text-slate-600 hover:text-slate-900 font-semibold"
-              >
-                Sobre a Holding
-              </Link>
-              <Link
                 href="/contato"
                 onClick={() => setMobileOpen(false)}
                 className="text-xs text-slate-600 hover:text-slate-900 font-semibold"
               >
-                Contato
+                Fale Conosco
               </Link>
             </div>
           </div>

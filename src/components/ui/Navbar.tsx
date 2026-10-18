@@ -15,8 +15,6 @@ import {
   Smartphone, 
   GraduationCap, 
   Mic2,
-  Layers,
-  Building2,
   ArrowRight
 } from 'lucide-react';
 
@@ -25,13 +23,13 @@ export default function Navbar() {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Lista dos 8 serviços solicitados pelo cliente
+  // Lista dos 8 serviços solicitados
   const servicesList = [
     { name: 'Google 360° HDR', href: '/google-360', desc: 'Presença no Google Maps', icon: Camera },
     { name: 'Tráfego Pago', href: '/servicos#trafego-pago', desc: 'Google, Meta e LinkedIn Ads', icon: TrendingUp },
     { name: 'Redes Sociais', href: '/servicos#redes-sociais', desc: 'Gestão e autoridade de marca', icon: Share2 },
     { name: 'Automação Comercial', href: '/servicos#automacao', desc: 'WhatsApp & processos com IA', icon: Cpu },
-    { name: 'Assessoria Digital', href: '/servicos#assessoria-digital', desc: 'Acompanhamento executivo', icon: Compass },
+    { name: 'Assessoria Digital', href: '/servicos#assessoria-digital', desc: 'Acompanhamento estratégico', icon: Compass },
     { name: 'Vídeo Mobile', href: '/servicos#video-mobile', desc: 'Reels e vídeos verticais', icon: Smartphone },
     { name: 'Treinamentos', href: '/servicos#treinamentos', desc: 'Capacitação in company', icon: GraduationCap },
     { name: 'Palestras', href: '/servicos#palestras', desc: 'Inovação e IA para eventos', icon: Mic2 },
@@ -160,7 +158,7 @@ export default function Navbar() {
             )}
           </div>
 
-          {/* Link Adicional Discreto: Sobre a Holding */}
+          {/* Link Adicional: Sobre */}
           <Link
             href="/sobre"
             className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
@@ -170,15 +168,15 @@ export default function Navbar() {
 
         </div>
 
-        {/* CTA Direct Contact */}
+        {/* CTA Direct Contact: "Entrar em Contato" */}
         <div className="hidden md:flex items-center">
           <a
-            href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20diretoria%20da%20holding%20FCG."
+            href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20a%20holding%20FCG."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-full bg-slate-900 px-4 py-2 text-xs font-semibold text-white hover:bg-slate-800 transition-all hover:scale-[1.02] shadow-sm"
           >
-            <span>Falar com a Diretoria</span>
+            <span>Entrar em Contato</span>
             <ArrowUpRight size={13} className="text-slate-300" />
           </a>
         </div>
@@ -253,12 +251,12 @@ export default function Navbar() {
 
           <div className="pt-2 border-t border-slate-100">
             <a
-              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20diretoria%20da%20holding%20FCG."
+              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20a%20holding%20FCG."
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-1.5 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white hover:bg-slate-800 transition-colors shadow-sm"
             >
-              <span>Falar no WhatsApp com Diretoria</span>
+              <span>Entrar em Contato no WhatsApp</span>
               <ArrowUpRight size={14} />
             </a>
           </div>

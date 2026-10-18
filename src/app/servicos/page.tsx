@@ -98,14 +98,14 @@ export default function ServicosPage() {
     {
       id: 'assessoria-digital',
       title: 'Assessoria & Acompanhamento Digital 360°',
-      tag: 'Diretoria Estratégica',
-      desc: 'Atuação consultiva e executiva contínua ao lado dos fundadores e diretores para planejar, estruturar e auditar toda a presença e expansão digital da companhia.',
+      tag: 'Liderança Estratégica',
+      desc: 'Atuação consultiva e executiva contínua ao lado dos fundadores e gestores para planejar, estruturar e auditar toda a presença e expansão digital da companhia.',
       price: 'Contrato Contínuo',
       icon: Compass,
       bullets: [
         'Planejamento trimestral de expansão de canais',
         'Auditoria técnica de sistemas e plataformas de venda',
-        'Reuniões de alinhamento estratégico com a diretoria',
+        'Reuniões de alinhamento estratégico contínuo',
         'Validação de novas oportunidades e canais comerciais'
       ],
       ctaText: 'Falar sobre Assessoria',

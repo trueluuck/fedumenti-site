@@ -169,12 +169,12 @@ export default function SobrePage() {
         {/* CTA */}
         <div className="pt-4 flex items-center gap-4">
           <a
-            href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20diretoria%20da%20holding%20FCG."
+            href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20a%20holding%20FCG."
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-6 py-3 text-xs font-bold text-white hover:bg-slate-800 transition-colors shadow-sm"
           >
-            <span>Falar com a Diretoria</span>
+            <span>Entrar em Contato</span>
             <ArrowRight size={15} />
           </a>
 

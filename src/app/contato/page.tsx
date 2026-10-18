@@ -35,17 +35,17 @@ export default function ContatoPage() {
           <div className="p-8 rounded-3xl border border-slate-200 bg-slate-50/70 space-y-6 flex flex-col justify-between hover:border-slate-300 transition-colors shadow-xs">
             <div className="space-y-3">
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-500 block">
-                Atendimento Direto à Diretoria
+                Atendimento Direto
               </span>
-              <h2 className="font-bold text-xl text-slate-950">WhatsApp Executivo</h2>
+              <h2 className="font-bold text-xl text-slate-950">WhatsApp Corporativo</h2>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Canal ágil para falar diretamente com a diretoria da holding sobre expansão de operações ou serviços do portfólio.
+                Canal ágil para entrar em contato diretamente com nossos especialistas sobre expansão de operações ou serviços do portfólio.
               </p>
             </div>
 
             <div className="pt-2">
               <a
-                href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20falar%20com%20a%20diretoria%20da%20holding%20FCG."
+                href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20entrar%20em%20contato%20com%20a%20holding%20FCG."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-xs font-bold text-white hover:bg-slate-800 transition-colors shadow-sm"

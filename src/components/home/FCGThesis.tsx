@@ -1,135 +1,110 @@
-import { Building2, Award, ShieldCheck, CheckCircle2, AlertTriangle, ArrowRight } from 'lucide-react';
+import { Building2, Award, ShieldCheck, CheckCircle2, XCircle, ArrowRight } from 'lucide-react';
 
 export default function FCGThesis() {
   return (
-    <section className="py-20 sm:py-28 bg-slate-900 text-slate-100 border-b border-slate-800 relative">
-      <div className="container-xl space-y-20">
+    <section id="tese" className="py-20 sm:py-28 bg-slate-50 text-slate-900 border-y border-slate-200/80">
+      <div className="container-xl space-y-16">
         
-        {/* Strip de Chancelamento Institucional / Prova Social */}
-        <div className="space-y-4">
-          <p className="text-center font-mono text-[10px] sm:text-xs uppercase tracking-[0.3em] text-slate-400 font-semibold">
-            Ecossistema de Validação & Parcerias Estratégicas
-          </p>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/40 flex items-center justify-center gap-2.5 text-slate-400 hover:text-white hover:border-slate-700 transition-colors">
-              <ShieldCheck size={18} className="text-blue-500 shrink-0" />
-              <div className="text-left leading-tight">
-                <span className="font-bold text-xs block text-slate-200">UTFPR SPRINT</span>
-                <span className="text-[10px] text-slate-400 font-mono">Incubação Tecnológica</span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/40 flex items-center justify-center gap-2.5 text-slate-400 hover:text-white hover:border-slate-700 transition-colors">
-              <Award size={18} className="text-cyan-500 shrink-0" />
-              <div className="text-left leading-tight">
-                <span className="font-bold text-xs block text-slate-200">Google Startups</span>
-                <span className="text-[10px] text-slate-400 font-mono">Cloud Partner</span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/40 flex items-center justify-center gap-2.5 text-slate-400 hover:text-white hover:border-slate-700 transition-colors">
-              <Building2 size={18} className="text-indigo-400 shrink-0" />
-              <div className="text-left leading-tight">
-                <span className="font-bold text-xs block text-slate-200">Sebrae Startups</span>
-                <span className="text-[10px] text-slate-400 font-mono">Validação Regional</span>
-              </div>
-            </div>
-
-            <div className="p-4 rounded-xl border border-slate-800 bg-slate-950/40 flex items-center justify-center gap-2.5 text-slate-400 hover:text-white hover:border-slate-700 transition-colors">
-              <span className="font-mono text-xs font-bold text-slate-200">26.306.303</span>
-              <div className="text-left leading-tight">
-                <span className="font-bold text-xs block text-slate-200">CNPJ Oficial</span>
-                <span className="text-[10px] text-slate-400 font-mono">Sede Guarapuava/PR</span>
-              </div>
-            </div>
+        {/* Header da Seção */}
+        <div className="max-w-3xl space-y-4">
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3.5 py-1">
+            <span className="text-[11px] font-mono font-bold uppercase tracking-widest text-slate-700">
+              Tese FCG de Expansão
+            </span>
           </div>
+          
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
+            Para quem é a FCG: o empreendedor com operação validada e faturamento real.
+          </h2>
+          
+          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
+            Não apostamos em suposições ou pitches sem tração. Nosso modelo foi desenhado para negócios que já provaram seu valor no mercado físico ou B2B e precisam de infraestrutura técnica de alto nível para expandir e dominar o mercado digital.
+          </p>
         </div>
 
-        {/* Divisor */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-slate-800 to-transparent" />
-
-        {/* Arquitetura Dor vs Solução */}
-        <div className="space-y-12">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-[11px] font-black uppercase tracking-[0.4em] text-blue-500 font-mono block">
-              Tese de Atuação FCG
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black text-white tracking-tight leading-tight">
-              Desenvolvido para operações com tração real.
-            </h2>
-            <p className="text-slate-400 text-base sm:text-lg leading-relaxed">
-              O mercado tradicional já validou seu modelo com faturamento sólido e clientes recorrentes. O próximo salto não depende de agências convencionais, mas de <strong>arquitetura proprietária de software</strong>.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-            {/* Card 01: A Dor do Mercado */}
-            <div className="p-8 sm:p-10 rounded-2xl sm:rounded-3xl border border-rose-950/60 bg-gradient-to-b from-rose-950/10 to-slate-950/80 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between group hover:border-rose-900/50 transition-colors">
-              <span className="absolute top-6 right-8 font-mono text-5xl sm:text-6xl font-black text-rose-500/10 select-none">
-                01
-              </span>
-              
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 text-rose-400 text-xs font-mono font-semibold uppercase tracking-wider">
-                  <AlertTriangle size={15} />
-                  <span>A Fricção Operacional</span>
-                </div>
-
-                <h3 className="text-2xl font-bold text-white tracking-tight">
-                  Digitação manual trava o crescimento e drena margens.
-                </h3>
-
-                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-                  Indústrias, atacadistas e grandes sellers perdem dias limpando planilhas, formatando fotos e cadastrando produtos individualmente para cada canal de venda. O processo lento gera erros fiscais de NCM, estoque desincronizado e multas em marketplaces.
-                </p>
+        {/* Comparativo Executivo: Modelo Convencional vs Parceria FCG */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          
+          {/* Card 01: O Cenário Comum de Frustração */}
+          <div className="p-8 sm:p-10 rounded-3xl border border-slate-200 bg-white shadow-xs flex flex-col justify-between space-y-6">
+            <div className="space-y-5">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-700 bg-rose-50 border border-rose-200/60 px-3 py-1 rounded-full">
+                  <XCircle size={14} />
+                  Onde as Empresas Travam
+                </span>
+                <span className="text-xs font-mono text-slate-400">Gargalo Tradicional</span>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-rose-950/60 space-y-2 text-xs text-slate-400 font-medium">
-                <div className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                  <span>Retrabalho braçal diário de equipes de cadastro</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-950 tracking-tight">
+                Agências amadoras e processos manuais que sangram margens
+              </h3>
+
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Empresas consolidadas tentam ir para o digital contratando agências de marketing que não compreendem a complexidade de um ERP, cálculo tributário de DIFAL para 27 UFs ou margem de contribuição. O resultado são planilhas infinitas, retrabalho e estoque desincronizado.
+              </p>
+
+              <div className="space-y-2.5 pt-2 text-xs text-slate-600">
+                <div className="flex items-start gap-2">
+                  <span className="text-rose-500 font-bold">✕</span>
+                  <span>Digitação braçal diária e erro humano no cadastro de produtos</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-rose-500" />
-                  <span>Inconsistência tributária em vendas interestaduais</span>
+                <div className="flex items-start gap-2">
+                  <span className="text-rose-500 font-bold">✕</span>
+                  <span>Dependência insustentável de anúncios pagos sem infraestrutura</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-rose-500 font-bold">✕</span>
+                  <span>Falta de software próprio gerando dependência e baixa retenção</span>
                 </div>
               </div>
             </div>
 
-            {/* Card 02: A Solução da FCG */}
-            <div className="p-8 sm:p-10 rounded-2xl sm:rounded-3xl border border-blue-900/50 bg-gradient-to-b from-blue-950/20 to-slate-950/80 backdrop-blur-xl relative overflow-hidden flex flex-col justify-between group hover:border-blue-700/60 transition-colors">
-              <span className="absolute top-6 right-8 font-mono text-5xl sm:text-6xl font-black text-blue-500/10 select-none">
-                02
-              </span>
+            <div className="pt-4 border-t border-slate-100 text-xs font-medium text-slate-500">
+              Resultado: Custo operacional elevado e estagnação digital.
+            </div>
+          </div>
 
-              <div className="space-y-4">
-                <div className="inline-flex items-center gap-2 text-blue-400 text-xs font-mono font-semibold uppercase tracking-wider">
-                  <CheckCircle2 size={15} />
-                  <span>A Engenharia FCG</span>
-                </div>
-
-                <h3 className="text-2xl font-bold text-white tracking-tight">
-                  Infraestrutura de dados autônoma com "Zero Digitação".
-                </h3>
-
-                <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-                  Não vendemos consultorias vazias. Desenvolvemos o ecossistema <strong>Linxar</strong> para transformar o fluxo de dados comerciais: ingestão direta via ERP, enriquecimento instantâneo de SKUs com IA, tratamento visual de fotos e publicação simultânea com cálculo automático de DIFAL.
-                </p>
+          {/* Card 02: A Parceria Estrutural FCG */}
+          <div className="p-8 sm:p-10 rounded-3xl border border-slate-900 bg-slate-950 text-white shadow-xl flex flex-col justify-between space-y-6">
+            <div className="space-y-5">
+              <div className="flex items-center justify-between">
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-3 py-1 rounded-full">
+                  <CheckCircle2 size={14} />
+                  A Abordagem FCG
+                </span>
+                <span className="text-xs font-mono text-slate-400">Holding & Engenharia</span>
               </div>
 
-              <div className="pt-6 mt-6 border-t border-blue-900/50 space-y-2 text-xs text-slate-300 font-medium">
-                <div className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  <span>Redução do tempo de lançamento de dias para frações de segundo</span>
+              <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                Tecnologia proprietária, orquestração e escala com governança
+              </h3>
+
+              <p className="text-sm text-slate-300 leading-relaxed">
+                A FCG atua diretamente com a liderança da empresa. Desenvolvemos e integramos a infraestrutura de software e dados do seu negócio: esteiras de catálogo com inteligência artificial, sincronização fiscal em tempo real e automação multicanal.
+              </p>
+
+              <div className="space-y-2.5 pt-2 text-xs text-slate-300">
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400 font-bold">✓</span>
+                  <span>Conexão nativa e esteiras "Zero Digitação" direto do estoque</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                  <span>Arquitetura de dados homologada para escala corporativa</span>
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400 font-bold">✓</span>
+                  <span>Blindagem tributária e cálculo fiscal automático em todas as vendas</span>
+                </div>
+                <div className="flex items-start gap-2">
+                  <span className="text-emerald-400 font-bold">✓</span>
+                  <span>Construção de equity e valor patrimonial com tecnologia própria</span>
                 </div>
               </div>
             </div>
+
+            <div className="pt-4 border-t border-slate-800 text-xs font-medium text-slate-400">
+              Resultado: Escala com previsibilidade, margem protegida e governança.
+            </div>
           </div>
+
         </div>
 
       </div>

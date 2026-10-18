@@ -1,140 +1,138 @@
 import Link from 'next/link';
-import { ArrowRight, ShieldCheck, Cpu, Database, Activity, Terminal } from 'lucide-react';
+import { ArrowRight, ShieldCheck, Award, Building2, TrendingUp, CheckCircle2 } from 'lucide-react';
 
 export default function FCGHero() {
   return (
-    <section className="relative pt-32 pb-20 sm:pt-40 sm:pb-32 bg-slate-950 text-white overflow-hidden border-b border-slate-800">
-      {/* Background Glows */}
+    <section className="relative pt-32 pb-20 sm:pt-44 sm:pb-28 bg-white text-slate-900 overflow-hidden">
+      {/* Background subtle mesh/gradient */}
       <div
         aria-hidden="true"
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-blue-600/15 via-indigo-600/5 to-transparent blur-[140px] pointer-events-none"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute -top-40 right-10 w-96 h-96 bg-cyan-500/10 blur-[120px] pointer-events-none"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-slate-100/80 via-blue-50/30 to-transparent blur-3xl pointer-events-none -z-10"
       />
 
       <div className="container-xl relative z-10 space-y-16">
         
         {/* Top Text Content */}
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1.5 backdrop-blur-md">
-            <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
-            <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-blue-400 font-mono">
-              Fedumenti Group · Holding de Tecnologia & Inovação
+        <div className="max-w-4xl mx-auto text-center space-y-7">
+          
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/80 px-4 py-1.5 shadow-xs">
+            <span className="h-2 w-2 rounded-full bg-blue-600 animate-pulse" />
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-slate-700 font-mono">
+              Fedumenti Group · Holding de Tecnologia
             </span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-[1.05] text-balance">
-            Tecnologia proprietária e escala para{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-indigo-300 bg-clip-text text-transparent">
-              empresas consolidadas.
+          {/* Main Headline */}
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-950 leading-[1.08] text-balance">
+            Tecnologia, governança e escala digital para o{' '}
+            <span className="bg-gradient-to-r from-slate-950 via-blue-900 to-indigo-900 bg-clip-text text-transparent">
+              empreendedor consolidado.
             </span>
           </h1>
 
-          <p className="text-base sm:text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto font-normal text-pretty">
-            A FCG é a holding de tecnologia que desenvolve e opera ativos de alta relevância mercadológica. Criamos infraestrutura própria de software, dados e inteligência para impulsionar operações comerciais com tração real.
+          {/* Subtitle */}
+          <p className="text-lg sm:text-xl text-slate-600 leading-relaxed max-w-2xl mx-auto font-normal text-pretty">
+            A FCG é a parceira estratégica de empresas com tração, faturamento real e operação validada que buscam liderar seus mercados no digital através de software proprietário e inteligência de dados.
           </p>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/linxar"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-slate-950 hover:bg-slate-200 transition-all hover:scale-[1.02] shadow-xl"
-            >
-              <span>Conhecer Ativo Linxar</span>
-              <ArrowRight size={16} />
-            </Link>
-
+          {/* CTAs */}
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">
             <a
-              href="https://wa.me/5542999217736"
+              href="https://wa.me/5542999217736?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20expans%C3%A3o%20digital%20com%20a%20holding%20FCG."
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-slate-700 bg-slate-900/60 backdrop-blur-md px-7 py-3.5 text-sm font-bold text-slate-200 hover:border-slate-500 hover:text-white transition-all"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-7 py-3.5 text-sm font-semibold text-white hover:bg-slate-800 transition-all hover:scale-[1.01] shadow-md"
             >
-              <span>Contato com a Diretoria</span>
+              <span>Falar com a Diretoria</span>
+              <ArrowRight size={16} />
             </a>
+
+            <Link
+              href="#tese"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:text-slate-950 transition-all shadow-xs"
+            >
+              <span>Conhecer Nossa Tese</span>
+            </Link>
+          </div>
+
+          {/* Quick Credibility Bullets */}
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs text-slate-500 font-medium">
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 size={15} className="text-emerald-600" />
+              <span>Sem promessas vazias de marketing</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 size={15} className="text-emerald-600" />
+              <span>Engenharia de software e dados</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 size={15} className="text-emerald-600" />
+              <span>Alinhamento de longo prazo</span>
+            </div>
           </div>
         </div>
 
-        {/* macOS Window Mockup: Painel de Orquestração B2B */}
-        <div className="max-w-5xl mx-auto">
-          <div className="group relative rounded-2xl sm:rounded-3xl border border-slate-800 bg-slate-900/90 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8)] backdrop-blur-2xl transition-all duration-500 hover:border-blue-500/30 overflow-hidden">
-            
-            {/* Window Header */}
-            <div className="flex items-center justify-between border-b border-slate-800/80 bg-slate-950/60 px-4 py-3 sm:px-6">
-              <div className="flex items-center gap-2">
-                <span className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                <span className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                <span className="h-3 w-3 rounded-full bg-[#27c93f]" />
+        {/* Clean Hero Feature Card: O Modelo de Parceria FCG */}
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-3xl border border-slate-200/90 bg-slate-50/70 p-6 sm:p-10 shadow-[0_12px_40px_rgb(0,0,0,0.04)] backdrop-blur-sm">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <div className="space-y-2.5 p-5 rounded-2xl bg-white border border-slate-200/70 shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700 font-bold">
+                  01
+                </div>
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">
+                  Operação Validada
+                </h2>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Não financiamos ideias no papel. Focamos no empresário que já tem fluxo de caixa, equipe, clientes e autoridade no mundo físico ou tradicional.
+                </p>
               </div>
-              <div className="flex items-center gap-2 rounded-md bg-slate-900 px-3 py-1 text-[11px] font-mono text-slate-400 border border-slate-800">
-                <Terminal size={12} className="text-blue-400" />
-                <span>fcgroup.com.br/intelligence-hub</span>
+
+              <div className="space-y-2.5 p-5 rounded-2xl bg-white border border-slate-200/70 shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-50 text-indigo-700 font-bold">
+                  02
+                </div>
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">
+                  Infraestrutura Digital
+                </h2>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Construímos a esteira tecnológica do seu negócio: conexão de ERPs, inteligência de catálogo, orquestração de pedidos e presença corporativa.
+                </p>
               </div>
-              <div className="flex items-center gap-2 text-[10px] font-mono text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-                <span>LIVE ENGINE</span>
+
+              <div className="space-y-2.5 p-5 rounded-2xl bg-white border border-slate-200/70 shadow-xs">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700 font-bold">
+                  03
+                </div>
+                <h2 className="text-base font-bold text-slate-900 tracking-tight">
+                  Escala Sustentável
+                </h2>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Transformamos a força física do negócio em dominância digital com governança fiscal, margem protegida e arquitetura escalável.
+                </p>
               </div>
+
             </div>
 
-            {/* Window Body: Dashboard de Arquitetura B2B */}
-            <div className="p-6 sm:p-8 space-y-6 bg-gradient-to-b from-slate-900/40 to-slate-950/80 font-sans">
-              
-              {/* Metrics Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div className="p-4 rounded-xl border border-slate-800/80 bg-slate-950/50 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400">Ativo Principal</span>
-                  <div className="text-lg sm:text-xl font-bold text-white">Linxar HUB</div>
-                  <span className="text-[11px] text-emerald-400 font-medium">Commerce AI</span>
-                </div>
-
-                <div className="p-4 rounded-xl border border-slate-800/80 bg-slate-950/50 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400">Canais Conectados</span>
-                  <div className="text-lg sm:text-xl font-bold text-white">12+ Marketplaces</div>
-                  <span className="text-[11px] text-blue-400 font-medium">Zero Digitação</span>
-                </div>
-
-                <div className="p-4 rounded-xl border border-slate-800/80 bg-slate-950/50 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400">Motor Fiscal</span>
-                  <div className="text-lg sm:text-xl font-bold text-white">DIFAL 27 UFs</div>
-                  <span className="text-[11px] text-indigo-400 font-medium">Compliance Ativo</span>
-                </div>
-
-                <div className="p-4 rounded-xl border border-slate-800/80 bg-slate-950/50 space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-slate-400">Validação Científica</span>
-                  <div className="text-lg sm:text-xl font-bold text-white">UTFPR Sprint</div>
-                  <span className="text-[11px] text-cyan-400 font-medium">Incubação Oficial</span>
-                </div>
+            {/* Chancelas Institucionais Minimalistas */}
+            <div className="mt-8 pt-6 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-slate-500">
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={16} className="text-slate-700" />
+                <span className="font-semibold text-slate-700">Incubação Tecnológica:</span>
+                <span>UTFPR Sprint</span>
               </div>
-
-              {/* Data Orchestration Pipeline Preview */}
-              <div className="rounded-xl border border-slate-800/80 bg-slate-950/70 p-5 space-y-4">
-                <div className="flex items-center justify-between text-xs font-mono text-slate-400 border-b border-slate-800/60 pb-3">
-                  <span className="flex items-center gap-2 text-slate-200 font-semibold">
-                    <Activity size={14} className="text-blue-400" />
-                    Fluxo de Orquestração Tecnológica FCG
-                  </span>
-                  <span>Pipeline v2.4</span>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                  <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800/60 space-y-1.5">
-                    <span className="font-mono text-[10px] text-blue-400 font-bold block">01. INGESTÃO & ERP</span>
-                    <p className="text-slate-300 font-medium">Conexão nativa com sistemas ERP de indústrias e grandes sellers.</p>
-                  </div>
-
-                  <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800/60 space-y-1.5">
-                    <span className="font-mono text-[10px] text-cyan-400 font-bold block">02. ENRIQUECIMENTO IA</span>
-                    <p className="text-slate-300 font-medium">Padronização de fotos (#FFFFFF) e catalogação sem intervenção manual.</p>
-                  </div>
-
-                  <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800/60 space-y-1.5">
-                    <span className="font-mono text-[10px] text-emerald-400 font-bold block">03. ESCALA OMNICANAL</span>
-                    <p className="text-slate-300 font-medium">Distribuição e precificação dinâmica em alta velocidade e escala.</p>
-                  </div>
-                </div>
+              <div className="flex items-center gap-2">
+                <Award size={16} className="text-slate-700" />
+                <span className="font-semibold text-slate-700">Parceria Cloud:</span>
+                <span>Google for Startups</span>
               </div>
-
+              <div className="flex items-center gap-2">
+                <Building2 size={16} className="text-slate-700" />
+                <span className="font-semibold text-slate-700">Ecossistema:</span>
+                <span>Sebrae Startups</span>
+              </div>
             </div>
 
           </div>

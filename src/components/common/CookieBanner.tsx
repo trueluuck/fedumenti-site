@@ -39,18 +39,18 @@ export default function CookieBanner() {
   return (
     <aside
       aria-label="Consentimento de Cookies"
-      className="fixed bottom-4 inset-x-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300"
+      className="fixed bottom-5 inset-x-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300"
     >
-      <div className="rounded-2xl border border-slate-800 bg-slate-950/90 backdrop-blur-xl p-5 shadow-2xl text-slate-200">
+      <div className="rounded-2xl border border-slate-200 bg-white/95 backdrop-blur-xl p-5 shadow-[0_12px_40px_rgb(0,0,0,0.12)] text-slate-800">
         <div className="flex items-start gap-3">
-          <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 shrink-0 mt-0.5">
+          <div className="p-2 rounded-lg bg-slate-100 text-slate-900 shrink-0 mt-0.5">
             <ShieldCheck size={18} />
           </div>
           <div className="space-y-1 text-xs leading-relaxed">
-            <p className="font-semibold text-slate-100 text-sm">Privacidade & Cookies</p>
-            <p className="text-slate-400">
+            <p className="font-bold text-slate-900 text-sm">Privacidade & Cookies</p>
+            <p className="text-slate-600">
               Utilizamos cookies essenciais e métricas anônimas para avaliar performance conforme nossa{' '}
-              <Link href="/politicas" className="underline hover:text-white transition-colors">
+              <Link href="/politicas" className="underline hover:text-slate-950 transition-colors">
                 Política de Privacidade
               </Link>
               .
@@ -62,14 +62,14 @@ export default function CookieBanner() {
           <button
             type="button"
             onClick={handleDecline}
-            className="px-3.5 py-1.5 rounded-lg border border-slate-700 text-slate-300 hover:bg-slate-900 transition-colors"
+            className="px-3.5 py-1.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors"
           >
             Apenas essenciais
           </button>
           <button
             type="button"
             onClick={handleAccept}
-            className="px-4 py-1.5 rounded-lg bg-white text-slate-950 font-semibold hover:bg-slate-100 transition-colors shadow-sm"
+            className="px-4 py-1.5 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors shadow-xs"
           >
             Aceitar todos
           </button>

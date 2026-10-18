@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { X } from 'lucide-react';
 
 type Props = {
   phone?: string;
@@ -13,7 +12,7 @@ type Props = {
 
 const DISMISS_KEY = 'fcg_whatsapp_bubble_dismissed';
 
-export default function WhatsAppFloat({
+export function WhatsAppFloat({
   phone = '5542999217736',
   message = 'Olá, gostaria de falar com a equipe da FCG sobre expansão digital.',
   bubbleTitle = 'Atendimento FCG',
@@ -82,7 +81,10 @@ export default function WhatsAppFloat({
               aria-label="Fechar balão de WhatsApp"
               className="text-slate-400 hover:text-slate-700 rounded-md p-0.5 hover:bg-slate-100 transition-colors"
             >
-              <X size={14} />
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
             </button>
           </div>
 
@@ -124,3 +126,5 @@ export default function WhatsAppFloat({
     </div>
   );
 }
+
+export default WhatsAppFloat;

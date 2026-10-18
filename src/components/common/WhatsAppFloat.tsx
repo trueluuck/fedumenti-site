@@ -12,7 +12,7 @@ type Props = {
 
 const DISMISS_KEY = 'fcg_whatsapp_bubble_dismissed';
 
-export function WhatsAppFloat({
+export default function WhatsAppFloat({
   phone = '5542999217736',
   message = 'Olá, gostaria de falar com a equipe da FCG sobre expansão digital.',
   bubbleTitle = 'Atendimento FCG',
@@ -126,5 +126,3 @@ export function WhatsAppFloat({
     </div>
   );
 }
-
-export default WhatsAppFloat;

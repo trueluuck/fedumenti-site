@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/sobre', changeFrequency: 'monthly' as const, priority: 0.8 },
     { path: '/contato', changeFrequency: 'monthly' as const, priority: 0.8 },
     { path: '/politicas', changeFrequency: 'yearly' as const, priority: 0.5 },
+    { path: '/servicos', changeFrequency: 'weekly' as const, priority: 0.9 },
     { path: '/google-360', changeFrequency: 'weekly' as const, priority: 0.9 },
     { path: '/linxar', changeFrequency: 'weekly' as const, priority: 0.95 },
     { path: '/linxar/hub', changeFrequency: 'weekly' as const, priority: 0.9 },

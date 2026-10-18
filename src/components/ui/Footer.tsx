@@ -18,7 +18,7 @@ export default function Footer() {
               <span>Fedumenti Group</span>
             </Link>
             <p className="text-sm text-slate-500 leading-relaxed max-w-xs">
-              Holding de tecnologia e expansão digital para empresas com operações consolidadas e faturamento comprovado.
+              Holding de tecnologia focada na expansão digital de empresas consolidadas através de software próprio, dados e serviços comerciais de alta performance.
             </p>
             <div className="flex items-center gap-2 pt-1">
               <a
@@ -48,57 +48,63 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Holding */}
+          {/* A Holding & Linxar */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900">A Holding</h4>
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900">Navegação Principal</h4>
             <ul className="space-y-2 text-sm">
               <li>
+                <Link href="/" className="text-slate-600 hover:text-slate-950 transition-colors font-medium">
+                  HOLDING (Início)
+                </Link>
+              </li>
+              <li>
+                <Link href="/linxar" className="text-slate-600 hover:text-slate-950 transition-colors font-medium">
+                  LINXAR (Commerce AI)
+                </Link>
+              </li>
+              <li>
+                <Link href="/servicos" className="text-slate-600 hover:text-slate-950 transition-colors font-medium">
+                  SERVIÇOS (Catálogo)
+                </Link>
+              </li>
+              <li>
                 <Link href="/sobre" className="text-slate-600 hover:text-slate-950 transition-colors">
-                  Sobre a FCG
-                </Link>
-              </li>
-              <li>
-                <Link href="/#tese" className="text-slate-600 hover:text-slate-950 transition-colors">
-                  Tese de Expansão
-                </Link>
-              </li>
-              <li>
-                <Link href="/contato" className="text-slate-600 hover:text-slate-950 transition-colors">
-                  Falar com a Diretoria
+                  Sobre a Empresa
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Portfólio de Ativos */}
+          {/* Serviços em Destaque */}
           <div className="md:col-span-2 space-y-3">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900">Portfólio</h4>
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900">Serviços FCG</h4>
             <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/linxar" className="text-slate-600 hover:text-slate-950 transition-colors">
-                  Ecossistema Linxar
-                </Link>
-              </li>
               <li>
                 <Link href="/google-360" className="text-slate-600 hover:text-slate-950 transition-colors">
                   Google 360° HDR
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://linxar.com.br/pt"
-                  target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-slate-600 hover:text-slate-950 transition-colors"
-                >
-                  linxar.com.br <ExternalLink size={11} />
-                </a>
+                <Link href="/servicos#trafego-pago" className="text-slate-600 hover:text-slate-950 transition-colors">
+                  Tráfego Pago
+                </Link>
+              </li>
+              <li>
+                <Link href="/servicos#automacao" className="text-slate-600 hover:text-slate-950 transition-colors">
+                  Automação com IA
+                </Link>
+              </li>
+              <li>
+                <Link href="/servicos#video-mobile" className="text-slate-600 hover:text-slate-950 transition-colors">
+                  Vídeo Mobile
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Sede & Contato */}
           <div className="md:col-span-3 space-y-3">
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900">Sede & Governança</h4>
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-slate-900">Sede & Atendimento</h4>
             <ul className="space-y-2.5 text-sm text-slate-600">
               <li className="flex items-center gap-2">
                 <Mail size={13} className="text-slate-700 shrink-0" />
@@ -107,7 +113,7 @@ export default function Footer() {
               <li className="flex items-center gap-2">
                 <Phone size={13} className="text-slate-700 shrink-0" />
                 <a href="https://wa.me/5542999217736" target="_blank" rel="noopener noreferrer"
-                  className="hover:text-slate-950 transition-colors">
+                  className="hover:text-slate-950 transition-colors font-medium">
                   (42) 9 9921-7736
                 </a>
               </li>

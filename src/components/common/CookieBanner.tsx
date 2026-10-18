@@ -39,7 +39,7 @@ export default function CookieBanner() {
   return (
     <aside
       aria-label="Consentimento de Cookies"
-      className="fixed bottom-5 inset-x-4 sm:left-auto sm:right-6 sm:max-w-md z-50 animate-in fade-in slide-in-from-bottom-5 duration-300"
+      className="fixed bottom-5 inset-x-4 sm:right-auto sm:left-6 sm:max-w-md z-40 animate-in fade-in slide-in-from-bottom-5 duration-300"
     >
       <div className="rounded-2xl border border-slate-200 bg-white/95 backdrop-blur-xl p-5 shadow-[0_12px_40px_rgb(0,0,0,0.12)] text-slate-800">
         <div className="flex items-start gap-3">

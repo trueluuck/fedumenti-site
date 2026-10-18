@@ -6,6 +6,7 @@ import { Suspense } from 'react';
 import { inter } from './fonts';
 import CookieBanner from '@/components/common/CookieBanner';
 import AnalyticsGate from '@/components/analytics/AnalyticsGate';
+import WhatsAppFloat from '@/components/common/WhatsAppFloat';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.fedumentigroup.com.br'),
@@ -60,6 +61,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Suspense fallback={null}>
           <CookieBanner />
           <AnalyticsGate />
+          <WhatsAppFloat />
         </Suspense>
       </body>
     </html>

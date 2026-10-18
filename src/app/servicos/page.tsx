@@ -175,14 +175,11 @@ export default function ServicosPage() {
         
         {/* Header Comercial */}
         <div className="max-w-3xl space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-slate-700 font-semibold">
-              Catálogo Comercial FCG · Soluções de Alto Impacto
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight text-balance">
+            Serviços para acelerar e profissionalizar a sua empresa no{' '}
+            <span className="bg-gradient-to-r from-[#881337] via-[#9f1239] to-[#be123c] bg-clip-text text-transparent">
+              mercado digital.
             </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
-            Serviços para acelerar e profissionalizar a sua empresa no digital.
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal">

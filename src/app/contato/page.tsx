@@ -14,14 +14,11 @@ export default function ContatoPage() {
         
         {/* Header */}
         <div className="space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-slate-700 font-semibold">
-              Institucional · Atendimento Executivo
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight text-balance">
+            Entre em Contato com a{' '}
+            <span className="bg-gradient-to-r from-[#881337] via-[#9f1239] to-[#be123c] bg-clip-text text-transparent">
+              Holding FCG
             </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
-            Contato com a Holding
           </h1>
 
           <p className="text-lg text-slate-600 leading-relaxed font-normal">

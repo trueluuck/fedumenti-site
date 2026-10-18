@@ -48,15 +48,11 @@ export default function Google360Page() {
         
         {/* Header Hero Google 360 */}
         <div className="max-w-3xl space-y-5">
-          <div className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1">
-            <Camera size={14} className="text-blue-700" />
-            <span className="text-[11px] font-mono uppercase tracking-widest text-blue-800 font-bold">
-              Serviço Comercial FCG · Presença Oficial no Google Maps
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight text-balance">
+            Tour Virtual Google 360° para{' '}
+            <span className="bg-gradient-to-r from-[#881337] via-[#9f1239] to-[#be123c] bg-clip-text text-transparent">
+              Empresas Consolidadas
             </span>
-          </div>
-
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-950 tracking-tight leading-tight">
-            Tour Virtual Google 360° para Empresas
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-600 leading-relaxed font-normal">
